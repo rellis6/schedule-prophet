@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<major name="Computer Science Major">
+	<track filename="cs_major_reqs.xml"/>
+</major>
+<major name="Information Systems Major">
+	<track filename="is_major_reqs.xml"/>
+</major>
+<major name="Information Systems Major with Computer Science Minor">
+	<track filename="is_major_reqs.xml"/>
+	<track filename="cs_minor_reqs.xml"/>
+</major>
+<major name="Computer Science and Information Systems Double Major">
+	<track filename="cs_major_reqs.xml"/>
+	<track filename="is_major_reqs.xml"/>
+</major>
