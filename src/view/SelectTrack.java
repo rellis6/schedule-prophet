@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import control.ProphetController;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -28,7 +30,9 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdISMajorCSMinor;
 	private JButton cmdCSISDoubleMajor;
 	private JButton cmdISMajor;
-
+	//private ProphetController controller;
+	private TestController controller;
+	
 	{
 		//Set Look & Feel
 		try {
@@ -45,15 +49,17 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				SelectTrack inst = new SelectTrack();
+				SelectTrack inst = new SelectTrack(new TestController());
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public SelectTrack() {
+	public SelectTrack(ProphetController controller) {
 		super();
+		//this.controller=controller;
+		this.controller=(TestController) controller;
 		initGUI();
 	}
 	
@@ -116,26 +122,26 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("CSMajor")){
 			this.dispose();
-			placeHolder();
+			namePlan("CSMajor");
 		}
 		else if(e.getActionCommand().equals("ISMajor")){
 			this.dispose();
-			placeHolder();
+			namePlan("ISMajor");
 		}
 		else if(e.getActionCommand().equals("CSISDouble")){
 			this.dispose();
-			placeHolder();
+			namePlan("CSISDouble");
 		}
 		else if(e.getActionCommand().equals("ISCSMinor")){
 			this.dispose();
-			placeHolder();
+			namePlan("ISCSMinor");
 		}
 	}
 	
-	private void placeHolder(){
+	private void namePlan(final String track){
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				NamePlan inst = new NamePlan();
+				NamePlan inst = new NamePlan(controller, track);
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
