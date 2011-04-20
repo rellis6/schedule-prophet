@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import control.ProphetController;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -26,6 +28,9 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmd;
 	private JTextField txtName;
 	private JLabel lblNamePlan;
+	//private ProphetController controller;
+	private TestController controller;
+	private String track;
 
 	{
 		//Set Look & Feel
@@ -43,15 +48,18 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				NamePlan inst = new NamePlan();
+				NamePlan inst = new NamePlan(new TestController(), "CSMajor");
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public NamePlan() {
+	public NamePlan(ProphetController controller, String track) {
 		super();
+		//this.controller=controller;
+		this.controller=(TestController) controller;
+		this.track=track;
 		initGUI();
 	}
 	
@@ -91,9 +99,10 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		this.dispose();
+		controller.createPlan(track,txtName.getText());
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				MaintainPlan inst = new MaintainPlan();
+				MaintainPlan inst = new MaintainPlan(controller);
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
