@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import control.ProphetController;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -32,7 +34,9 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblSelectOption;
 	private JButton cmdLoadPlan;
 	private JButton cmdCreatePlan;
-
+	//private ProphetController controller;
+	private TestController controller;
+	
 	{
 		//Set Look & Feel
 		try {
@@ -49,15 +53,17 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				StartMenu inst = new StartMenu();
+				StartMenu inst = new StartMenu(new TestController());
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public StartMenu() {
+	public StartMenu(ProphetController controller) {
 		super();
+		//this.controller=controller;
+		this.controller=(TestController) controller;
 		initGUI();
 	}
 	
@@ -104,7 +110,7 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 			this.dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					SelectTrack inst = new SelectTrack();
+					SelectTrack inst = new SelectTrack(controller);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
@@ -114,7 +120,7 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 			this.dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					LoadPlan inst = new LoadPlan();
+					LoadPlan inst = new LoadPlan(controller);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
