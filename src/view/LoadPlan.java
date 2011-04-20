@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.SwingUtilities;
 
+import control.ProphetController;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -33,7 +35,10 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdDeletePlan;
 	private JButton cmdCancel;
 	private JButton cmdSelectPlan;
-
+	private JScrollPane scrollPane;
+	//private ProphetController controller;
+	private TestController controller;
+	
 	{
 		//Set Look & Feel
 		try {
@@ -50,15 +55,17 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				LoadPlan inst = new LoadPlan();
+				LoadPlan inst = new LoadPlan(new TestController());
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public LoadPlan() {
+	public LoadPlan(ProphetController controller) {
 		super();
+		//this.controller=controller;
+		this.controller=(TestController) controller;
 		initGUI();
 	}
 	
@@ -75,11 +82,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 				lblSelectPlan.setFont(new java.awt.Font("Tahoma",0,14));
 			}
 			{
-				String rows[][] = { { "Katherine's Plan 3", "09/03/2010"},
-				 		 { "Katherine's Hypothetical CS/IS Plan", "8/14/2010"},
-						 { "Katherine's Plan 2", "07/21/2010"},
-						 { "Katherine's Hypothetical IS Plan", "10/05/2008"},
-						 { "Katherine Miller's CS Plan", "08/28/2007"}};
+				String rows[][] = controller.getPlans();
 				String headers[] = { "Plan Name", "Date Created"};
 				tblSavedPlans = new JTable(rows,headers);
 				tblSavedPlans.setBounds(20, 41, 360, 142);
@@ -87,7 +90,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 				tblSavedPlans.setFont(new java.awt.Font("Tahoma",0,14));
 				tblSavedPlans.setPreferredSize(new java.awt.Dimension(358, 111));
 
-				JScrollPane scrollPane = new JScrollPane(tblSavedPlans);
+				scrollPane = new JScrollPane(tblSavedPlans);
 				scrollPane.setBounds(20, 41, 360, 139);
 				scrollPane.setFont(new java.awt.Font("Tahoma",0,14));
 				getContentPane().add(scrollPane);
@@ -128,24 +131,39 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Select")){
+		int row=tblSavedPlans.getSelectedRow();
+		if(e.getActionCommand().equals("Select") && row>=0){
+			controller.loadPlan((String) tblSavedPlans.getValueAt(row, 0));
 			this.dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					MaintainPlan inst = new MaintainPlan();
+					MaintainPlan inst = new MaintainPlan(controller);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
 			});
 		}
-		else if(e.getActionCommand().equals("Delete")){
-			//delete stuff
+		else if(e.getActionCommand().equals("Delete") && row>=0){
+			controller.deletePlan((String) tblSavedPlans.getValueAt(row, 0));
+			scrollPane.setVisible(false);
+			String rows[][] = controller.getPlans();
+			String headers[] = { "Plan Name", "Date Created"};
+			tblSavedPlans = new JTable(rows,headers);
+			tblSavedPlans.setBounds(20, 41, 360, 142);
+			tblSavedPlans.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+			tblSavedPlans.setFont(new java.awt.Font("Tahoma",0,14));
+			tblSavedPlans.setPreferredSize(new java.awt.Dimension(358, 111));
+
+			scrollPane = new JScrollPane(tblSavedPlans);
+			scrollPane.setBounds(20, 41, 360, 139);
+			scrollPane.setFont(new java.awt.Font("Tahoma",0,14));
+			getContentPane().add(scrollPane);
 		}
 		else if(e.getActionCommand().equals("Cancel")){
 			this.dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					StartMenu inst = new StartMenu();
+					StartMenu inst = new StartMenu(null);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
