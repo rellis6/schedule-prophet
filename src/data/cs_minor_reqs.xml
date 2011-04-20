@@ -1,75 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <track name="Computer Science Minor">
-	<categories>
-		<category name="CS Core Courses" minimum="3">
-			<courses>
-				<course id="CMSC201" grade="D"/>
-				<course id="CMSC202" grade="D"/>
-				<course id="CMSC341" grade="D"/>
-			</courses>
-		</category>
-		<category name="CMSC203 or MATH301" minimum="1">
-			<courses>
-				<course id="CMSC203" grade="D"/>
-				<course id="MATH301" grade="D"/>
-			</courses>
-		</category>
-		<category name="CS Remaining Requirements" minimum="9cr">
-			<courses>
-				<category name="CS 400-Level Courses" minimum="1">
-					<courses>
-						<course id="CMSC426" grade="D"/>
-						<course id="CMSC427" grade="D"/>
-						<course id="CMSC431" grade="D"/>
-						<course id="CMSC432" grade="D"/>
-						<course id="CMSC433" grade="D"/>
-						<course id="CMSC435" grade="D"/>
-						<course id="CMSC436" grade="D"/>
-						<course id="CMSC437" grade="D"/>
-						<course id="CMSC442" grade="D"/>
-						<course id="CMSC443" grade="D"/>
-						<course id="CMSC444" grade="D"/>
-						<course id="CMSC445" grade="D"/>
-						<course id="CMSC446" grade="D"/>
-						<course id="CMSC451" grade="D"/>
-						<course id="CMSC452" grade="D"/>
-						<course id="CMSC453" grade="D"/>
-						<course id="CMSC455" grade="D"/>
-						<course id="CMSC456" grade="D"/>
-						<course id="CMSC457" grade="D"/>
-						<course id="CMSC461" grade="D"/>
-						<course id="CMSC465" grade="D"/>
-						<course id="CMSC466" grade="D"/>
-						<course id="CMSC471" grade="D"/>
-						<course id="CMSC473" grade="D"/>
-						<course id="CMSC475" grade="D"/>
-						<course id="CMSC476" grade="D"/>
-						<course id="CMSC477" grade="D"/>
-						<course id="CMSC478" grade="D"/>
-						<course id="CMSC479" grade="D"/>
-						<course id="CMSC481" grade="D"/>
-						<course id="CMSC483" grade="D"/>
-						<course id="CMSC484" grade="D"/>
-						<course id="CMSC486" grade="D"/>
-						<course id="CMSC487" grade="D"/>
-						<course id="CMSC491" grade="D"/>
-						<course id="CMSC493" grade="D"/>
-						<course id="MATH430" grade="D"/>
-						<course id="MATH441" grade="D"/>
-						<course id="MATH452" grade="D"/>
-						<course id="MATH475" grade="D"/>
-						<course id="MATH481" grade="D"/>
-						<course id="MATH483" grade="D"/>
-					</courses>
-				</category>
-				<category name="CS Remaining Courses" minimum="0">
-					<courses>
-						<course id="CMSC313" grade="D"/>
-						<course id="CMSC331" grade="D"/>
-						<course id="MATH221" grade="D"/>
-					</courses>
-				</category>
-			</courses>
-		</category>
-	</categories>
+	<absolutereq name="CS Core Courses">
+		<course id="CMSC201" grade="D"/>
+		<course id="CMSC202" grade="D"/>
+		<course id="CMSC341" grade="D"/>
+	</absolutereq>
+	<flexiblereq name="CMSC203 or MATH301" number="1">
+		<course id="CMSC203" grade="D"/>
+		<course id="MATH301" grade="D"/>
+	</flexiblereq>
+	<flexiblereqset name="CS Remaining Requirements" credits="9cr">
+		<flexiblereq name="CS 400-Level Courses" number="1">
+			<course id="CMSC426" grade="D"/>
+			<course id="CMSC427" grade="D"/>
+			<course id="CMSC431" grade="D"/>
+			<course id="CMSC432" grade="D"/>
+			<course id="CMSC433" grade="D"/>
+			<course id="CMSC435" grade="D"/>
+			<course id="CMSC436" grade="D"/>
+			<course id="CMSC437" grade="D"/>
+			<course id="CMSC442" grade="D"/>
+			<course id="CMSC443" grade="D"/>
+			<course id="CMSC444" grade="D"/>
+			<course id="CMSC445" grade="D"/>
+			<course id="CMSC446" grade="D"/>
+			<course id="CMSC451" grade="D"/>
+			<course id="CMSC452" grade="D"/>
+			<course id="CMSC453" grade="D"/>
+			<course id="CMSC455" grade="D"/>
+			<course id="CMSC456" grade="D"/>
+			<course id="CMSC457" grade="D"/>
+			<course id="CMSC461" grade="D"/>
+			<course id="CMSC465" grade="D"/>
+			<course id="CMSC466" grade="D"/>
+			<course id="CMSC471" grade="D"/>
+			<course id="CMSC473" grade="D"/>
+			<course id="CMSC475" grade="D"/>
+			<course id="CMSC476" grade="D"/>
+			<course id="CMSC477" grade="D"/>
+			<course id="CMSC478" grade="D"/>
+			<course id="CMSC479" grade="D"/>
+			<course id="CMSC481" grade="D"/>
+			<course id="CMSC483" grade="D"/>
+			<course id="CMSC484" grade="D"/>
+			<course id="CMSC486" grade="D"/>
+			<course id="CMSC487" grade="D"/>
+			<course id="CMSC491" grade="D"/>
+			<course id="CMSC493" grade="D"/>
+			<course id="MATH430" grade="D"/>
+			<course id="MATH441" grade="D"/>
+			<course id="MATH452" grade="D"/>
+			<course id="MATH475" grade="D"/>
+			<course id="MATH481" grade="D"/>
+			<course id="MATH483" grade="D"/>	
+		</flexiblereq>
+		<flexiblereq name="CS Remaining Courses">
+			<course id="CMSC313" grade="D"/>
+			<course id="CMSC331" grade="D"/>
+			<course id="MATH221" grade="D"/>
+		</flexiblereq>
+	</flexiblereqset>
 </track>
