@@ -1,7 +1,7 @@
 /**
  * File:    CoursePathDAO.java
  * Project: 
- * Author:  Mark Pallone
+ * Author:  Katherine Miller, Mark Pallone
  * Date:    Mar 31, 2011
  * Section: 
  * Email:   markpa1@umbc.edu OR mark.c.pallone@gmail.com
@@ -40,6 +40,7 @@ public class CoursePathDAO {
 	
 	/**
 	 * Default constructor that populates the master course list.
+	 * @author Katherine Miller
 	 */
 	public CoursePathDAO () {
 		// First we initialize the master list of courses.
@@ -49,6 +50,7 @@ public class CoursePathDAO {
 	/**
 	 * Parses the master course list XML file and imports the
 	 * data into an ArrayList of courses.
+	 * @author Katherine Miller
 	 */
 	private void initializeMasterCourseList() {
 		
@@ -151,6 +153,7 @@ public class CoursePathDAO {
 	/**
 	 * returns an ArrayList<Track> object containing the pertaining track combos
 	 * @param name Name of specified Track
+	 * @author Katherine Miller
 	 */
 	public ArrayList<Track> getTrackCourses(String name){
 		if(!getMasterTrackList().contains(name))
@@ -176,15 +179,67 @@ public class CoursePathDAO {
 		
 	}
 	
-	public Course getCourse(String CourseID, ArrayList<Track> track){
+	/**
+	 * Gets the name of a major based on the list of tracks--
+	 * For example, if a student has both the cs major and is 
+	 * major in his track list, this function will return
+	 * "Computer Science and Information Systems Double Major"
+	 * @param tracks ArrayList of tracks 
+	 * @return The string representing the major
+	 * @author Katherine Miller
+	 */
+	public String getTrackName(ArrayList<Track> tracks) {
+		String trackName = "";
+		boolean csmajor = false;
+		boolean csminor = false;
+		boolean ismajor = false;
+		for (int i = 0; i < tracks.size(); i++) {
+			// Track needs a name property with setters and getters
+			// in order to make this possible.
+			String name = tracks.get(i).getName();
+			if (name == "Computer Science Major") {
+				csmajor = true;
+			} else if (name == "Computer Science Minor") {
+				csminor = true;
+			} else if (name == "Information Systems Major") {
+				ismajor = true;
+			}
+		}
 		
-		return null;
+		if (ismajor && csmajor) {
+			trackName = "Computer Science and Information Systems Double Major";
+		} else if (ismajor && csminor) {
+			trackName = "Information Systems Major with Computer Science Minor";
+		} else if (ismajor) {
+			trackName = "Information Systems Major";
+		} else if (csmajor) {
+			trackName = "Computer Science Major";
+		}
+		return trackName;
+	}
+	
+	/**
+	 * Gets a course using the courseID from the master course list
+	 * @param courseID The course's ID
+	 * @return The course object corresponding to the ID
+	 * @author Katherine Miller
+	 */
+	public Course getCourse(String courseID){
+		Course c = null;
+		for (int i=0; i < masterCourseList.size(); i++) {
+			if (masterCourseList.get(i).getCourseID() == courseID) {
+				c = masterCourseList.get(i);
+
+			}
+		}
+		return c;
 	}
 	
 	/**
 	 * 
 	 * @param track The name of the track we'd like to get
 	 * @return A track object containing all the requirements of the track requested
+	 * @author Katherine Miller
 	 */
 	private Track getTrack(String track){
 		File trackFile = null;
@@ -336,15 +391,13 @@ public class CoursePathDAO {
 	 * @param id The ID for the course we want to populate
 	 * @param grade Minimum grade required by the track
 	 * @return The course object as it appears in the master course list, with the minimum grade parameter added
+	 * @author Katherine Miller
 	 */
 	private Course populateTrackCourse(String id, String grade) {
 		Course course = null;
-		for (int i=0; i < masterCourseList.size(); i++) {
-			if (masterCourseList.get(i).getCourseID() == id) {
-				Course c = masterCourseList.get(i);
-				course = new Course(id, "", "", grade, c.getCredits(), c.getCourseTitle());
-			}
-		}
+		Course c = getCourse(id);
+		course = new Course(id, "", "", grade, c.getCredits(), c.getCourseTitle());
+
 		return course;
 	}
 	
@@ -352,6 +405,7 @@ public class CoursePathDAO {
 	 * 
 	 * @param prereq A string in the format "courseID(grade)|courseID(grade)|...|courseID(grade)"
 	 * @return A FlexibleRequirement containing the list of courses described with numToTake set to one
+	 * @author Katherine Miller
 	 */
 	private FlexibleRequirement parsePrerequisite(String prereq) {
 		FlexibleRequirement prerequisite;
