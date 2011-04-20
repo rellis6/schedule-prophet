@@ -15,6 +15,8 @@ import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import control.ProphetController;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -50,7 +52,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private JMenuItem menu;
 	private JMenuItem menuOpen;
 	private JScrollPane neededScrollPane;
-
+	//private ProphetController controller;
+	private TestController controller;
+	
 	{
 		//Set Look & Feel
 		try {
@@ -67,15 +71,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				MaintainPlan inst = new MaintainPlan();
+				MaintainPlan inst = new MaintainPlan(new TestController());
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public MaintainPlan() {
+	public MaintainPlan(ProphetController controller) {
 		super();
+		//this.controller=controller;
+		this.controller=(TestController) controller;
 		initGUI();
 	}
 	
@@ -105,6 +111,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						jMenu1.add(menu);
 						menu.setText("Save");
 						menu.setFont(new java.awt.Font("Tahoma",0,12));
+						menu.setActionCommand("Save");
+						menu.addActionListener(this);
 					}
 					{
 						menuSeparator = new JSeparator();
@@ -115,6 +123,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						jMenu1.add(menuExport);
 						menuExport.setText("Export");
 						menuExport.setFont(new java.awt.Font("Tahoma",0,12));
+						menuExport.setActionCommand("Export");
+						menuExport.addActionListener(this);
 					}
 					{
 						menuSeparator2 = new JSeparator();
@@ -138,6 +148,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						menuAbout = new JMenuItem();
 						menuHelp.add(menuAbout);
 						menuAbout.setText("About UMBC CS/IS Schedule Prophet");
+						menuAbout.setActionCommand("About");
+						menuAbout.addActionListener(this);
 					}
 				}
 			}
@@ -166,43 +178,16 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode semester = null;
 				DefaultMutableTreeNode course = null;
 				
-				semester = new DefaultMutableTreeNode("Fall 2009");
-				completed.add(semester);
-				
-				course = new DefaultMutableTreeNode("CMSC 201");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("MATH 151");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("ENGL 100");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("Social Science");
-				semester.add(course);
-				
-				semester = new DefaultMutableTreeNode("Spring 2010");
-				completed.add(semester);
-				
-				course = new DefaultMutableTreeNode("CMSC 202");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("CMSC 203");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("MATH 152");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("PHYS 121");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("Arts/Humanities");
-				semester.add(course);
-				
-				semester = new DefaultMutableTreeNode("Fall 2010");
-				completed.add(semester);
-				
-				course = new DefaultMutableTreeNode("CMSC 313");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("CMSC 341");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("MATH 221");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("PHYS 122");
-				semester.add(course);
+				String[] semesters = controller.getCompletedSemesters();
+				for(int i=0; i<semesters.length; i++){
+					semester = new DefaultMutableTreeNode(semesters[i]);
+					completed.add(semester);
+					String[] courses = controller.getCourseList(semesters[i]);
+					for(int j=0; j<courses.length; j++){
+						course = new DefaultMutableTreeNode(courses[j]);
+						semester.add(course);
+					}
+				}
 
 				treeCompletedCourses = new JTree(completed);
 				completedScrollPane = new JScrollPane(treeCompletedCourses);
@@ -219,41 +204,16 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode category = null;
 				DefaultMutableTreeNode course = null;
 				
-				category = new DefaultMutableTreeNode("Computer Science Core Courses");
-				needed.add(category);
-				
-				course = new DefaultMutableTreeNode("CMSC 201");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 202");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 203");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 313");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 331");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 341");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 345");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 411");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 421");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 441");
-				category.add(course);
-				
-				category = new DefaultMutableTreeNode("Computer Science Upper Level Electives");
-				needed.add(category);
-				
-				course = new DefaultMutableTreeNode("CMSC 426");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 431");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 435");
-				category.add(course);
-				course = new DefaultMutableTreeNode("CMSC 445");
-				category.add(course);
+				String[] categories = controller.getNeededCategories();
+				for(int i=0; i<categories.length; i++){
+					category = new DefaultMutableTreeNode(categories[i]);
+					needed.add(category);
+					String[] courses = controller.getCourseList(categories[i]);
+					for(int j=0; j<courses.length; j++){
+						course = new DefaultMutableTreeNode(courses[j]);
+						category.add(course);
+					}
+				}
 				
 				treeNeededCourses = new JTree(needed);
 				neededScrollPane = new JScrollPane(treeNeededCourses);
@@ -269,6 +229,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				cmdAddCourseToPlan.setText("Add Course To Plan");
 				cmdAddCourseToPlan.setBounds(582, 11, 158, 23);
 				cmdAddCourseToPlan.setFont(new java.awt.Font("Tahoma",0,14));
+				cmdAddCourseToPlan.setActionCommand("Add course");
+				cmdAddCourseToPlan.addActionListener(this);
 			}
 			{
 				cmdRemoveCourse = new JButton();
@@ -276,6 +238,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				cmdRemoveCourse.setText("Remove Course");
 				cmdRemoveCourse.setBounds(437, 11, 140, 23);
 				cmdRemoveCourse.setFont(new java.awt.Font("Tahoma",0,14));
+				cmdRemoveCourse.setActionCommand("Remove course");
+				cmdRemoveCourse.addActionListener(this);
 			}
 			{
 				DefaultMutableTreeNode future = new DefaultMutableTreeNode("Future Course Plan");
@@ -283,46 +247,16 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode semester = null;
 				DefaultMutableTreeNode course = null;
 				
-				semester = new DefaultMutableTreeNode("Spring 2011");
-				future.add(semester);
-				
-				course = new DefaultMutableTreeNode("CMSC 331");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("CMSC 345");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("STAT 355");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("BIOL 100");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("Lab Class");
-				semester.add(course);
-				
-				semester = new DefaultMutableTreeNode("Fall 2011");
-				future.add(semester);
-				
-				course = new DefaultMutableTreeNode("CMSC 304");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("CMSC 421");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("CMSC 441");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("Culture");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("Social Sciences");
-				semester.add(course);
-				
-				semester = new DefaultMutableTreeNode("Spring 2012");
-				future.add(semester);
-				
-				course = new DefaultMutableTreeNode("CMSC 411");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("CMSC 461");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("Writing Intensive");
-				semester.add(course);
-				course = new DefaultMutableTreeNode("Social Sciences");
-				semester.add(course);
-				
+				String[] semesters = controller.getFutureSemesters();
+				for(int i=0; i<semesters.length; i++){
+					semester = new DefaultMutableTreeNode(semesters[i]);
+					future.add(semester);
+					String[] courses = controller.getCourseList(semesters[i]);
+					for(int j=0; j<courses.length; j++){
+						course = new DefaultMutableTreeNode(courses[j]);
+						semester.add(course);
+					}
+				}
 				
 				treeFuturePlan = new JTree(future);
 				futureScrollPane = new JScrollPane(treeFuturePlan);
@@ -339,6 +273,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				cmdMarkSemesterComplete.setText("Mark Semester Complete");
 				cmdMarkSemesterComplete.setBounds(437, 40, 303, 23);
 				cmdMarkSemesterComplete.setFont(new java.awt.Font("Tahoma",0,14));
+				cmdMarkSemesterComplete.setActionCommand("Mark completed");
+				cmdMarkSemesterComplete.addActionListener(this);
 			}
 			pack();
 			this.setSize(772, 600);
@@ -354,7 +290,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			this.dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					LoadPlan inst = new LoadPlan();
+					LoadPlan inst = new LoadPlan(controller);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
@@ -364,20 +300,50 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			this.dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					StartMenu inst = new StartMenu();
+					StartMenu inst = new StartMenu(controller);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
 			});
 		}
-		else{
+		else if(e.getActionCommand().equals("Export")){
+			
+		}
+		else if(e.getActionCommand().equals("Save")){
+			
+		}
+		else if(e.getActionCommand().equals("About")){
+			
+		}
+		else if(e.getActionCommand().equals("Add completed")){
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					EditCourse inst = new EditCourse();
+					EditCourse inst = new EditCourse(controller);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
 			});
+		}
+		else if(e.getActionCommand().equals("Edit completed")){
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					EditCourse inst = new EditCourse(controller);
+					inst.setLocationRelativeTo(null);
+					inst.setVisible(true);
+				}
+			});
+		}
+		else if(e.getActionCommand().equals("Add course")){
+			
+		}
+		else if(e.getActionCommand().equals("Remove course")){
+			
+		}
+		else if(e.getActionCommand().equals("Mark completed")){
+			
+		}
+		else{
+			System.out.println(e.getActionCommand());
 		}
 	}
 
