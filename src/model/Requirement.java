@@ -15,11 +15,12 @@ public abstract class Requirement {
 	private int minCredits;
 	
 	/**
+	 * Determine whether or not a list of Courses fulfills this requirement.
 	 * 
 	 * @param courseList list of courses
 	 * @return an empty list if courseList doesn't fulfill the requirements; if courseList does
 	 * fulfill this requirement, a list of courses that fulfill this requirement (taken from courseList)
-	 * will be returned.
+	 * will be returned. This is done so that users of this class can make sure one course isn't used to fulfill multiple requirements.
 	 */
 	public abstract ArrayList<Course> isFulfilled(ArrayList<Course> courseList);
 	

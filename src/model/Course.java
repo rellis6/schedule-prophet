@@ -105,11 +105,11 @@ public class Course {
 				return true;
 			} 
 		} else if (grade.equals("C")) {
-			if ((!minPassingGrade.equals("A")) || (!minPassingGrade.equals("B"))) {
+			if ((!minPassingGrade.equals("A")) && (!minPassingGrade.equals("B"))) {
 				return true;
 			}
 		} else if (grade.equals("D")) {
-			if ((!minPassingGrade.equals("A")) || (!minPassingGrade.equals("B")) || 
+			if ((!minPassingGrade.equals("A")) && (!minPassingGrade.equals("B")) && 
 					(!minPassingGrade.equals("C"))) {
 				return true;
 			}

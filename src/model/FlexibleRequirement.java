@@ -17,15 +17,6 @@ public class FlexibleRequirement extends Requirement {
 	/** this number of courses must be taken from courseList */
 	private int numToTake;
 	
-	/**
-	 * 
-	 * @param courseList list of courses that make up this requirement
-	 */
-	public FlexibleRequirement(ArrayList<Course> courseList, int minCredits) {
-		setRequirements(courseList);
-		this.numToTake = 1;
-		setMinCredits(minCredits);
-	}
 	
 	/**
 	 * 
@@ -49,7 +40,7 @@ public class FlexibleRequirement extends Requirement {
 		for (int i = 0; i < courseList.size(); i++) {
 			if (getRequirements().contains(courseList.get(i)) && 
 					courseList.get(i).meetsGradeRequirement()) {
-				fulfillingCourses.add(courseList.get(i));
+				fulfillingCourses.add(new Course(courseList.get(i)));
 				creditCount += courseList.get(i).getCredits();
 			}
 		}
