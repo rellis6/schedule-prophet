@@ -15,15 +15,7 @@ public class FlexibleRequirementSet extends Requirement {
 	private ArrayList<AbsoluteRequirement> requirements;
 	private int numToTake;
 
-	/**
-	 * Create a FlexibleRequirementSet, with the number of AbsoluteRequirements to take set to 1.
-	 * @param requirements list of absolute requirements
-	 */
-	public FlexibleRequirementSet(ArrayList<AbsoluteRequirement> requirements, int minCredits) {
-		this.requirements = requirements;
-		numToTake = 1;
-		setMinCredits(minCredits);
-	}
+
 	
 	/**
 	 * Create a FlexibleRequirementSet.
@@ -52,7 +44,7 @@ public class FlexibleRequirementSet extends Requirement {
 				
 				// since this AbsoluteRequirement is fulfilled, add the courses that fulfilled it to fulfilledRequirements
 				for (int j = 0; j < tempFulfillingCourses.size(); j++) {
-					fulfillingCourses.add(tempFulfillingCourses.get(j));
+					fulfillingCourses.add(new Course(tempFulfillingCourses.get(j)));
 					creditCount += tempFulfillingCourses.get(j).getCredits();
 				}
 			}

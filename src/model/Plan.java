@@ -24,6 +24,8 @@ public class Plan {
 	private int totalCredits;
 	
 	//why does addCourse take a Course but removeCourse takes a String?
+	// ^ I wasn't sure if Course objects would always be known. It would probably work just fine if they both took Course objects. 
+	// This way is a little more flexible.
 	
 	/**
 	 * Create a plan.
@@ -91,7 +93,7 @@ public class Plan {
 		ArrayList<Requirement> courseReqs = course.getPreReqs();
 		
 		for (Requirement req : courseReqs) {
-			if (req.isFulfilled(courses).size() != 0) {
+			if (req.isFulfilled(courses).size() == 0) { // remember that isFulfilled() returns an empty list if it's not fulfilled 
 				unfulfilledReqs.add(req);
 			}
 		}

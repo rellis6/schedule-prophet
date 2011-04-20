@@ -79,7 +79,7 @@ public class Semester {
 	public Course getCourse(String courseID) throws NonExistentCourseException {
 		for (int i = 0; i < classes.size(); i++) {
 			if (courseID.equals(classes.get(i).getCourseID())) {
-				return classes.get(i);
+				return new Course(classes.get(i));
 			}
 		}
 		throw new NonExistentCourseException("Course doesn't exist in this semester.");
