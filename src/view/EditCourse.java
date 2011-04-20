@@ -13,6 +13,8 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import control.ProphetController;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -37,7 +39,9 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblGrade;
 	private JComboBox cbxSemester;
 	private JScrollPane scrollpaneComments;
-
+	//private ProphetController controller;
+	private TestController controller;
+	
 	{
 		//Set Look & Feel
 		try {
@@ -54,15 +58,17 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				EditCourse inst = new EditCourse();
+				EditCourse inst = new EditCourse(new TestController());
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
 		});
 	}
 	
-	public EditCourse() {
+	public EditCourse(ProphetController controller) {
 		super();
+		//this.controller=controller;
+		this.controller=(TestController) controller;
 		initGUI();
 	}
 	
