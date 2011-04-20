@@ -118,9 +118,6 @@ public class Course {
 		return false;
 	}
 	
-	public boolean meetsPreReqs() {
-		return true;
-	}
 	
 	/**
 	 * Add a prerequisite to this course.

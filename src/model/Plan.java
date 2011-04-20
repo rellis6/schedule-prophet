@@ -80,18 +80,39 @@ public class Plan {
 	
 	
 	/**
-	 * See if a course meets its prerequisites.
+	 * See if this plan meets a Course's prerequisites.
 	 * @param course see if this course's prereqs have been met
-	 * @return an empty ArrayList if course meets its prereqs, and an ArrayList filled with courses that still need to be taken otherwise
+	 * @return an empty ArrayList if course meets its prereqs, and an ArrayList filled with Requirements
+	 *  that still need to be fulfilled otherwise
 	 */
 	public ArrayList<Requirement> meetsPrereqs(Course course) {
-		ArrayList<Requirement> neededPrereqs = new ArrayList<Requirement>();
-
+		ArrayList<Requirement> unfulfilledReqs = new ArrayList<Requirement>();
+		ArrayList<Course> courses = getCourses();
+		ArrayList<Requirement> courseReqs = course.getPreReqs();
 		
-		return neededPrereqs;
+		for (Requirement req : courseReqs) {
+			if (req.isFulfilled(courses).size() != 0) {
+				unfulfilledReqs.add(req);
+			}
+		}
+		
+		return unfulfilledReqs;
 	}
 	
-
+	/**
+	 * get all of the courses within this plan. 
+	 * @return list of courses in this plan
+	 */
+	private ArrayList<Course> getCourses() {
+		ArrayList<Course> courses = new ArrayList<Course>();
+		for (Semester semester : completedSemesters) {
+			courses.addAll(semester.getClasses());
+		}
+		for (Semester semester : futureSemesters) {
+			courses.addAll(semester.getClasses());
+		}
+		return courses;
+	}
 	
 	/**
 	 * Find a semester in this plan from either completedSemesters or futureSemesters.

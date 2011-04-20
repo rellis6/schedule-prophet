@@ -22,7 +22,7 @@ public abstract class Requirement {
 	 * will be returned.
 	 */
 	public abstract ArrayList<Course> isFulfilled(ArrayList<Course> courseList);
-
+	
 	/**
 	 * @param requirements the requirements to set
 	 */
