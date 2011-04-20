@@ -9,7 +9,7 @@
 package model;
 
 import java.util.ArrayList;
-//TODO test
+
 /**
  * @author g00gle
  *
@@ -78,10 +78,6 @@ public class Course {
 		this.courseTitle = courseTitle;
 	}
 	
-
-
-
-	
 	/**
 	 * Compare courses for equality.
 	 * 
@@ -122,6 +118,9 @@ public class Course {
 		return false;
 	}
 	
+	public boolean meetsPreReqs() {
+		return true;
+	}
 	
 	/**
 	 * Add a prerequisite to this course.
