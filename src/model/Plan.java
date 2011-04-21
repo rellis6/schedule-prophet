@@ -199,6 +199,11 @@ public class Plan {
 		return null;
 	}
 	
+	public void savePlan(String name){
+		//save plan
+		//throws PlanAlreadyExistsException
+	}
+	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Track> getTracks() {
 		return (ArrayList<Track>) tracks.clone();
