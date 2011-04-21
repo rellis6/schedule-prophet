@@ -45,11 +45,10 @@ public class ProphetController {
 	
 	public void newPlan(){
 		this.plan = new Plan(TrackList);
-		return;
 	}
 	
 	public void loadPlan(String filename){
-		return;
+		planDAO = new UserPlanDAO(filename);
 	}
 	
 	/**
@@ -58,14 +57,13 @@ public class ProphetController {
 	 * Postcondition(s): returns array which contains grade + comments
 	 * @param args                    
 	 */		
-	void addCourse(String courseID, String season, String comments, int year){
+	public void addCourse(String courseID, String season, String comments, int year){
 		try {
-			//test for duplicate courses, method in plan?
 			//duplicate course exception?
-			plan.addCourse(courseDAO.getCourse(courseID, TrackList), season, year);
+			plan.addCourse(courseDAO.getCourse(courseID), season, year);
 		} catch (NonExistentSemesterException e) {
 			System.out.print(e.toString());
-			//warning/error window with gui?
+			//warning/error window
 		}
 	}	
 	
@@ -75,7 +73,7 @@ public class ProphetController {
 	 * Postcondition(s): returns True if other courses exist in semester
 	 * @param args                    
 	 */		
-	boolean removeCourse(String courseID, String season, int year){
+	public boolean removeCourse(String courseID, String season, int year){
 		
 		try {
 			plan.removeCourse(courseID, season, year);
@@ -94,7 +92,7 @@ public class ProphetController {
 	 * Postcondition(s): returns array containing grade + comments
 	 * @param args                    
 	 */		
-	String[] getCourseInfo(String courseID, String season, int year){
+	public String[] getCourseInfo(String courseID, String season, int year){
 		String[] array = {plan.getCourse(courseID, season, year).getGrade(), 
 				plan.getCourse(courseID, season, year).getNotes()};
 		return array;
@@ -108,8 +106,8 @@ public class ProphetController {
 	 * Postcondition(s): 
 	 * @param args                    
 	 */		
-	void savePlan(String name){
-		return;
+	public void savePlan(){
+		planDAO.savePlan(plan);
 	}
 
 	/**
@@ -117,18 +115,16 @@ public class ProphetController {
 	 * @param season season of semester to be added
 	 * @param year year of semester to be added
 	 */
-	void addSemester(String season, int year){
+	public void addSemester(String season, int year){
 		if(plan.addSemester(season, year) == false){
-			//warning/error window of semester already exists?
+			//error window
+		}
+		else{
+			//success window?
 		}
 	}
 	
-	/**
-	 * Name:             main   <br \>
-	 * Precondition(s):           <br \>
-	 * Postcondition(s):          <br \>
-	 * @param args                    
-	 */
+
 	public static void main(String Args[]) {
 		System.out.println("Hello, world!");
 	}
