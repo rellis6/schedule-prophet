@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.File;  //Will need to handle files in the DAO
 import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -160,10 +161,26 @@ public class UserPlanDAO {
 		fileText = fileText + "</plan>\n";
 		
 		String filePath = System.getenv("APPDATA") + "\\prophet\\" + plan.getName() + ".xml";
-		FileWriter fwriter = new FileWriter(filePath);
+		FileWriter fwriter = null;
+		try {
+			fwriter = new FileWriter(filePath);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         BufferedWriter out = new BufferedWriter(fwriter);
-        out.write(fileText);
-        out.close();
+        try {
+			out.write(fileText);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	
