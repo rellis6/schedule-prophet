@@ -252,9 +252,7 @@ public class UserPlanDAO {
 	 */
 	public void deletePlan(String name) throws IllegalArgumentException {
 		
-		//This will need to be updated with a path of where we are planning to store the plans
-		//along with a corrected filename. 
-	    String fileName = "FILL IN FILE PATH/NAME HERE";
+		String fileName = System.getenv("APPDATA") + "\\prophet\\" + name + ".xml";
 	    // A File object to represent the filename
 	    File file = new File(fileName);
 
