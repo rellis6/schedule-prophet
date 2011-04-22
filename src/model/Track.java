@@ -20,9 +20,34 @@ public class Track {
 	
 	public static final int MIN_CREDITS = 120;
 	private ArrayList<Requirement> courseRequirements;
+	private String name;
 	
+	/**
+	 * Create a new Track with name set to an empty String.
+	 * @param courseRequirements
+	 */
 	public Track(ArrayList<Requirement> courseRequirements) {
 		this.courseRequirements = courseRequirements;
+		name = "";
+	}
+	
+	/**
+	 * Create a new Track. 
+	 * 
+	 * @param courseRequirements list of requirements to fulfill
+	 * @param name name of this track
+	 */
+	public Track(ArrayList<Requirement> courseRequirements, String name) {
+		this.courseRequirements = courseRequirements;
+		this.name = name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	/*

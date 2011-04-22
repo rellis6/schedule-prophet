@@ -22,13 +22,14 @@ public class Plan {
 	private ArrayList<Semester> futureSemesters;
 	private ArrayList<Track> tracks;
 	private int totalCredits;
+	private String name;
 	
 	//why does addCourse take a Course but removeCourse takes a String?
 	// ^ I wasn't sure if Course objects would always be known. It would probably work just fine if they both took Course objects. 
 	// This way is a little more flexible.
 	
 	/**
-	 * Create a plan.
+	 * Create a plan with 'name' set to an empty string.
 	 * @param tracks Tracks this plan is meant to fulfill.
 	 */
 	public Plan(ArrayList<Track> tracks) {
@@ -36,6 +37,20 @@ public class Plan {
 		completedSemesters = new ArrayList<Semester>();
 		futureSemesters = new ArrayList<Semester>();
 		totalCredits = 0;
+		this.name = "";
+	}
+	
+	public Plan(ArrayList<Track> tracks, String name) {
+		this(tracks);
+		setName(name);
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	/**
@@ -184,6 +199,32 @@ public class Plan {
 			return true;
 		} 
 		
+	}
+	
+	public boolean addSemester(Semester newSemester) {
+		String season = newSemester.getSeason();
+		int year = newSemester.getYear();
+		
+		try {
+			getSemester(season, year);
+			return false;
+		} catch (NonExistentSemesterException e) {
+			futureSemesters.add(newSemester);
+			return true;
+		}
+	}
+
+	public ArrayList<Semester> getSemesters() {
+		ArrayList<Semester> allSemesters = new ArrayList<Semester>();
+		
+		for (Semester s : completedSemesters) {
+			allSemesters.add(new Semester(s));
+		}
+		for (Semester s : futureSemesters) {
+			allSemesters.add(new Semester(s));
+		}
+		
+		return allSemesters;
 	}
 	
 	public Course getCourse(String courseID, String season, int year){

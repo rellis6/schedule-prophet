@@ -34,6 +34,13 @@ public class Semester {
 		setCompleted(false);
 	}
 	
+	public Semester(Semester s) {
+		this.season = s.getSeason();
+		this.year = year;
+		this.classes = s.getClasses();
+		this.completed = s.getCompleted();
+	}
+	
 	/**
 	 * Returns whether or not two semesters are the same, based on name and year.
 	 * @return whether or not two semesters are the same, based on name and year
