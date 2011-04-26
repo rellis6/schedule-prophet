@@ -17,8 +17,8 @@ import data.*;
 /**
  * @author Mark Pallone
  *
- * Description: 
- *
+ * Description: Every action that can be taken using the GUI is called as a method 
+ * in the ProphetController class.
  */
 public class ProphetController {
 	Plan plan;
@@ -39,12 +39,18 @@ public class ProphetController {
 	//string with the track name to PC, PC checks it's valid, then adds?
 	
 	
-	public void initTrackList(String track){
+	private void initTrackList(String track){
 		this.TrackList = courseDAO.getTrackCourses(track);
 	}
 	
-	public void newPlan(){
+	public void newPlan(String track){
+		initTrackList(track);
 		this.plan = new Plan(TrackList);
+	}
+	
+	public void newPlan(String track, String name){
+		initTrackList(track);
+		this.plan = new Plan(TrackList, name);
 	}
 	
 	public void loadPlan(String filename){
@@ -124,7 +130,43 @@ public class ProphetController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param season season of semester to be completed
+	 * @param year year of semester to be completed
+	 * @param completed boolean of what the semesterCompleted value of the specified semester 
+	 * should be set to
+	 * @return an ArrayList of any semesters before the semester to be completed which aren't
+	 * completed
+	 */
+	public ArrayList<Semester> setSemester(String season, int year, boolean completed){
+		ArrayList<Semester> allSemesters = plan.getSemesters();
+		ArrayList<Semester> needCompleted = new ArrayList<Semester>();
 
+		for(Semester current: allSemesters){
+			if(current.equals(new Semester(season, year)))
+				break;
+			if(current.isCompleted() == false)
+				needCompleted.add(current);
+		}
+		
+		if(needCompleted.size() == 0)
+			this.plan.completeSemester(season, year);
+		
+		return needCompleted;
+	}
+
+	//Plan class needs an uncompleteSemester method or a setCompleted method
+	
+	//completes all semesters up to specified
+	public void completePriorSemesters(String season, int year){
+		
+	}
+	//uncompletes from sepecified to latest completed
+	public void uncompleteFutureSemesters(String season, int year){
+		
+	}
+	
 	public static void main(String Args[]) {
 		System.out.println("Hello, world!");
 	}
