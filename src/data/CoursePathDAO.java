@@ -107,11 +107,11 @@ public class CoursePathDAO {
 							// Now, just in case the tags are out of order, 
 							// we will test for equality with the two possibilities
 							// that we expect and process accordingly
-							if (courseChild.getNodeName() == "description") {
+							if (courseChild.getNodeName().equals("description")) {
 								// If this child is a description tag, we can simply get the
 								// text inside the tag and assign to the desciption variable.
 								courseDescription = courseChild.getTextContent();
-							} else if (courseChild.getNodeName() == "prerequisites") {
+							} else if (courseChild.getNodeName().equals("prerequisites")) {
 								// Prerequisites are a little more complicated. They are given
 								// as separate tags inside of a "prerequisites" tag, so first 
 								// we need to grab the list of child nodes and iterate through it.
@@ -121,7 +121,7 @@ public class CoursePathDAO {
 									if (prerequisites.item(g) instanceof Element) {
 										// Cast node to Element and make sure it is a "prerequisite" tag.
 										Element prereq = (Element) prerequisites.item(g);
-										if (prereq.getNodeName() == "prerequisite") {
+										if (prereq.getNodeName().equals("prerequisite")) {
 											// The text content of a prerequisite tag may simply be a
 											// course ID, but if there are several equivalent courses that
 											// each may satisfy the prereq, and/or certain minimum grades
@@ -197,11 +197,11 @@ public class CoursePathDAO {
 			// Track needs a name property with setters and getters
 			// in order to make this possible.
 			String name = tracks.get(i).getName();
-			if (name == "Computer Science Major") {
+			if (name.equals("Computer Science Major")) {
 				csmajor = true;
-			} else if (name == "Computer Science Minor") {
+			} else if (name.equals("Computer Science Minor")) {
 				csminor = true;
-			} else if (name == "Information Systems Major") {
+			} else if (name.equals("Information Systems Major")) {
 				ismajor = true;
 			}
 		}
@@ -227,7 +227,7 @@ public class CoursePathDAO {
 	public Course getCourse(String courseID){
 		Course c = null;
 		for (int i=0; i < masterCourseList.size(); i++) {
-			if (masterCourseList.get(i).getCourseID() == courseID) {
+			if (masterCourseList.get(i).getCourseID().equals(courseID)) {
 				c = masterCourseList.get(i);
 
 			}
@@ -248,15 +248,15 @@ public class CoursePathDAO {
 		org.w3c.dom.Document trackDoc;
 		ArrayList<Requirement> trackReqs = new ArrayList<Requirement>();
 		try {
-			if (track == "Computer Science Major") {
+			if (track.equals("Computer Science Major")) {
 				// Open the cs major track XML file
 				trackFile = new File("src\\data\\cs_major_reqs.xml");
-			} else if (track == "Information Systems Major") {
+			} else if (track.equals("Information Systems Major")) {
 				// Open the is major track XML file
-				trackFile = new File("src\\data\\cs_major_reqs.xml");
-			} else if (track == "Computer Science Minor") {
+				trackFile = new File("src\\data\\is_major_reqs.xml");
+			} else if (track.equals("Computer Science Minor")) {
 				// Open the cs minor track XML file
-				trackFile = new File("src\\data\\cs_major_reqs.xml");
+				trackFile = new File("src\\data\\cs_minor_reqs.xml");
 			}
 			// Create new instances of DocumentBuilder, DocumentBuilderFactory,
 			// and create the DOM out of the selected trackfile
@@ -299,7 +299,7 @@ public class CoursePathDAO {
 							Element course = (Element) courses.item(h);
 							
 							// Make sure child is a course
-							if (course.getNodeName() == "course") {
+							if (course.getNodeName().equals("course")) {
 								// Get course ID and minimum grade
 								String courseID = course.getAttribute("id");
 								String courseGrade = course.getAttribute("grade");
@@ -310,14 +310,14 @@ public class CoursePathDAO {
 						}
 					}
 					// Now, get the parameters that depend on requirement type.
-					if (reqType == "absolutereq") {
+					if (reqType.equals("absolutereq")) {
 						numCredits = Integer.parseInt(req.getAttribute("credits"));
 						trackReqs.add(new AbsoluteRequirement(courseList, numCredits));
-					} else if (reqType == "flexiblereq") {
+					} else if (reqType.equals("flexiblereq")) {
 						numToTake = Integer.parseInt(req.getAttribute("number"));
 						numCredits = Integer.parseInt(req.getAttribute("credits"));
 						trackReqs.add(new FlexibleRequirement(courseList, numToTake, numCredits));
-					} else if (reqType == "flexiblereqset") {
+					} else if (reqType.equals("flexiblereqset")) {
 						ArrayList<AbsoluteRequirement> absReqList = new ArrayList<AbsoluteRequirement>();
 						NodeList absReqs = req.getChildNodes();
 						// Now, we have to iterate through a whole other list of
@@ -328,7 +328,7 @@ public class CoursePathDAO {
 								Element absReq = (Element) absReqs.item(g);
 								
 								// Make sure child is an absolute requirement
-								if (absReq.getNodeName() == "absolutereq") {
+								if (absReq.getNodeName().equals("absolutereq")) {
 									String aReqName = absReq.getAttribute("name");
 									String aReqType = absReq.getNodeName();
 									int arCredits = Integer.parseInt(absReq.getAttribute("credits"));
@@ -344,7 +344,7 @@ public class CoursePathDAO {
 											Element arCourse = (Element) arCourses.item(f);
 											
 											// Make sure child is a course
-											if (arCourse.getNodeName() == "course") {
+											if (arCourse.getNodeName().equals("course")) {
 												// Get course ID and minimum grade
 												String arCourseID = arCourse.getAttribute("id");
 												String arCourseGrade = arCourse.getAttribute("grade");
