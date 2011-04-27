@@ -39,13 +39,13 @@ For each *defect*, state:
     * Start: 7:00 PM
 
 = Use Cases = 
-  # Create Schedule
-  # Load Schedule
-  # Add Course
-  # Remove Course
-  # Edit Course
-  # Complete Semester
-  # Save Schedule
-  # Export Schedule
-  # Maintain User Plan Repository
-  # Display Courses Needing Completion
+  # Create Schedule-Katherine Miller
+  # Load Schedule-Katherine Miller
+  # Add Course-Robert Ellis
+  # Remove Course-Robert Ellis
+  # Edit Course-Justin Ermer
+  # Complete Semester-Justin Ermer
+  # Save Schedule-Mark Pallone
+  # Export Schedule-Mark Pallone
+  # Maintain User Plan Repository-John LaCourse
+  # Display Courses Needing Completion-John LaCourse
