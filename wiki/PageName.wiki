@@ -1,6 +1,15 @@
 #summary What we need to do for the testing report.
 
 = Outline =
+
+For each *testing session*, state:
+  * date
+  * location
+  * time started
+  * time ended
+  * testers
+  * use cases covered
+
 For each *use case*, state: 
   * equivalence partitions
     * boundary conditions 
@@ -21,3 +30,23 @@ For each *defect*, state:
     * how the repair affects other parts of the program 
   * underlying logical flaw 
 
+= Testing Sessions = 
+  # Start list here!
+
+= Use Cases = 
+  # Create Schedule
+  # Load Schedule
+  # Add Course
+  # Remove Course
+  # Edit Course
+  # Complete Semester
+  # Save Schedule
+  # Export Schedule
+  # Maintain User Plan Repository
+  # Display Courses Needing Completion
+
+= Test Cases = 
+  # Start list here!
+
+= Defects = 
+  # Start list here! 
