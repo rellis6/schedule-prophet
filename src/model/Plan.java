@@ -162,10 +162,12 @@ public class Plan {
 	 * removes from futureSemesters, and adds to completedSemesters
 	 * @param season season of semester
 	 * @param year year of semester
-	 * @return true if successfully completed, false if already completed
+	 * @return returns an array list of String Arrays which contain the season and year of
+	 * any semesters that need to be changed
 	 */
 	
-	public boolean completeSemester(String season, int year){
+	public ArrayList<String[]> setSemesterCompleted(String season, int year, boolean completed){
+		//initializes and finds the specified semester
 		Semester semester = null;
 		try {
 			semester = getSemester(season, year);
@@ -174,15 +176,67 @@ public class Plan {
 			e.printStackTrace();
 		}
 		
-		if(semester.isCompleted() == true)
-			return false;
-		semester.setCompleted(true);
-		futureSemesters.remove(semester);
-		completedSemesters.add(semester);
 		
-		return true;
+		/**/
+		ArrayList<Semester> allSemesters = getSemesters();
+		ArrayList<Semester> needChanged = new ArrayList<Semester>();
+		
+		//test for completing a semester
+		if(completed == true){
+			//adds any prior uncompleted semesters to needChanged
+			for(Semester current: allSemesters){
+				//breaks when it gets to itself
+				if(current.equals(semester))
+					break;
+				if(current.isCompleted() != completed)
+					needChanged.add(current);
+			}
+			
+			//if none need to be changed, complete
+			if(needChanged.size() == 0){
+				semester.setCompleted(true);
+				futureSemesters.remove(semester);
+				completedSemesters.add(semester);
+			}
+		}
+		//test for uncompleting semesters
+		else{
+			Semester current = null;
+			//if not last semester
+			if(allSemesters.indexOf(semester) != allSemesters.size() - 1)
+				//iterates through allSemesters after semester's index, adding each to needChanged
+				//until an uncompleted semester is hit or it reaches the end
+				for(int i = allSemesters.indexOf(new Semester(season, year)) + 1; i < allSemesters.size(); i++){
+					current = allSemesters.get(i);
+					
+					//breaks if an uncompleted semester is found
+					if(current.isCompleted() == false)
+						break;
+					if(current.isCompleted() != completed)
+						needChanged.add(current);
+				}
+			//if last semester
+			else{
+				semester.setCompleted(false);
+				futureSemesters.add(semester);
+				completedSemesters.remove(semester);
+			}
+		}
+		
+		ArrayList<String[]> pairs = new ArrayList<String[]>();
+		
+		//create and return season-year String pairs
+		for(Semester current: allSemesters){
+			String[] pair = new String[2];
+			pair[0] = current.getSeason();
+			pair[1] = Integer.toString(current.getYear());
+			pairs.add(pair);
+		}
+		
+		return pairs;
 		
 	}
+	
 	/**
 	 * Adds newly created semester to the end of the futureSemester list,
 	 * can be dragged to completedSemesters in GUI if completed
@@ -238,6 +292,20 @@ public class Plan {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void completePriorSemesters(String season, int year){
+		ArrayList<Semester> allSemesters = this.getSemesters();
+		for(int i = 0; i <= allSemesters.indexOf(new Semester(season, year)); i++){
+			allSemesters.get(i).setCompleted(true);
+		}
+	}
+	//uncompletes from specified to latest completed
+	public void uncompleteFutureSemesters(String season, int year){
+		ArrayList<Semester> allSemesters = this.getSemesters();
+		for(int i = allSemesters.indexOf(new Semester(season, year)); i < allSemesters.size(); i++){
+			allSemesters.get(i).setCompleted(false);
+		}
 	}
 	
 	public void savePlan(String name){
