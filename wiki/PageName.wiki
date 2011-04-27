@@ -31,7 +31,10 @@ For each *defect*, state:
   * underlying logical flaw 
 
 = Testing Sessions = 
-  # Start list here!
+  # 4/27/11
+    * Who: All team members
+    * Location: UMBC library
+    * Start: 7:00 PM
 
 = Use Cases = 
   # Create Schedule
