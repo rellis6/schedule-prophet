@@ -36,9 +36,9 @@ public class Semester {
 	
 	public Semester(Semester s) {
 		this.season = s.getSeason();
-		this.year = year;
+		this.year = s.getYear();
 		this.classes = s.getClasses();
-		this.completed = s.getCompleted();
+		this.completed = s.isCompleted();
 	}
 	
 	/**
@@ -69,13 +69,6 @@ public class Semester {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return whether or not this course has been completed
-	 */
-	public boolean getCompleted() {
-		return completed;
-	}
 	
 	/**
 	 * Given a course courseID, return the courseID if it exists in this semester.

@@ -174,7 +174,7 @@ public class Plan {
 			e.printStackTrace();
 		}
 		
-		if(semester.getCompleted() == true)
+		if(semester.isCompleted() == true)
 			return false;
 		semester.setCompleted(true);
 		futureSemesters.remove(semester);

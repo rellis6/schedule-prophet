@@ -239,7 +239,7 @@ public class UserPlanDAO {
 		ArrayList<Course> courses = s.getClasses();
 		for (int i = 0; i < courses.size(); i++) {
 			Course c = courses.get(i);
-			str = str + courseToXML(c.getCourseID(), s.getSeason(), String.valueOf(s.getYear()), s.getCompleted(), c.getGrade(), c.getNotes());
+			str = str + courseToXML(c.getCourseID(), s.getSeason(), String.valueOf(s.getYear()), s.isCompleted(), c.getGrade(), c.getNotes());
 		}
 		return str;
 	}

@@ -139,36 +139,89 @@ public class ProphetController {
 	 * @return an ArrayList of any semesters before the semester to be completed which aren't
 	 * completed
 	 */
-	public ArrayList<Semester> setSemester(String season, int year, boolean completed){
+	public ArrayList<String[]> setSemester(String season, int year, boolean completed){
 		ArrayList<Semester> allSemesters = plan.getSemesters();
-		ArrayList<Semester> needCompleted = new ArrayList<Semester>();
+		ArrayList<Semester> needChanged = new ArrayList<Semester>();
 
-		for(Semester current: allSemesters){
-			if(current.equals(new Semester(season, year)))
-				break;
-			if(current.isCompleted() == false)
-				needCompleted.add(current);
+		if(completed == true){
+			for(Semester current: allSemesters){
+				//breaks when it gets to itself
+				if(current.equals(new Semester(season, year)))
+					break;
+				if(current.isCompleted() != completed)
+					needChanged.add(current);
+			}
+
+			if(needChanged.size() == 0)
+				this.plan.completeSemester(season, year);
+
+		}
+		//test for uncompleting semesters, starting from desired semester until end or
+		//uncompleted semester
+		else{
+			Semester current = null;
+			//tests if last semester, then starts right after given semester
+			if(allSemesters.indexOf(new Semester(season, year)) == allSemesters.size() - 1)
+				for(int i = allSemesters.indexOf(new Semester(season, year)) + 1; i < allSemesters.size(); i++){
+					current = allSemesters.get(i);
+					//breaks if an uncompleted semester is found
+					if(current.isCompleted() == false)
+						break;
+					else
+						needChanged.add(current);
+				}
 		}
 		
-		if(needCompleted.size() == 0)
-			this.plan.completeSemester(season, year);
+		ArrayList<String[]> pairs = new ArrayList<String[]>();
 		
-		return needCompleted;
+		for(Semester current: allSemesters){
+			String[] pair = new String[2];
+			pair[0] = current.getSeason();
+			pair[1] = Integer.toString(current.getYear());
+			pairs.add(pair);
+		}
+		
+		return pairs;
 	}
 
 	//Plan class needs an uncompleteSemester method or a setCompleted method
 	
+	//completePriorSemesters() and uncompleteFutureSemesters probably need to go in plan
+	//and need to check prereq stuff
 	//completes all semesters up to specified
 	public void completePriorSemesters(String season, int year){
-		
+		ArrayList<Semester> allSemesters = plan.getSemesters();
+		for(int i = 0; i <= allSemesters.indexOf(new Semester(season, year)); i++){
+			allSemesters.get(i).setCompleted(true);
+		}
 	}
-	//uncompletes from sepecified to latest completed
+	//uncompletes from specified to latest completed
 	public void uncompleteFutureSemesters(String season, int year){
-		
+		ArrayList<Semester> allSemesters = plan.getSemesters();
+		for(int i = allSemesters.indexOf(new Semester(season, year)); i < allSemesters.size(); i++){
+			allSemesters.get(i).setCompleted(false);
+		}
 	}
 	
 	public static void main(String Args[]) {
-		System.out.println("Hello, world!");
+			
+		ArrayList<String[]>  pairs = new ArrayList<String[]>();
+		
+		for(int i = 0; i < 2; i++){
+			String[] pair = new String[2];
+			if(i == 0){	
+				pair[0] = "test";
+				pair[1] = "one\n";
+			}
+			else{
+				pair[0] = "test";
+				pair[1] = "two\n";
+			}
+			pairs.add(pair);
+		}
+		
+		System.out.println(pairs.get(0)[0] + pairs.get(0)[1] + pairs.get(1)[0] + pairs.get(1)[1]);
+		
 	}
 
 }
