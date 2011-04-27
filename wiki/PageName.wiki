@@ -49,9 +49,3 @@ For each *defect*, state:
   # Export Schedule
   # Maintain User Plan Repository
   # Display Courses Needing Completion
-
-= Test Cases = 
-  # Start list here!
-
-= Defects = 
-  # Start list here! 
