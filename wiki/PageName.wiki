@@ -1,0 +1,23 @@
+#summary What we need to do for the testing report.
+
+= Outline =
+For each *use case*, state: 
+  * equivalence partitions
+    * boundary conditions 
+    * test cases stemming from each equivalence partition
+  * name of tester
+
+For each *test case*, state:
+  * name of test
+  * name of tester
+  * purpose of test 
+  * input data 
+  * prior inputs needed to do this test 
+  * expected output
+
+For each *defect*, state: 
+  * description
+  * repair suggestion (or the repair actually made if it's already been done) 
+    * how the repair affects other parts of the program 
+  * underlying logical flaw 
+
