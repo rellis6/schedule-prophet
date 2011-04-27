@@ -38,6 +38,7 @@ For each *defect*, state:
 
 = Use Cases = 
   # Create Schedule
+    * testing 123!
   # Load Schedule
   # Add Course
   # Remove Course
