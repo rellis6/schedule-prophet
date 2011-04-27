@@ -96,21 +96,21 @@ public class UserPlanDAO {
 					if (planSemesters.size() == 0) {
 						// Then create a new semester and add the course
 						Semester newSemester = new Semester(season, Integer.parseInt(year));
-						if (completed == "true") {
+						if (completed.equals("true")) {
 							newSemester.setCompleted(true);
 						}
 						newSemester.addCourse(formalCourse);
 						planSemesters.add(newSemester);
 					} else {
 						Semester lastSemester = planSemesters.get(planSemesters.size()-1);
-						if ((lastSemester.getSeason() == season) && (lastSemester.getYear() == Integer.parseInt(year))) {
+						if ((lastSemester.getSeason().equals(season)) && (lastSemester.getYear() == Integer.parseInt(year))) {
 							// Then no new semester needs to be created, just
 							// add this course to the current semester
 							lastSemester.addCourse(formalCourse);
 						} else {
 							// Then create a new semester and add the course
 							Semester newSemester = new Semester(season, Integer.parseInt(year));
-							if (completed == "true") {
+							if (completed.equals("true")) {
 								newSemester.setCompleted(true);
 							}
 							newSemester.addCourse(formalCourse);
