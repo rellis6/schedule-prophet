@@ -67,8 +67,8 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	
 	public EditCourse(ProphetController controller) {
 		super();
-		//this.controller=controller;
-		this.controller=(TestController) controller;
+		this.controller=controller;
+		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	

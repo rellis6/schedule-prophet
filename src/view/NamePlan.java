@@ -28,8 +28,8 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmd;
 	private JTextField txtName;
 	private JLabel lblNamePlan;
-	//private ProphetController controller;
-	private TestController controller;
+	private ProphetController controller;
+	//private TestController controller;
 	private String track;
 
 	{
@@ -57,8 +57,8 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 	
 	public NamePlan(ProphetController controller, String track) {
 		super();
-		//this.controller=controller;
-		this.controller=(TestController) controller;
+		this.controller=controller;
+		//this.controller=(TestController) controller;
 		this.track=track;
 		initGUI();
 	}
@@ -99,7 +99,7 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		this.dispose();
-		controller.createPlan(track,txtName.getText());
+		controller.newPlan(track,txtName.getText());
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				MaintainPlan inst = new MaintainPlan(controller);

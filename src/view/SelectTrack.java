@@ -58,8 +58,8 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	
 	public SelectTrack(ProphetController controller) {
 		super();
-		//this.controller=controller;
-		this.controller=(TestController) controller;
+		this.controller=controller;
+		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	
