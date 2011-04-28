@@ -2,6 +2,7 @@ package view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -14,6 +15,9 @@ import javax.swing.JTree;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
+
+import model.Course;
+import model.Semester;
 
 import control.ProphetController;
 
@@ -54,7 +58,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private JScrollPane neededScrollPane;
 	private ProphetController controller;
 	//private TestController controller;
-	
+	/*
 	{
 		//Set Look & Feel
 		try {
@@ -178,11 +182,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode semester = null;
 				DefaultMutableTreeNode course = null;
 				
-				String[] semesters = controller.getCompletedSemesters();
-				for(int i=0; i<semesters.length; i++){
-					semester = new DefaultMutableTreeNode(semesters[i]);
+				ArrayList<Semester> semesters = controller.getCompletedSemesters();
+				for(int i=0; i<semesters.size(); i++){
+					String temp=semesters.get(i).getSeason().concat(" ");
+					temp.concat(Integer.toString(semesters.get(i).getYear()));
+					semester = new DefaultMutableTreeNode(temp);
 					completed.add(semester);
-					String[] courses = controller.getCourseList(semesters[i]);
+					ArrayList<Course> tempCourses = controller.getCourseList(temp);
+					String[] courses = null;
+					for(int j=0; j<tempCourses.size(); j++){
+						courses[j]=tempCourses.get(j).getCourseID();
+					}
 					for(int j=0; j<courses.length; j++){
 						course = new DefaultMutableTreeNode(courses[j]);
 						semester.add(course);
@@ -208,7 +218,11 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				for(int i=0; i<categories.length; i++){
 					category = new DefaultMutableTreeNode(categories[i]);
 					needed.add(category);
-					String[] courses = controller.getCourseList(categories[i]);
+					ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);
+					String[] courses = null;
+					for(int j=0; j<tempCourses.size(); j++){
+						courses[j]=tempCourses.get(j).getCourseID();
+					}
 					for(int j=0; j<courses.length; j++){
 						course = new DefaultMutableTreeNode(courses[j]);
 						category.add(course);
@@ -247,11 +261,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode semester = null;
 				DefaultMutableTreeNode course = null;
 				
-				String[] semesters = controller.getFutureSemesters();
-				for(int i=0; i<semesters.length; i++){
-					semester = new DefaultMutableTreeNode(semesters[i]);
+				ArrayList<Semester> semesters = controller.getFutureSemesters();
+				for(int i=0; i<semesters.size(); i++){
+					String temp=semesters.get(i).getSeason().concat(" ");
+					temp.concat(Integer.toString(semesters.get(i).getYear()));
+					semester = new DefaultMutableTreeNode(temp);
 					future.add(semester);
-					String[] courses = controller.getCourseList(semesters[i]);
+					ArrayList<Course> tempCourses = controller.getCourseList(temp);
+					String[] courses = null;
+					for(int j=0; j<tempCourses.size(); j++){
+						courses[j]=tempCourses.get(j).getCourseID();
+					}
 					for(int j=0; j<courses.length; j++){
 						course = new DefaultMutableTreeNode(courses[j]);
 						semester.add(course);

@@ -1,6 +1,7 @@
 package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -37,8 +38,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdSelectPlan;
 	private JScrollPane scrollPane;
 	private ProphetController controller;
-	//private TestController controller;
-	
+	/*
 	{
 		//Set Look & Feel
 		try {
@@ -65,7 +65,6 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	public LoadPlan(ProphetController controller) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	
@@ -82,7 +81,14 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 				lblSelectPlan.setFont(new java.awt.Font("Tahoma",0,14));
 			}
 			{
-				String rows[][] = controller.getPlans();
+				ArrayList<String> tempRows = controller.getPlans();
+				String rows[][] = null;
+				for(int i=0; i<tempRows.size(); i++){
+					String temp[] = null;
+					temp[0]=tempRows.get(i);
+					temp[1]="bla";
+					rows[i]=temp;
+				}
 				String headers[] = { "Plan Name", "Date Created"};
 				tblSavedPlans = new JTable(rows,headers);
 				tblSavedPlans.setBounds(20, 41, 360, 142);
@@ -146,7 +152,14 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		else if(e.getActionCommand().equals("Delete") && row>=0){
 			controller.deletePlan((String) tblSavedPlans.getValueAt(row, 0));
 			scrollPane.setVisible(false);
-			String rows[][] = controller.getPlans();
+			ArrayList<String> tempRows = controller.getPlans();
+			String rows[][] = null;
+			for(int i=0; i<tempRows.size(); i++){
+				String temp[] = null;
+				temp[0]=tempRows.get(i);
+				temp[1]="bla";
+				rows[i]=temp;
+			}
 			String headers[] = { "Plan Name", "Date Created"};
 			tblSavedPlans = new JTable(rows,headers);
 			tblSavedPlans.setBounds(20, 41, 360, 142);
