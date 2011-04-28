@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<courses>
 <course id="CMSC104" name="Problem Solving and Computer Programming">
 	<description>This course is designed to provide an introduction to problem solving and computer programming that does not require prior programming experience. Elementary problem solving skills and algorithm development will be 
 introduced. Students will be taught the basic use of a programming environment and basic programming constructs (including loops, control statements, functions, and arrays). This course also teaches students the fundamentals of using the UNIX operating system, and introduces general computer science concepts. Note: This course does not fulfill any of the computer science major requirements. Students who have taken and received transfer credit for, or who are taking concurrently any computer programming course in a high-level programming language, will not receive credit for CMSC 104. The list of such computer programming courses includes, but is not limited to AP Computer Science, CMSC 201, CMSC 202, and sections of CMSC 291 that cover programming topics.</description>
@@ -933,3 +934,4 @@ introduced. Students will be taught the basic use of a programming environment a
 		<prerequisite>LANG102</prerequisite>
 	</prerequisites>
 </course>
+</courses>
