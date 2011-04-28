@@ -117,7 +117,6 @@ public class TestController extends ProphetController{
 	}
 
 	public ArrayList<Course> getCourseList(String category) {
-		System.out.println("getCourseList");
 		if(category.equals("Fall 2009")){
 			ArrayList<Course> courses=new ArrayList<Course>();
 			courses.add(new Course("CMSC 201", "Z", 1000000000, "class of awesome"));

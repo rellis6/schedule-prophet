@@ -185,11 +185,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				ArrayList<Semester> semesters = controller.getCompletedSemesters();
 				for(int i=0; i<semesters.size(); i++){
 					String temp=semesters.get(i).getSeason().concat(" ");
-					temp.concat(Integer.toString(semesters.get(i).getYear()));
+					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					completed.add(semester);
+					System.out.println(temp);
 					ArrayList<Course> tempCourses = controller.getCourseList(temp);
-					String[] courses = null;
+					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
 						courses[j]=tempCourses.get(j).getCourseID();
 					}
@@ -219,7 +220,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					category = new DefaultMutableTreeNode(categories[i]);
 					needed.add(category);
 					ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);
-					String[] courses = null;
+					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
 						courses[j]=tempCourses.get(j).getCourseID();
 					}
@@ -264,11 +265,14 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				ArrayList<Semester> semesters = controller.getFutureSemesters();
 				for(int i=0; i<semesters.size(); i++){
 					String temp=semesters.get(i).getSeason().concat(" ");
-					temp.concat(Integer.toString(semesters.get(i).getYear()));
+					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					future.add(semester);
 					ArrayList<Course> tempCourses = controller.getCourseList(temp);
-					String[] courses = null;
+					System.out.println(temp);
+					System.out.println(tempCourses);
+					System.out.println(controller.getCourseList(temp));
+					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
 						courses[j]=tempCourses.get(j).getCourseID();
 					}
