@@ -122,19 +122,19 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("CSMajor")){
 			this.dispose();
-			namePlan("CSMajor");
+			namePlan("Computer Science Major");
 		}
 		else if(e.getActionCommand().equals("ISMajor")){
 			this.dispose();
-			namePlan("ISMajor");
+			namePlan("Information Systems Major");
 		}
 		else if(e.getActionCommand().equals("CSISDouble")){
 			this.dispose();
-			namePlan("CSISDouble");
+			namePlan("Computer Science and Information Systems Double Major");
 		}
 		else if(e.getActionCommand().equals("ISCSMinor")){
 			this.dispose();
-			namePlan("ISCSMinor");
+			namePlan("Information Systems Major with Computer Science Minor");
 		}
 	}
 	

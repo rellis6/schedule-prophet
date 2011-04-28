@@ -27,7 +27,7 @@ import data.*;
 public class ProphetController {
 	Plan plan;
 	ArrayList<Track> TrackList = new ArrayList<Track>();
-	CoursePathDAO courseDAO;
+	CoursePathDAO courseDAO = new CoursePathDAO();
 	UserPlanDAO planDAO;
 	
 	/**
@@ -44,6 +44,8 @@ public class ProphetController {
 	
 	//only called for creating new plans
 	private void initTrackList(String track){
+		System.out.println("init: " + track);
+		
 		this.TrackList = courseDAO.getTrackCourses(track);
 	}
 	
@@ -53,6 +55,7 @@ public class ProphetController {
 	}
 	
 	public void newPlan(String track, String name){
+		System.out.println("new: " + track);
 		initTrackList(track);
 		this.plan = new Plan(TrackList, name);
 	}
