@@ -134,7 +134,7 @@ introduced. Students will be taught the basic use of a programming environment a
 		<prerequisite>CMSC203</prerequisite>
 	</prerequisites>
 </course>
-<course id="CMSC 443" name="Cryptology">
+<course id="CMSC443" name="Cryptology">
 	<description>An introduction to cryptology, the science of making and breaking codes and ciphers. Topics include: conventional and public-key cryptosystems, including DES, RSA, shift register systems and selected classical systems; examples of cryptanalytic techniques; digital signatures; pseudo-random number generation; cryptographic protocols and their applications; and an introduction to the theories of cryptographic strength based on information theory and complexity theory.</description>
 	<prerequisites>
 		<prerequisite>CMSC341</prerequisite>
@@ -281,6 +281,12 @@ introduced. Students will be taught the basic use of a programming environment a
 	</prerequisites>
 </course>
 <course id="CMSC484" name="Java Server Technologies">
+	<description>This course is an in-depth look at several of the technologies currently in use to develop applications for the Web. Topics include the use of Java Servlets and Java Server Pages (JSP) and their benefits over traditional CGI programs, the development of web services using SOAP and XML, the use of Enterprise Java Beans to encapsulate server-side business logic and the use of application servers. Several programming projects will be done using these technologies and an appropriate Webserver, such as Apache Tomcat. In addition, several related technologies, such as PHP and Javascript, will be covered.</description>
+	<prerequisites>
+		<prerequisite>CMSC202</prerequisite>
+	</prerequisites>
+</course>
+<course id="CMSC486" name="CHANGE THIS TO REAL TITLE">
 	<description>This course is an in-depth look at several of the technologies currently in use to develop applications for the Web. Topics include the use of Java Servlets and Java Server Pages (JSP) and their benefits over traditional CGI programs, the development of web services using SOAP and XML, the use of Enterprise Java Beans to encapsulate server-side business logic and the use of application servers. Several programming projects will be done using these technologies and an appropriate Webserver, such as Apache Tomcat. In addition, several related technologies, such as PHP and Javascript, will be covered.</description>
 	<prerequisites>
 		<prerequisite>CMSC202</prerequisite>

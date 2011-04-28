@@ -230,7 +230,6 @@ public class CoursePathDAO {
 		for (int i=0; i < masterCourseList.size(); i++) {
 			if (masterCourseList.get(i).getCourseID().equals(courseID)) {
 				c = masterCourseList.get(i);
-
 			}
 		}
 		return c;
@@ -312,11 +311,11 @@ public class CoursePathDAO {
 					}
 					// Now, get the parameters that depend on requirement type.
 					if (reqType.equals("absolutereq")) {
-						numCredits = Integer.parseInt(req.getAttribute("credits"));
+						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new AbsoluteRequirement(courseList, numCredits));
 					} else if (reqType.equals("flexiblereq")) {
 						numToTake = Integer.parseInt(req.getAttribute("number"));
-						numCredits = Integer.parseInt(req.getAttribute("credits"));
+						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new FlexibleRequirement(courseList, numToTake, numCredits));
 					} else if (reqType.equals("flexiblereqset")) {
 						ArrayList<AbsoluteRequirement> absReqList = new ArrayList<AbsoluteRequirement>();
@@ -332,7 +331,7 @@ public class CoursePathDAO {
 								if (absReq.getNodeName().equals("absolutereq")) {
 									String aReqName = absReq.getAttribute("name");
 									String aReqType = absReq.getNodeName();
-									int arCredits = Integer.parseInt(absReq.getAttribute("credits"));
+									int arCredits = 0 /*Integer.parseInt(absReq.getAttribute("credits"))*/;
 									ArrayList<Course> arCourseList = new ArrayList<Course>();
 									
 									// Courses are defined as children of a requirement
@@ -361,8 +360,8 @@ public class CoursePathDAO {
 							}
 						}
 						// Get last parameters for flexible requirement set and add to list of track requirements
-						numToTake = Integer.parseInt(req.getAttribute("number"));
-						numCredits = Integer.parseInt(req.getAttribute("credits"));
+						numToTake = 0 /*Integer.parseInt(req.getAttribute("number"))*/;
+						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new FlexibleRequirementSet(absReqList, numToTake, numCredits));
 					}
 				}
@@ -397,7 +396,7 @@ public class CoursePathDAO {
 	private Course populateTrackCourse(String id, String grade) {
 		Course course = null;
 		Course c = getCourse(id);
-		course = new Course(id, "", "", grade, c.getCredits(), c.getCourseTitle());
+		course = new Course(id, "", "", grade, 0/*c.getCredits()*/, c.getCourseTitle());
 
 		return course;
 	}
