@@ -62,8 +62,8 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	
 	public StartMenu(ProphetController controller) {
 		super();
-		//this.controller=controller;
-		this.controller=(TestController) controller;
+		this.controller=controller;
+		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	

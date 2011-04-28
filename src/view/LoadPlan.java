@@ -64,8 +64,8 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	
 	public LoadPlan(ProphetController controller) {
 		super();
-		//this.controller=controller;
-		this.controller=(TestController) controller;
+		this.controller=controller;
+		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	
