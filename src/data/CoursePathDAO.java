@@ -156,6 +156,7 @@ public class CoursePathDAO {
 	 * @author Katherine Miller
 	 */
 	public ArrayList<Track> getTrackCourses(String name){
+		System.out.println(name);
 		if(!getMasterTrackList().contains(name))
 			return null;
 			
@@ -414,7 +415,10 @@ public class CoursePathDAO {
 		for (int i = 0; i < prereqList.length; i++) {
 			String prereqParts[] = prereqList[i].split("\\(");
 			String courseID = prereqParts[0];
-			String minGrade = prereqParts[1].split("\\)")[0];
+			String minGrade = "F";
+			if (prereqParts.length > 1) {
+				minGrade = prereqParts[1].split("\\)")[0];
+			}
 			Course course = new Course(courseID, minGrade, "", "", 0, ""/*,""*/);
 			courses.add(course);
 		}
@@ -422,4 +426,8 @@ public class CoursePathDAO {
 		return prerequisite;
 	}
 
+	public static void main(String Args[]) {
+		CoursePathDAO test = new CoursePathDAO();
+	}
+	
 }
