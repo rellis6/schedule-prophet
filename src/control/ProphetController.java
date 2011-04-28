@@ -62,6 +62,7 @@ public class ProphetController {
 	
 	public void loadPlan(String filename){
 		planDAO = new UserPlanDAO(filename);
+		plan = planDAO.getPlan();
 	}
 	
 	/**
@@ -111,8 +112,6 @@ public class ProphetController {
 		return array;
 	}
 
-
-
 	/**
 	 * Name: 
 	 * Precondition(s): 
@@ -137,15 +136,12 @@ public class ProphetController {
 		}
 	}
 	
-	
-	
 	public void deletePlan(String plan){
-		
+		planDAO.deletePlan(plan);
 	}
 	
-	public String[][] getPlans(){
-		return null;
-		
+	public ArrayList<String> getPlans(){
+		return planDAO.getPlanList();
 	}
 	
 	/**
@@ -161,27 +157,40 @@ public class ProphetController {
 		return plan.setSemesterCompleted(season, year, completed);
 	}
 	
-	//completePriorSemesters() and uncompleteFutureSemesters() probably need to go in plan
-	//and need to check prereq stuff
-	//completes all semesters up to specified
-//	public void completePriorSemesters(String season, int year){
-//		ArrayList<Semester> allSemesters = plan.getSemesters();
-//		for(int i = 0; i <= allSemesters.indexOf(new Semester(season, year)); i++){
-//			allSemesters.get(i).setCompleted(true);
-//		}
-//	}
-//	//uncompletes from specified to latest completed
-//	public void uncompleteFutureSemesters(String season, int year){
-//		ArrayList<Semester> allSemesters = plan.getSemesters();
-//		for(int i = allSemesters.indexOf(new Semester(season, year)); i < allSemesters.size(); i++){
-//			allSemesters.get(i).setCompleted(false);
-//		}
-//	}
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Semester> getCompletedSemesters() {
+		return plan.getSemesters(true);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Semester> getFutureSemesters() {
+		return plan.getSemesters(false);
+	}	
 	
-	public static void main(String Args[]) {
-		//ProphetController controller = new ProphetController();
-		//StartMenu start = new StartMenu(controller);
-		
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public ArrayList<Course> getCourseList(String string) {
+		return plan.getCourses();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String[] getNeededCategories() {
+		return null;
+	}	
+	
+	public static void main(String Args[]) {		
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -189,28 +198,7 @@ public class ProphetController {
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
-		});
-		
-	}
-
-	public String[] getCompletedSemesters() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String[] getCourseList(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String[] getNeededCategories() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String[] getFutureSemesters() {
-		// TODO Auto-generated method stub
-		return null;
+		});	
 	}
 
 }
