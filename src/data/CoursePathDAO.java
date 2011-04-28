@@ -61,7 +61,7 @@ public class CoursePathDAO {
 			// Open the master course list XML file, and create new 
 			// instances of DocumentBuilderFactory and DocumentBuilder
 			// that we will use to parse the XML into a DOM.
-			File courseListFile = new File("src\\data\\master_course_list.xml");
+			File courseListFile = new File("src/data/master_course_list.xml");
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			org.w3c.dom.Document courseListDocument = builder.parse(courseListFile);
@@ -250,13 +250,13 @@ public class CoursePathDAO {
 		try {
 			if (track.equals("Computer Science Major")) {
 				// Open the cs major track XML file
-				trackFile = new File("src\\data\\cs_major_reqs.xml");
+				trackFile = new File("src/data/cs_major_reqs.xml");
 			} else if (track.equals("Information Systems Major")) {
 				// Open the is major track XML file
-				trackFile = new File("src\\data\\is_major_reqs.xml");
+				trackFile = new File("src/data/is_major_reqs.xml");
 			} else if (track.equals("Computer Science Minor")) {
 				// Open the cs minor track XML file
-				trackFile = new File("src\\data\\cs_minor_reqs.xml");
+				trackFile = new File("src/data/cs_minor_reqs.xml");
 			}
 			// Create new instances of DocumentBuilder, DocumentBuilderFactory,
 			// and create the DOM out of the selected trackfile
