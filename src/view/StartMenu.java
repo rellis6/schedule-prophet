@@ -34,8 +34,8 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblSelectOption;
 	private JButton cmdLoadPlan;
 	private JButton cmdCreatePlan;
-	//private ProphetController controller;
-	private TestController controller;
+	private ProphetController controller;
+	//private TestController controller;
 	
 	{
 		//Set Look & Feel

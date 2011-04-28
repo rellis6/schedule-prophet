@@ -11,6 +11,10 @@ package control;
 
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
+import view.StartMenu;
+
 import model.*;
 import data.*;
 
@@ -38,7 +42,7 @@ public class ProphetController {
 	//how does TrackList get populated? Does clicking a button on the gui pass a designated
 	//string with the track name to PC, PC checks it's valid, then adds?
 	
-	
+	//only called for creating new plans
 	private void initTrackList(String track){
 		this.TrackList = courseDAO.getTrackCourses(track);
 	}
@@ -130,6 +134,17 @@ public class ProphetController {
 		}
 	}
 	
+	
+	
+	public void deletePlan(String plan){
+		
+	}
+	
+	public String[][] getPlans(){
+		return null;
+		
+	}
+	
 	/**
 	 * 
 	 * @param season season of semester to be completed
@@ -161,24 +176,38 @@ public class ProphetController {
 //	}
 	
 	public static void main(String Args[]) {
-			
-		ArrayList<String[]>  pairs = new ArrayList<String[]>();
+		//ProphetController controller = new ProphetController();
+		//StartMenu start = new StartMenu(controller);
 		
-		for(int i = 0; i < 2; i++){
-			String[] pair = new String[2];
-			if(i == 0){	
-				pair[0] = "test";
-				pair[1] = "one\n";
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				StartMenu inst = new StartMenu(new ProphetController());
+				inst.setLocationRelativeTo(null);
+				inst.setVisible(true);
 			}
-			else{
-				pair[0] = "test";
-				pair[1] = "two\n";
-			}
-			pairs.add(pair);
-		}
+		});
 		
-		System.out.println(pairs.get(0)[0] + pairs.get(0)[1] + pairs.get(1)[0] + pairs.get(1)[1]);
-		
+	}
+
+	public String[] getCompletedSemesters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String[] getCourseList(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String[] getNeededCategories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String[] getFutureSemesters() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
