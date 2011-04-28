@@ -40,15 +40,28 @@ public class Plan {
 		this.name = "";
 	}
 	
+	/**
+	 * 
+	 * @param tracks ArrayList of desired Tracks for the plan
+	 * @param name initial name of the plan
+	 */
 	public Plan(ArrayList<Track> tracks, String name) {
 		this(tracks);
 		setName(name);
 	}
 	
+	/**
+	 * 
+	 * @param name sets the plan name equal to String parameter name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * 
+	 * @return returns String name of plan
+	 */
 	public String getName() {
 		return name;
 	}
@@ -120,7 +133,7 @@ public class Plan {
 	 * get all of the courses within this plan. 
 	 * @return list of courses in this plan
 	 */
-	private ArrayList<Course> getCourses() {
+	public ArrayList<Course> getCourses() {
 		ArrayList<Course> courses = new ArrayList<Course>();
 		for (Semester semester : completedSemesters) {
 			courses.addAll(semester.getClasses());
@@ -165,7 +178,6 @@ public class Plan {
 	 * @return returns an array list of String Arrays which contain the season and year of
 	 * any semesters that need to be changed
 	 */
-	
 	public ArrayList<String[]> setSemesterCompleted(String season, int year, boolean completed){
 		//initializes and finds the specified semester
 		Semester semester = null;
@@ -268,6 +280,10 @@ public class Plan {
 		}
 	}
 
+	/**
+	 * 
+	 * @return returns an ArrayList of both completed and future semesters
+	 */
 	public ArrayList<Semester> getSemesters() {
 		ArrayList<Semester> allSemesters = new ArrayList<Semester>();
 		
@@ -281,6 +297,35 @@ public class Plan {
 		return allSemesters;
 	}
 	
+	/**
+	 * 
+	 * @param completed boolean for to determine whether completed or uncompleted
+	 * semesters will be returned
+	 * @return an ArrayList of all completed semesters if completed is true, or
+	 * all future semesters if completed is false
+	 */
+	public ArrayList<Semester> getSemesters(boolean completed) {
+		ArrayList<Semester> Semesters = new ArrayList<Semester>();
+
+		if(completed == true)
+			for (Semester s : completedSemesters) {
+				Semesters.add(new Semester(s));
+			}
+		if(completed == false)
+			for (Semester s : futureSemesters) {
+				Semesters.add(new Semester(s));
+			}
+
+		return Semesters;
+	}
+	
+	/**
+	 * 
+	 * @param courseID String identifier of the Course
+	 * @param season String season identifier of the semester the Course is in
+	 * @param year int year identifier of the semester the Course is in
+	 * @return
+	 */
 	public Course getCourse(String courseID, String season, int year){
 		try {
 			return getSemester(season, year).getCourse(courseID);
@@ -294,6 +339,7 @@ public class Plan {
 		return null;
 	}
 	
+	
 	public void completePriorSemesters(String season, int year){
 		ArrayList<Semester> allSemesters = this.getSemesters();
 		for(int i = 0; i <= allSemesters.indexOf(new Semester(season, year)); i++){
@@ -306,11 +352,6 @@ public class Plan {
 		for(int i = allSemesters.indexOf(new Semester(season, year)); i < allSemesters.size(); i++){
 			allSemesters.get(i).setCompleted(false);
 		}
-	}
-	
-	public void savePlan(String name){
-		//save plan
-		//throws PlanAlreadyExistsException
 	}
 	
 	@SuppressWarnings("unchecked")
