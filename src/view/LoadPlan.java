@@ -82,9 +82,9 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 			}
 			{
 				ArrayList<String> tempRows = controller.getPlans();
-				String rows[][] = null;
+				String rows[][] = new String[tempRows.size()][2];
 				for(int i=0; i<tempRows.size(); i++){
-					String temp[] = null;
+					String temp[] = new String[2];
 					temp[0]=tempRows.get(i);
 					temp[1]="bla";
 					rows[i]=temp;
@@ -153,9 +153,9 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 			controller.deletePlan((String) tblSavedPlans.getValueAt(row, 0));
 			scrollPane.setVisible(false);
 			ArrayList<String> tempRows = controller.getPlans();
-			String rows[][] = null;
+			String rows[][] = new String[tempRows.size()][2];
 			for(int i=0; i<tempRows.size(); i++){
-				String temp[] = null;
+				String temp[] = new String[2];
 				temp[0]=tempRows.get(i);
 				temp[1]="bla";
 				rows[i]=temp;
