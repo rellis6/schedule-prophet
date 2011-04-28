@@ -52,8 +52,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private JMenuItem menu;
 	private JMenuItem menuOpen;
 	private JScrollPane neededScrollPane;
-	//private ProphetController controller;
-	private TestController controller;
+	private ProphetController controller;
+	//private TestController controller;
 	
 	{
 		//Set Look & Feel

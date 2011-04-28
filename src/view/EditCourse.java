@@ -39,8 +39,8 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblGrade;
 	private JComboBox cbxSemester;
 	private JScrollPane scrollpaneComments;
-	//private ProphetController controller;
-	private TestController controller;
+	private ProphetController controller;
+	//private TestController controller;
 	
 	{
 		//Set Look & Feel

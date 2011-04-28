@@ -36,8 +36,8 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdCancel;
 	private JButton cmdSelectPlan;
 	private JScrollPane scrollPane;
-	//private ProphetController controller;
-	private TestController controller;
+	private ProphetController controller;
+	//private TestController controller;
 	
 	{
 		//Set Look & Feel
