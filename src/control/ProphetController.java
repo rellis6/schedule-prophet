@@ -9,6 +9,7 @@
  */
 package control;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
@@ -38,6 +39,7 @@ public class ProphetController {
 	void editCompletedCourse(String courseID, String season, int year, String grade, String comments){
 	}
 	**/
+	
 	
 	//how does TrackList get populated? Does clicking a button on the gui pass a designated
 	//string with the track name to PC, PC checks it's valid, then adds?
@@ -140,9 +142,30 @@ public class ProphetController {
 		planDAO.deletePlan(plan);
 	}
 	
-	public ArrayList<String> getPlans(){
-		return planDAO.getPlanList();
+//	public ArrayList<String> getPlans(){
+//		return planDAO.getPlanList();
+//	}
+	
+	/**
+	 * Gets the list of all files in the prophet directory
+	 * (located in the user's AppData folder). If no files
+	 * exist, returns an empty list.
+	 * @return The list of all files in the prophet directory
+	 * @author Katherine Miller
+	 */
+	public ArrayList<String> getPlans() {
+		ArrayList<String> planFiles = new ArrayList<String>();
+		String prophetDirPath = System.getenv("APPDATA") + "\\prophet";
+		File prophetDir = new File(prophetDirPath);
+		String[] fileList = prophetDir.list();
+		if (fileList != null) {
+			for (int i = 0; i < fileList.length; i++) {
+				planFiles.add(fileList[i]);
+			}
+		}
+		return planFiles;
 	}
+
 	
 	/**
 	 * 
