@@ -214,7 +214,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				
 				DefaultMutableTreeNode category = null;
 				DefaultMutableTreeNode course = null;
-				
+				/*
 				String[] categories = controller.getNeededCategories();
 				for(int i=0; i<categories.length; i++){
 					category = new DefaultMutableTreeNode(categories[i]);
@@ -226,6 +226,14 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					}
 					for(int j=0; j<courses.length; j++){
 						course = new DefaultMutableTreeNode(courses[j]);
+						category.add(course);
+					}*/
+				ArrayList<Course> categories = controller.getCourseList("bla");
+				for(int i=0; i<1; i++){
+					category = new DefaultMutableTreeNode("Needed courses");
+					needed.add(category);
+					for(int j=0; j<categories.size(); j++){
+						course = new DefaultMutableTreeNode(categories.get(j).getCourseID());
 						category.add(course);
 					}
 				}
