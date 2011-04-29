@@ -219,5 +219,9 @@ public class TestController extends ProphetController{
 		semesters.add(new Semester("Spring", 2012));
 		return semesters;
 	}
+	
+	public ArrayList<String[]> setSemesterCompleted(String season, int year, boolean completed){
+		return new ArrayList<String[]>();
+	}
 
 }

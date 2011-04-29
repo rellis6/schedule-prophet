@@ -15,6 +15,7 @@ import javax.swing.JTree;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 
 import model.Course;
 import model.Semester;
@@ -188,7 +189,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					completed.add(semester);
-					System.out.println(temp);
 					ArrayList<Course> tempCourses = controller.getCourseList(temp);
 					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
@@ -214,7 +214,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				
 				DefaultMutableTreeNode category = null;
 				DefaultMutableTreeNode course = null;
-				/*
+				
 				String[] categories = controller.getNeededCategories();
 				for(int i=0; i<categories.length; i++){
 					category = new DefaultMutableTreeNode(categories[i]);
@@ -227,7 +227,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					for(int j=0; j<courses.length; j++){
 						course = new DefaultMutableTreeNode(courses[j]);
 						category.add(course);
-					}*/
+					}/*
 				ArrayList<Course> categories = controller.getCourseList("bla");
 				for(int i=0; i<1; i++){
 					category = new DefaultMutableTreeNode("Needed courses");
@@ -235,7 +235,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					for(int j=0; j<categories.size(); j++){
 						course = new DefaultMutableTreeNode(categories.get(j).getCourseID());
 						category.add(course);
-					}
+					}*/
 				}
 				
 				treeNeededCourses = new JTree(needed);
@@ -277,9 +277,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					semester = new DefaultMutableTreeNode(temp);
 					future.add(semester);
 					ArrayList<Course> tempCourses = controller.getCourseList(temp);
-					System.out.println(temp);
-					System.out.println(tempCourses);
-					System.out.println(controller.getCourseList(temp));
 					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
 						courses[j]=tempCourses.get(j).getCourseID();
@@ -339,13 +336,19 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Export")){
-			
+			//controller.exportPlan();
 		}
 		else if(e.getActionCommand().equals("Save")){
-			
+			controller.savePlan();
 		}
 		else if(e.getActionCommand().equals("About")){
-			
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					About inst = new About();
+					inst.setLocationRelativeTo(null);
+					inst.setVisible(true);
+				}
+			});
 		}
 		else if(e.getActionCommand().equals("Add completed")){
 			SwingUtilities.invokeLater(new Runnable() {
@@ -366,13 +369,24 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Add course")){
+			TreePath neededPath = treeNeededCourses.getSelectionPath();
+			TreePath futurePath = treeFuturePlan.getSelectionPath();
+			if(neededPath==null || futurePath==null || neededPath.getPathCount()<3 || futurePath.getPathCount()<2){
+				return;
+			}
 			
 		}
 		else if(e.getActionCommand().equals("Remove course")){
 			
 		}
 		else if(e.getActionCommand().equals("Mark completed")){
-			
+			TreePath path = treeFuturePlan.getSelectionPath();
+			if(path==null || path.getPathCount()<2){
+				return;
+			}
+			DefaultMutableTreeNode component = (DefaultMutableTreeNode) path.getPathComponent(1);
+			String[] semester=component.toString().split(" ");
+			controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
 		}
 		else{
 			System.out.println(e.getActionCommand());
