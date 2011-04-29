@@ -216,6 +216,28 @@ public class ProphetController {
 	
 	/**
 	 * 
+	 * @return
+	 */
+	public ArrayList<Course> getUnplannedCourses(){
+		ArrayList<Course> unplanned = new ArrayList<Course>();
+		
+		//sets unplanned to be an arraylist of all courses for all applicable tracks
+		for(Track track: TrackList){
+			for(Course course: track.getClasses()){
+				unplanned.add(course);
+			}
+		}
+		
+		//removes any planned courses(completed or future)
+		for(Course course: plan.getCourses()){
+			unplanned.remove(course);
+		}
+		
+		return unplanned;
+	}
+	
+	/**
+	 * 
 	 * @param string
 	 * @return
 	 */

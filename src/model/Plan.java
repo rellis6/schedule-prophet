@@ -130,7 +130,7 @@ public class Plan {
 	}
 	
 	/**
-	 * get all of the courses within this plan, completed and uncompleted. 
+	 * get all of the planned courses within this plan, completed and uncompleted. 
 	 * @return list of courses in this plan
 	 */
 	public ArrayList<Course> getCourses() {
