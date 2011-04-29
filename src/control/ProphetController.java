@@ -182,7 +182,7 @@ public class ProphetController {
 	
 	/**
 	 * 
-	 * @return
+	 * @return an arraylist of all completed semesters
 	 */
 	public ArrayList<Semester> getCompletedSemesters() {
 		return plan.getSemesters(true);
@@ -190,11 +190,29 @@ public class ProphetController {
 
 	/**
 	 * 
-	 * @return
+	 * @return an arraylist of all uncompleted semesters
 	 */
 	public ArrayList<Semester> getFutureSemesters() {
 		return plan.getSemesters(false);
 	}	
+	
+	/**
+	 * 
+	 * @return an arraylist of uncompleted courses
+	 */
+	public ArrayList<Course> getUncompletedCourses(){
+		ArrayList<Course> uncompleted = plan.getCourses();
+		
+		//iterates through all completed semesters
+		for(Semester curSem: getCompletedSemesters()){
+			//iterates through all courses in a completed semester, removing their 
+			//occurence from uncompleted
+			for(Course curCourse: curSem.getClasses())
+				uncompleted.remove(curCourse);
+		}
+		
+		return uncompleted;
+	}
 	
 	/**
 	 * 
