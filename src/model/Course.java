@@ -23,6 +23,8 @@ public class Course {
 	private String minPassingGrade;
 	private int credits;
 	private String courseTitle;
+	private String category;
+	private String description;
 	
 	/**
 	 * Create a deep copy of a course
@@ -37,6 +39,8 @@ public class Course {
 		minPassingGrade = c.getMinPassingGrade();
 		credits = c.getCredits();
 		courseTitle = c.getCourseTitle();
+		category = c.getCategory();
+		description = c.getDescription();
 	}
 	
 	/**
@@ -51,7 +55,8 @@ public class Course {
 	 * @param courseTitle ex: "Introduction to Computer Science"
 	 */
 	public Course(String courseID, String grade, String notes, 
-			String minPassingGrade, int credits, String courseTitle) {
+			String minPassingGrade, int credits, String courseTitle, String category,
+			String description) {
 		this.courseID = courseID;
 		this.grade = grade;
 		this.notes = notes;
@@ -59,6 +64,8 @@ public class Course {
 		preReqs = new ArrayList<Requirement>();
 		this.credits = credits;
 		this.courseTitle = courseTitle;
+		this.category = category;
+		this.description = description;
 	}
 	
 	/**
@@ -68,7 +75,8 @@ public class Course {
 	 * @param credits number of credits course is worth
 	 * @param courseTitle ex: "Introduction to Computer Science"
 	 */
-	public Course(String courseID, String minPassingGrade, int credits, String courseTitle) {
+	public Course(String courseID, String minPassingGrade, int credits, String courseTitle,
+				  String category, String description) {
 		this.courseID = courseID;
 		this.minPassingGrade = minPassingGrade;
 		this.grade = "";
@@ -76,6 +84,8 @@ public class Course {
 		preReqs = new ArrayList<Requirement>();
 		this.credits = credits;
 		this.courseTitle = courseTitle;
+		this.category = category;
+		this.description = description;
 	}
 	
 	/**
@@ -218,5 +228,36 @@ public class Course {
 		return new String(courseTitle);
 	}
 	
+	/**
+	 * Set the category.
+	 * @param category - the course category, eg, "Computer Science", "Biology", "GEP", etc.
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	/**
+	 * Get this course's category.
+	 * @return category - eg, "Computer Science", "Biology", "GEP", etc.
+	 */
+	public String getCategory() {
+		return category;
+	}
+	
+	/**
+	 * Set the description of the course.
+	 * @param description course description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	/**
+	 * Get the description of the course.
+	 * @return course description
+	 */
+	public String getDescription() {
+		return description;
+	}
 
 }
