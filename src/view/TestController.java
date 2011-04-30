@@ -12,6 +12,8 @@ public class TestController extends ProphetController{
 	CoursePathDAO courseDAO;
 	UserPlanDAO planDAO;
 	boolean delete=false;
+	boolean addCourse=false;
+	boolean deleteCourse=false;
 	
 	/**
 	 * We shouldn't need these two since adding a completed course is exactly the same as adding an uncompleted
@@ -48,11 +50,17 @@ public class TestController extends ProphetController{
 	
 	public void addCourse(String courseID, String season, String comments, int year){
 		System.out.println("addCourse");
+		System.out.println("course ID: "+courseID);
+		System.out.println("season: "+season);
+		System.out.println("comments: "+comments);
+		System.out.println("year: "+year);
+		addCourse=true;
 		return;
 	}	
 	
 	public boolean removeCourse(String courseID, String season, int year){
 		System.out.println("removeCourse");
+		deleteCourse=true;
 		return true;
 	}
 
@@ -144,7 +152,8 @@ public class TestController extends ProphetController{
 		}
 		else if(category.equals("Spring 2011")){
 			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 331", "Z", 1000000000, "class of awesome"));
+			if(addCourse){courses.add(new Course("CMSC 201", "Z", 1000000000, "class of awesome"));}
+			if(!deleteCourse){courses.add(new Course("CMSC 331", "Z", 1000000000, "class of awesome"));}
 			courses.add(new Course("CMSC 345", "Z", 1000000000, "class of awesome"));
 			courses.add(new Course("STAT 355", "Z", 1000000000, "class of awesome"));
 			courses.add(new Course("BIOL 100", "Z", 1000000000, "class of awesome"));
@@ -170,7 +179,7 @@ public class TestController extends ProphetController{
 		}
 		else if(category.equals("Computer Science Core Courses")){
 			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 201", "Z", 1000000000, "class of awesome"));
+			if(!addCourse){courses.add(new Course("CMSC 201", "Z", 1000000000, "class of awesome"));}
 			courses.add(new Course("CMSC 202", "Z", 1000000000, "class of awesome"));
 			courses.add(new Course("CMSC 203", "Z", 1000000000, "class of awesome"));
 			courses.add(new Course("CMSC 313", "Z", 1000000000, "class of awesome"));

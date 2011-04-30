@@ -36,6 +36,9 @@ import control.ProphetController;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
+	
+	private boolean EXPORT_ENABLED=false;
+	
 	private JButton cmdAddCompletedCourse;
 	private JTree treeCompletedCourses;
 	private JButton cmdEditCompletedCourse;
@@ -57,6 +60,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private JMenuItem menu;
 	private JMenuItem menuOpen;
 	private JScrollPane neededScrollPane;
+	private MaintainPlan self;
 	private ProphetController controller;
 	//private TestController controller;
 	/*
@@ -123,7 +127,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						menuSeparator = new JSeparator();
 						jMenu1.add(menuSeparator);
 					}
-					{
+					if(EXPORT_ENABLED){
 						menuExport = new JMenuItem();
 						jMenu1.add(menuExport);
 						menuExport.setText("Export");
@@ -312,6 +316,110 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 	}
+	
+	public void regenerateTrees(){
+		completedScrollPane.setVisible(false);
+		neededScrollPane.setVisible(false);
+		futureScrollPane.setVisible(false);
+		{
+			DefaultMutableTreeNode completed =
+		        new DefaultMutableTreeNode("Completed Courses");
+			
+			DefaultMutableTreeNode semester = null;
+			DefaultMutableTreeNode course = null;
+			
+			ArrayList<Semester> semesters = controller.getCompletedSemesters();
+			for(int i=0; i<semesters.size(); i++){
+				String temp=semesters.get(i).getSeason().concat(" ");
+				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
+				semester = new DefaultMutableTreeNode(temp);
+				completed.add(semester);
+				ArrayList<Course> tempCourses = controller.getCourseList(temp);
+				String[] courses = new String[tempCourses.size()];
+				for(int j=0; j<tempCourses.size(); j++){
+					courses[j]=tempCourses.get(j).getCourseID();
+				}
+				for(int j=0; j<courses.length; j++){
+					course = new DefaultMutableTreeNode(courses[j]);
+					semester.add(course);
+				}
+			}
+
+			treeCompletedCourses = new JTree(completed);
+			completedScrollPane = new JScrollPane(treeCompletedCourses);
+			treeCompletedCourses.setFont(new java.awt.Font("Tahoma",0,14));
+			getContentPane().add(completedScrollPane);
+			completedScrollPane.setBounds(10, 40, 361, 240);
+			//treeCompletedCourses.setBounds(10, 40, 361, 240);
+		}
+		{
+			DefaultMutableTreeNode needed = new DefaultMutableTreeNode("Courses Needed");
+			
+			DefaultMutableTreeNode category = null;
+			DefaultMutableTreeNode course = null;
+			
+			String[] categories = controller.getNeededCategories();
+			for(int i=0; i<categories.length; i++){
+				category = new DefaultMutableTreeNode(categories[i]);
+				needed.add(category);
+				ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);
+				String[] courses = new String[tempCourses.size()];
+				for(int j=0; j<tempCourses.size(); j++){
+					courses[j]=tempCourses.get(j).getCourseID();
+				}
+				for(int j=0; j<courses.length; j++){
+					course = new DefaultMutableTreeNode(courses[j]);
+					category.add(course);
+				}/*
+			ArrayList<Course> categories = controller.getCourseList("bla");
+			for(int i=0; i<1; i++){
+				category = new DefaultMutableTreeNode("Needed courses");
+				needed.add(category);
+				for(int j=0; j<categories.size(); j++){
+					course = new DefaultMutableTreeNode(categories.get(j).getCourseID());
+					category.add(course);
+				}*/
+			}
+			
+			treeNeededCourses = new JTree(needed);
+			neededScrollPane = new JScrollPane(treeNeededCourses);
+			getContentPane().add(neededScrollPane);
+			neededScrollPane.setBounds(10, 291, 361, 249);
+			neededScrollPane.setSize(361, 238);
+			treeNeededCourses.setFont(new java.awt.Font("Tahoma",0,14));
+			treeNeededCourses.setSize(359, 238);
+		}
+		{
+			DefaultMutableTreeNode future = new DefaultMutableTreeNode("Future Course Plan");
+			
+			DefaultMutableTreeNode semester = null;
+			DefaultMutableTreeNode course = null;
+			
+			ArrayList<Semester> semesters = controller.getFutureSemesters();
+			for(int i=0; i<semesters.size(); i++){
+				String temp=semesters.get(i).getSeason().concat(" ");
+				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
+				semester = new DefaultMutableTreeNode(temp);
+				future.add(semester);
+				ArrayList<Course> tempCourses = controller.getCourseList(temp);
+				String[] courses = new String[tempCourses.size()];
+				for(int j=0; j<tempCourses.size(); j++){
+					courses[j]=tempCourses.get(j).getCourseID();
+				}
+				for(int j=0; j<courses.length; j++){
+					course = new DefaultMutableTreeNode(courses[j]);
+					semester.add(course);
+				}
+			}
+			
+			treeFuturePlan = new JTree(future);
+			futureScrollPane = new JScrollPane(treeFuturePlan);
+			getContentPane().add(futureScrollPane);
+			futureScrollPane.setBounds(381, 70, 359, 459);
+			treeFuturePlan.setFont(new java.awt.Font("Tahoma",0,14));
+			treeFuturePlan.setSize(357, 450);
+		}
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		//System.out.println(e.getActionCommand());
@@ -336,7 +444,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Export")){
-			//controller.exportPlan();
+			controller.exportPlan();
 		}
 		else if(e.getActionCommand().equals("Save")){
 			controller.savePlan();
@@ -351,18 +459,37 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Add completed")){
+			TreePath neededPath = treeNeededCourses.getSelectionPath();
+			TreePath completedPath = treeCompletedCourses.getSelectionPath();
+			if(neededPath==null || neededPath.getPathCount()<3){
+				return;
+			}
+			final String needed=neededPath.getPathComponent(2).toString();
+			final String[] future;
+			if(completedPath==null || completedPath.getPathCount()<2){
+				future=null;
+			}
+			else{
+				future=completedPath.getPathComponent(1).toString().split(" ");
+			}
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					EditCourse inst = new EditCourse(controller);
+					AddCompletedCourse inst = new AddCompletedCourse(controller, needed, future, self);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
 			});
 		}
 		else if(e.getActionCommand().equals("Edit completed")){
+			TreePath completedPath = treeCompletedCourses.getSelectionPath();
+			if(completedPath==null || completedPath.getPathCount()<3){
+				return;
+			}
+			final String course=completedPath.getPathComponent(2).toString();
+			final String[] semester=completedPath.getPathComponent(1).toString().split(" ");
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					EditCourse inst = new EditCourse(controller);
+					EditCourse inst = new EditCourse(controller, course, semester);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
@@ -374,10 +501,20 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			if(neededPath==null || futurePath==null || neededPath.getPathCount()<3 || futurePath.getPathCount()<2){
 				return;
 			}
-			
+			String needed=neededPath.getPathComponent(2).toString();
+			String[] future=futurePath.getPathComponent(1).toString().split(" ");
+			controller.addCourse(needed, future[0], "", Integer.parseInt(future[1]));
+			regenerateTrees();
 		}
 		else if(e.getActionCommand().equals("Remove course")){
-			
+			TreePath futurePath = treeFuturePlan.getSelectionPath();
+			if(futurePath==null || futurePath.getPathCount()<3){
+				return;
+			}
+			String[] semester=futurePath.getPathComponent(1).toString().split(" ");
+			String course=futurePath.getPathComponent(2).toString();
+			controller.removeCourse(course, semester[0], Integer.parseInt(semester[1]));
+			regenerateTrees();
 		}
 		else if(e.getActionCommand().equals("Mark completed")){
 			TreePath path = treeFuturePlan.getSelectionPath();
@@ -386,11 +523,19 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			}
 			DefaultMutableTreeNode component = (DefaultMutableTreeNode) path.getPathComponent(1);
 			String[] semester=component.toString().split(" ");
-			controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
+			ArrayList<String[]> prerequisites=controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
+			if(prerequisites.size()==0){
+				return;
+			}
+			//TODO: handle unmet prerequisites.  Don't know the format of the prerequisite list.
 		}
 		else{
 			System.out.println(e.getActionCommand());
 		}
+	}
+
+	public void setSelf(MaintainPlan inst) {
+		self=inst;
 	}
 
 }

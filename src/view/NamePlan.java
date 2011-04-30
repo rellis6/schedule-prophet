@@ -103,6 +103,7 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				MaintainPlan inst = new MaintainPlan(controller);
+				inst.setSelf(inst);
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 			}
