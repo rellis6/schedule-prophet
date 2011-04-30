@@ -264,4 +264,13 @@ public class ProphetController {
 		});	
 	}
 
+	
+	/**
+	 * not currently implemented
+	 */
+	public void exportPlan() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
