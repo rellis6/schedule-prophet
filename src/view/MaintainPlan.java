@@ -1,4 +1,5 @@
 package view;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import javax.swing.JTree;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import model.Course;
@@ -42,6 +44,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdAddCompletedCourse;
 	private JTree treeCompletedCourses;
 	private JButton cmdEditCompletedCourse;
+	private JButton cmdMarkSemesterUncomplete;
 	private JScrollPane completedScrollPane;				
 	private JScrollPane futureScrollPane;
 	private JTree treeNeededCourses;
@@ -52,6 +55,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdAddCourseToPlan;
 	private JTree treeFuturePlan;
 	private JButton cmdMarkSemesterComplete;
+	private JButton AddSemester;
 	private JMenuItem menuAbout;
 	private JSeparator menuSeparator2;
 	private JSeparator menuSeparator;
@@ -175,10 +179,19 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				cmdEditCompletedCourse = new JButton();
 				getContentPane().add(cmdEditCompletedCourse);
 				cmdEditCompletedCourse.setText("Edit Completed Course");
-				cmdEditCompletedCourse.setBounds(195, 11, 176, 23);
+				cmdEditCompletedCourse.setBounds(195, 11, 175, 23);
 				cmdEditCompletedCourse.setFont(new java.awt.Font("Tahoma",0,14));
 				cmdEditCompletedCourse.setActionCommand("Edit completed");
 				cmdEditCompletedCourse.addActionListener(this);
+			}
+			{
+				cmdMarkSemesterUncomplete = new JButton();
+				getContentPane().add(cmdMarkSemesterUncomplete);
+				cmdMarkSemesterUncomplete.setText("Remove Completed Semester");
+				cmdMarkSemesterUncomplete.setBounds(10, 40, 360, 23);
+				cmdMarkSemesterUncomplete.setFont(new java.awt.Font("Tahoma",0,14));
+				cmdMarkSemesterUncomplete.setActionCommand("Remove completed");
+				cmdMarkSemesterUncomplete.addActionListener(this);
 			}
 			{
 				DefaultMutableTreeNode completed =
@@ -208,7 +221,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				completedScrollPane = new JScrollPane(treeCompletedCourses);
 				treeCompletedCourses.setFont(new java.awt.Font("Tahoma",0,14));
 				getContentPane().add(completedScrollPane);
-				completedScrollPane.setBounds(10, 40, 361, 240);
+				completedScrollPane.setBounds(10, 69, 361, 211);
 				//treeCompletedCourses.setBounds(10, 40, 361, 240);
 				
 				
@@ -263,7 +276,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				cmdRemoveCourse = new JButton();
 				getContentPane().add(cmdRemoveCourse);
 				cmdRemoveCourse.setText("Remove Course");
-				cmdRemoveCourse.setBounds(437, 11, 140, 23);
+				cmdRemoveCourse.setBounds(377, 11, 200, 23);
 				cmdRemoveCourse.setFont(new java.awt.Font("Tahoma",0,14));
 				cmdRemoveCourse.setActionCommand("Remove course");
 				cmdRemoveCourse.addActionListener(this);
@@ -304,10 +317,19 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				cmdMarkSemesterComplete = new JButton();
 				getContentPane().add(cmdMarkSemesterComplete);
 				cmdMarkSemesterComplete.setText("Mark Semester Complete");
-				cmdMarkSemesterComplete.setBounds(437, 40, 303, 23);
+				cmdMarkSemesterComplete.setBounds(377, 40, 200, 23);
 				cmdMarkSemesterComplete.setFont(new java.awt.Font("Tahoma",0,14));
 				cmdMarkSemesterComplete.setActionCommand("Mark completed");
 				cmdMarkSemesterComplete.addActionListener(this);
+			}
+			{
+				AddSemester = new JButton();
+				getContentPane().add(AddSemester);
+				AddSemester.setText("Add Semester");
+				AddSemester.setBounds(582, 40, 158, 23);
+				AddSemester.setFont(new java.awt.Font("Tahoma",0,14));
+				AddSemester.setActionCommand("Add semester");
+				AddSemester.addActionListener(this);
 			}
 			pack();
 			this.setSize(772, 600);
@@ -349,7 +371,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			completedScrollPane = new JScrollPane(treeCompletedCourses);
 			treeCompletedCourses.setFont(new java.awt.Font("Tahoma",0,14));
 			getContentPane().add(completedScrollPane);
-			completedScrollPane.setBounds(10, 40, 361, 240);
+			completedScrollPane.setBounds(10, 69, 361, 211);
 			//treeCompletedCourses.setBounds(10, 40, 361, 240);
 		}
 		{
@@ -444,7 +466,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Export")){
-			controller.exportPlan();
+			//controller.exportPlan();
 		}
 		else if(e.getActionCommand().equals("Save")){
 			controller.savePlan();
@@ -517,17 +539,54 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			regenerateTrees();
 		}
 		else if(e.getActionCommand().equals("Mark completed")){
-			TreePath path = treeFuturePlan.getSelectionPath();
+			String[] semester = treeFuturePlan.getPathForRow(1).getPathComponent(1).toString().split(" ");
+			controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
+			regenerateTrees();
+			/*TreePath path = treeFuturePlan.getSelectionPath();
 			if(path==null || path.getPathCount()<2){
 				return;
 			}
 			DefaultMutableTreeNode component = (DefaultMutableTreeNode) path.getPathComponent(1);
 			String[] semester=component.toString().split(" ");
-			ArrayList<String[]> prerequisites=controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
+			final ArrayList<String[]> prerequisites=controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
 			if(prerequisites.size()==0){
 				return;
 			}
-			//TODO: handle unmet prerequisites.  Don't know the format of the prerequisite list.
+			prerequisites.add(semester);
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					AskCompleteSemesters inst = new AskCompleteSemesters(controller, prerequisites, self);
+					inst.setLocationRelativeTo(null);
+					inst.setVisible(true);
+				}
+			});*/
+		}
+		else if(e.getActionCommand().equals("Remove completed")){
+			treeCompletedCourses.setSelectionRow(treeCompletedCourses.getRowCount()-1);
+			String[] semester = treeCompletedCourses.getSelectionPath().getPathComponent(1).toString().split(" ");
+			controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), false);
+			regenerateTrees();
+		}
+		else if(e.getActionCommand().equals("Add semester")){
+			treeFuturePlan.setSelectionRow(treeFuturePlan.getRowCount()-1);
+			String[] semester = treeFuturePlan.getSelectionPath().getPathComponent(1).toString().split(" ");
+			String season=semester[0];
+			int year=Integer.parseInt(semester[1]);
+			if(season.equals("Spring")){
+				season="Summer";
+			}
+			else if(season.equals("Summer")){
+				season="Fall";
+			}
+			else if(season.equals("Fall")){
+				season="Winter";
+			}
+			else{
+				season="Spring";
+				year++;
+			}
+			controller.addSemester(season, year);
+			regenerateTrees();
 		}
 		else{
 			System.out.println(e.getActionCommand());
@@ -536,6 +595,13 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 
 	public void setSelf(MaintainPlan inst) {
 		self=inst;
+	}
+
+	public void completeSemesters(ArrayList<String[]> prerequisites) {
+		for(int i=0; i<prerequisites.size(); i++){
+			String[] semester=prerequisites.get(i);
+			controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
+		}
 	}
 
 }
