@@ -26,7 +26,7 @@ public class TestController extends ProphetController{
 	
 	//how does TrackList get populated? Does clicking a button on the gui pass a designated
 	//string with the track name to PC, PC checks it's valid, then adds?
-	
+	/*
 	public TestController(){
 		System.out.println("hello world");
 	}
@@ -231,6 +231,6 @@ public class TestController extends ProphetController{
 	
 	public ArrayList<String[]> setSemesterCompleted(String season, int year, boolean completed){
 		return new ArrayList<String[]>();
-	}
+	}*/
 
 }
