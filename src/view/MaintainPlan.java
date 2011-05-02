@@ -39,7 +39,7 @@ import control.ProphetController;
 */
 public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	
-	private boolean EXPORT_ENABLED=false;
+	private boolean EXPORT_ENABLED=true;
 	
 	private JButton cmdAddCompletedCourse;
 	private JTree treeCompletedCourses;
@@ -466,7 +466,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Export")){
-			//controller.exportPlan();
+			controller.exportPlan();
 		}
 		else if(e.getActionCommand().equals("Save")){
 			controller.savePlan();
