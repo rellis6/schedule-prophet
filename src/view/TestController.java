@@ -1,19 +1,37 @@
+/**
+ * File:    ProphetController.java
+ * Project: CS 345 
+ * Author:  Mark Pallone
+ * Date:    Mar 31, 2011
+ * Section: 
+ * Email:   markpa1@umbc.edu OR mark.c.pallone@gmail.com
+ * Class Invariant(s):
+ */
 package view;
 
+import java.io.File;
 import java.util.ArrayList;
 
-import control.*;
+import javax.swing.SwingUtilities;
+
+import control.ProphetController;
+
+import view.StartMenu;
+
 import model.*;
 import data.*;
 
+/**
+ * @author Mark Pallone
+ *
+ * Description: Every action that can be taken using the GUI is called as a method 
+ * in the ProphetController class.
+ */
 public class TestController extends ProphetController{
 	Plan plan;
 	ArrayList<Track> TrackList = new ArrayList<Track>();
-	CoursePathDAO courseDAO;
+	CoursePathDAO courseDAO = new CoursePathDAO();
 	UserPlanDAO planDAO;
-	boolean delete=false;
-	boolean addCourse=false;
-	boolean deleteCourse=false;
 	
 	/**
 	 * We shouldn't need these two since adding a completed course is exactly the same as adding an uncompleted
@@ -24,213 +42,231 @@ public class TestController extends ProphetController{
 	}
 	**/
 	
+	
 	//how does TrackList get populated? Does clicking a button on the gui pass a designated
 	//string with the track name to PC, PC checks it's valid, then adds?
-	/*
-	public TestController(){
-		System.out.println("hello world");
+	
+	//only called for creating new plans
+	private void initTrackList(String track){
+		System.out.println("init track list");
+//		TrackList = new TestTrack(track);
 	}
 	
-	
-	public void initTrackList(String track){
-		System.out.println("initTrackList");
-		return;
+	public void newPlan(String track){
+		System.out.println("new plan");
 	}
 	
-	public void newPlan(){
-		System.out.println("newPlan");
-		return;
+	public void newPlan(String track, String name){
+		System.out.println("new plan");
 	}
 	
-	//filename should be the name of the plan.  GUI currently has no way of knowing the actual file path.
 	public void loadPlan(String filename){
-		System.out.println("loadPlan");
-		return;
+		System.out.println("load plan");
 	}
 	
+	/**
+	 * Name: 
+	 * Precondition(s): 
+	 * Postcondition(s): returns array which contains grade + comments
+	 * @param args                    
+	 */		
 	public void addCourse(String courseID, String season, String comments, int year){
-		System.out.println("addCourse");
-		System.out.println("course ID: "+courseID);
-		System.out.println("season: "+season);
-		System.out.println("comments: "+comments);
-		System.out.println("year: "+year);
-		addCourse=true;
-		return;
+		try {
+			//duplicate course exception?
+			plan.addCourse(courseDAO.getCourse(courseID), season, year);
+		} catch (NonExistentSemesterException e) {
+			System.out.print(e.toString());
+			//warning/error window
+		}
 	}	
 	
+	/**
+	 * Name: 
+	 * Precondition(s): 
+	 * Postcondition(s): returns True if other courses exist in semester
+	 * @param args                    
+	 */		
 	public boolean removeCourse(String courseID, String season, int year){
-		System.out.println("removeCourse");
-		deleteCourse=true;
+		
+		try {
+			plan.removeCourse(courseID, season, year);
+		} catch (NonExistentCourseException e) {
+			System.out.print(e.getMessage());
+			//warning/error window?
+		}
+		
+		//not sure what return should be; boolean t/f if any other courses exist at all?
 		return true;
 	}
 
+	/**
+	 * Name: 
+	 * Precondition(s): 
+	 * Postcondition(s): returns array containing grade + comments
+	 * @param args                    
+	 */		
 	public String[] getCourseInfo(String courseID, String season, int year){
-		System.out.println("getCourseInfo");
-		String[] array = {"A", "Boring notes for some mysterious class"};
+		String[] array = {plan.getCourse(courseID, season, year).getGrade(), 
+				plan.getCourse(courseID, season, year).getNotes()};
 		return array;
 	}
 
-	public void savePlan(String name){
-		System.out.println("savePlan");
-		return;
+	/**
+	 * Name: 
+	 * Precondition(s): 
+	 * Postcondition(s): 
+	 * @param args                    
+	 */		
+	public void savePlan(){
+		System.out.println("save plan");
 	}
 
+	/**
+	 *  Adds a new semester
+	 * @param season season of semester to be added
+	 * @param year year of semester to be added
+	 */
 	public void addSemester(String season, int year){
-		System.out.println("addSemester");
-		return;
+		if(plan.addSemester(season, year) == false){
+			//error window
+		}
+		else{
+			//success window?
+		}
 	}
 	
-	public static void main(String Args[]) {
-		System.out.println("Hello, world!");
+	public void deletePlan(String plan){
+		System.out.println("delete plan");
 	}
 	
+//	public ArrayList<String> getPlans(){
+//		return planDAO.getPlanList();
+//	}
 	
-	//New methods start here
-	public void createPlan(String track, String name){
-		System.out.println("creating plan "+name+" in track "+track);
-		return;
-	}
-
+	/**
+	 * Gets the list of all files in the prophet directory
+	 * (located in the user's AppData folder). If no files
+	 * exist, returns an empty list.
+	 * @return The list of all files in the prophet directory
+	 * @author Katherine Miller
+	 */
 	public ArrayList<String> getPlans() {
-		System.out.println("getPlans");
-		ArrayList<String> string1 = new ArrayList<String>();
-		string1.add("Katherine's Plan 3");
-		string1.add("Katherine's Hypothetical CS/IS Plan");
-		string1.add("Katherine's Plan 2");
-		string1.add("Katherine's Hypothetical IS Plan");
-		string1.add("Katherine Miller's CS Plan");
-		ArrayList<String> string2 = (ArrayList<String>) string1.clone();
-		string2.remove(0);
-		if(delete){
-			return string2;
+		ArrayList<String> planFiles = new ArrayList<String>();
+		String prophetDirPath = System.getenv("APPDATA") + "\\prophet";
+		File prophetDir = new File(prophetDirPath);
+		String[] fileList = prophetDir.list();
+		if (fileList != null) {
+			for (int i = 0; i < fileList.length; i++) {
+				planFiles.add(fileList[i]);
+			}
 		}
-		else{
-			return string1;
-		}
+		return planFiles;
 	}
 
-	public void deletePlan(String name) {
-		System.out.println("deleting: "+name);
-		delete=true;
-		return;
-	}
-
-	public ArrayList<Semester> getCompletedSemesters() {
-		System.out.println("getCompletedSemesters");
-		ArrayList<Semester> semesters=new ArrayList<Semester>();
-		semesters.add(new Semester("Fall", 2009));
-		semesters.add(new Semester("Spring", 2010));
-		semesters.add(new Semester("Fall", 2010));
-		return semesters;
-	}
-
-	public ArrayList<Course> getCourseList(String category) {
-		if(category.equals("Fall 2009")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 201", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("MATH 151", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("ENGL 100", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Social Science", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Spring 2010")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 202", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 203", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("MATH 152", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("PHYS 121", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Arts/Humanities", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Fall 2010")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 313", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 341", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("MATH 221", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("PHYS 122", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Spring 2011")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			if(addCourse){courses.add(new Course("CMSC 201", "Z", 1000000000, "class of awesome"));}
-			if(!deleteCourse){courses.add(new Course("CMSC 331", "Z", 1000000000, "class of awesome"));}
-			courses.add(new Course("CMSC 345", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("STAT 355", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("BIOL 100", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Lab Class", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Fall 2011")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 304", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 421", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 441", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Culture", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Social Sciences", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Spring 2012")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 411", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 461", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Writing Intensive", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Social Sciences", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Computer Science Core Courses")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			if(!addCourse){courses.add(new Course("CMSC 201", "Z", 1000000000, "class of awesome"));}
-			courses.add(new Course("CMSC 202", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 203", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 313", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 331", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 341", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 345", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 411", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 421", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 441", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Computer Science Upper Level Electives")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("CMSC 426", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 431", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 435", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("CMSC 445", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else if(category.equals("Other")){
-			ArrayList<Course> courses=new ArrayList<Course>();
-			courses.add(new Course("Social Science", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Arts/Humanities", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("PHED", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Culture", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Lab Class", "Z", 1000000000, "class of awesome"));
-			courses.add(new Course("Writing Intensive", "Z", 1000000000, "class of awesome"));
-			return courses;
-		}
-		else{
-			return null;
-		}
-	}
-
-	public String[] getNeededCategories() {
-		System.out.println("getNeededCategories");
-		String[] categories={"Computer Science Core Courses", "Computer Science Upper Level Electives", "Other"};
-		return categories;
-	}
-
-	public ArrayList<Semester> getFutureSemesters() {
-		System.out.println("getFutureSemesters");
-		ArrayList<Semester> semesters=new ArrayList<Semester>();
-		semesters.add(new Semester("Spring", 2011));
-		semesters.add(new Semester("Fall", 2011));
-		semesters.add(new Semester("Spring", 2012));
-		return semesters;
+	
+	/**
+	 * 
+	 * @param season season of semester to be completed
+	 * @param year year of semester to be completed
+	 * @param completed boolean of what the semesterCompleted value of the specified semester 
+	 * should be set to
+	 * @return an ArrayList of any semesters before the semester to be completed which aren't
+	 * completed
+	 */
+	public ArrayList<String[]> setSemesterCompleted(String season, int year, boolean completed){
+		return plan.setSemesterCompleted(season, year, completed);
 	}
 	
-	public ArrayList<String[]> setSemesterCompleted(String season, int year, boolean completed){
-		return new ArrayList<String[]>();
-	}*/
+	/**
+	 * 
+	 * @return an arraylist of all completed semesters
+	 */
+	public ArrayList<Semester> getCompletedSemesters() {
+		return plan.getSemesters(true);
+	}
+
+	/**
+	 * 
+	 * @return an arraylist of all uncompleted semesters
+	 */
+	public ArrayList<Semester> getFutureSemesters() {
+		return plan.getSemesters(false);
+	}	
+	
+	/**
+	 * 
+	 * @return an arraylist of uncompleted courses
+	 */
+	public ArrayList<Course> getUncompletedCourses(){
+		ArrayList<Course> uncompleted = plan.getCourses();
+		
+		//iterates through all completed semesters
+		for(Semester curSem: getCompletedSemesters()){
+			//iterates through all courses in a completed semester, removing their 
+			//occurence from uncompleted
+			for(Course curCourse: curSem.getClasses())
+				uncompleted.remove(curCourse);
+		}
+		
+		return uncompleted;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Course> getUnplannedCourses(){
+		ArrayList<Course> unplanned = new ArrayList<Course>();
+		
+		//sets unplanned to be an arraylist of all courses for all applicable tracks
+		for(Track track: TrackList){
+			for(Course course: track.getClasses()){
+				unplanned.add(course);
+			}
+		}
+		
+		//removes any planned courses(completed or future)
+		for(Course course: plan.getCourses()){
+			unplanned.remove(course);
+		}
+		
+		return unplanned;
+	}
+	
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public ArrayList<Course> getCourseList(String string) {
+		return plan.getCourses();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String[] getNeededCategories() {
+		return null;
+	}	
+	
+	public static void main(String Args[]) {		
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				StartMenu inst = new StartMenu(new TestController());
+				inst.setLocationRelativeTo(null);
+				inst.setVisible(true);
+			}
+		});	
+	}
+
+	
+	/**
+	 * not currently implemented
+	 */
+	public void exportPlan() {
+		System.out.println("Export");
+	}
 
 }
