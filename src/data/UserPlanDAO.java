@@ -277,4 +277,13 @@ public class UserPlanDAO {
 	      throw new IllegalArgumentException("Delete: deletion failed");
 	}
 
+	/**
+	 * Save a plan to a CSV file with the Plan information.
+	 * @param planName Name of the user plan file.
+	 * @author g00gle
+	 */	
+	public void exportPlan(Plan plan)
+	{
+		
+	}
 }
