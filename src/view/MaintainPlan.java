@@ -39,7 +39,7 @@ import control.ProphetController;
 */
 public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	
-	private boolean EXPORT_ENABLED=true;
+	private boolean EXPORT_ENABLED=false;
 	
 	private JButton cmdAddCompletedCourse;
 	private JTree treeCompletedCourses;
@@ -139,7 +139,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						menuExport.setActionCommand("Export");
 						menuExport.addActionListener(this);
 					}
-					{
+					if(EXPORT_ENABLED){
 						menuSeparator2 = new JSeparator();
 						jMenu1.add(menuSeparator2);
 					}
@@ -206,7 +206,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					completed.add(semester);
-					ArrayList<Course> tempCourses = controller.getCourseList(temp);
+					ArrayList<Course> tempCourses = controller.getCourseList(temp);//getCourseList returns all courses completed or planned, regardless of what temp is.
 					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
 						courses[j]=tempCourses.get(j).getCourseID();
@@ -232,11 +232,11 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode category = null;
 				DefaultMutableTreeNode course = null;
 				
-				String[] categories = controller.getNeededCategories();
+				String[] categories = controller.getNeededCategories();//getNeededCategories is unimplemented and returns null
 				for(int i=0; i<categories.length; i++){
 					category = new DefaultMutableTreeNode(categories[i]);
 					needed.add(category);
-					ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);
+					ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);//getCourseList returns all courses completed or planned
 					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
 						courses[j]=tempCourses.get(j).getCourseID();
@@ -293,7 +293,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					future.add(semester);
-					ArrayList<Course> tempCourses = controller.getCourseList(temp);
+					ArrayList<Course> tempCourses = controller.getCourseList(temp);//getCourseList returns all courses completed or planned, regardless of what temp is.
 					String[] courses = new String[tempCourses.size()];
 					for(int j=0; j<tempCourses.size(); j++){
 						courses[j]=tempCourses.get(j).getCourseID();
@@ -356,7 +356,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 				semester = new DefaultMutableTreeNode(temp);
 				completed.add(semester);
-				ArrayList<Course> tempCourses = controller.getCourseList(temp);
+				ArrayList<Course> tempCourses = controller.getCourseList(temp);//getCourseList returns all courses completed or planned, regardless of what temp is.
 				String[] courses = new String[tempCourses.size()];
 				for(int j=0; j<tempCourses.size(); j++){
 					courses[j]=tempCourses.get(j).getCourseID();
@@ -380,11 +380,11 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			DefaultMutableTreeNode category = null;
 			DefaultMutableTreeNode course = null;
 			
-			String[] categories = controller.getNeededCategories();
+			String[] categories = controller.getNeededCategories();//unimplemented, returns null
 			for(int i=0; i<categories.length; i++){
 				category = new DefaultMutableTreeNode(categories[i]);
 				needed.add(category);
-				ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);
+				ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);//getCourseList returns all courses completed or planned
 				String[] courses = new String[tempCourses.size()];
 				for(int j=0; j<tempCourses.size(); j++){
 					courses[j]=tempCourses.get(j).getCourseID();
@@ -423,7 +423,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 				semester = new DefaultMutableTreeNode(temp);
 				future.add(semester);
-				ArrayList<Course> tempCourses = controller.getCourseList(temp);
+				ArrayList<Course> tempCourses = controller.getCourseList(temp);//getCourseList returns all courses completed or planned, regardless of what temp is.
 				String[] courses = new String[tempCourses.size()];
 				for(int j=0; j<tempCourses.size(); j++){
 					courses[j]=tempCourses.get(j).getCourseID();
@@ -466,7 +466,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Export")){
-			controller.exportPlan();
+			controller.exportPlan();//stub, doesn't cause problems
 		}
 		else if(e.getActionCommand().equals("Save")){
 			controller.savePlan();
