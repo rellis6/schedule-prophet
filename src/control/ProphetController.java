@@ -121,6 +121,7 @@ public class ProphetController {
 	 * @param args                    
 	 */		
 	public void savePlan(){
+		System.out.println(plan.getName());
 		planDAO.savePlan(plan);
 	}
 
@@ -241,7 +242,7 @@ public class ProphetController {
 	 * @param string
 	 * @return
 	 */
-	public ArrayList<Course> getCourseList(String string) {
+	public ArrayList<Course> getCourseList() {
 		return plan.getCourses();
 	}
 

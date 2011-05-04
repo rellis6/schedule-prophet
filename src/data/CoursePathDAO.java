@@ -137,7 +137,7 @@ public class CoursePathDAO {
 						}
 					}
 					// Create a new instance of course with all the information we just parsed...
-					Course c = new Course(courseID, "", "", "", credits, courseName/*, courseDescription*/);
+					Course c = new Course(courseID, "", "", "", credits, courseName, "", courseDescription);
 					// ...set the list of prerequisites...
 					c.setPreReqs(prerequisiteList);
 					// ... and add it to the master course list.
@@ -395,8 +395,8 @@ public class CoursePathDAO {
 	 */
 	private Course populateTrackCourse(String id, String grade) {
 		Course course = null;
-		Course c = getCourse(id);
-		course = new Course(id, "", "", grade, 0/*c.getCredits()*/, c.getCourseTitle());
+		Course c = getCourse(id);//what is this line used for? Should this method return c?
+		course = new Course(id, "", "", grade, 0/*c.getCredits()*/, c.getCourseTitle(), c.getCategory(), c.getDescription());
 
 		return course;
 	}
