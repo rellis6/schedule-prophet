@@ -117,6 +117,11 @@ public class Track {
 		return false;
 	}
 	
+	/**
+	 * Get a unique list of courses needed by this track.
+	 * 
+	 * @return list of classes needec by this Track. No duplicates in the list
+	 */
 	public ArrayList<Course> getClasses() {
 		ArrayList<Course> uniqueCourseList = new ArrayList<Course>();
 		
