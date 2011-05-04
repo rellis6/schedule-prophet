@@ -206,7 +206,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					completed.add(semester);
-					ArrayList<Course> tempCourses = controller.getCourseList(temp);//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
+					ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
 					ArrayList<Course> completedCourses=new ArrayList<Course>();
 					for(int j=0; i<tempCourses.size(); i++){
 						if(tempCourses.get(j).getCourseID().equals(temp)){
@@ -238,7 +238,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode category = null;
 				DefaultMutableTreeNode course = null;
 				
-				ArrayList<Course> courses = controller.getCourseList("blaerg");//RESOLVED  getCourseList returns all courses completed or planned
+				ArrayList<Course> courses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned
 				for(int i=0; i<courses.size(); i++){
 					course = new DefaultMutableTreeNode(courses.get(i).getCourseID());
 					needed.add(course);
@@ -328,7 +328,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					future.add(semester);
-					ArrayList<Course> tempCourses = controller.getCourseList(temp);//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
+					ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
 					ArrayList<Course> courseList=new ArrayList<Course>();
 					for(int j=0; j<tempCourses.size(); j++){
 						if(tempCourses.get(j).getCourseID().equals(temp)){
@@ -397,7 +397,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 				semester = new DefaultMutableTreeNode(temp);
 				completed.add(semester);
-				ArrayList<Course> tempCourses = controller.getCourseList(temp);//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
+				ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
 				ArrayList<Course> courseList=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
 					if(tempCourses.get(j).getCourseID().equals(temp)){
@@ -427,7 +427,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			DefaultMutableTreeNode category = null;
 			DefaultMutableTreeNode course = null;
 			
-			ArrayList<Course> courses = controller.getCourseList("blaerg");//RESOLVED  getCourseList returns all courses completed or planned
+			ArrayList<Course> courses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned
 			for(int i=0; i<courses.size(); i++){
 				course = new DefaultMutableTreeNode(courses.get(i).getCourseID());
 				needed.add(course);
@@ -499,7 +499,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 				semester = new DefaultMutableTreeNode(temp);
 				future.add(semester);
-				ArrayList<Course> tempCourses = controller.getCourseList(temp);//getCourseList returns all courses completed or planned, regardless of what temp is.
+				ArrayList<Course> tempCourses = controller.getCourseList();//getCourseList returns all courses completed or planned, regardless of what temp is.
 				ArrayList<Course> courseList=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
 					if(tempCourses.get(j).getCourseID().equals(temp)){
