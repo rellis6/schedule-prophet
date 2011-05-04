@@ -335,15 +335,17 @@ public class UserPlanDAO {
 	}
 	    
 	    /**
-		 * Creates a populated course tag to be written to xml plan file.
+		 * Creates a populated course tag to be written to CSV plan file.
 		 * @param id The id of the course
 		 * @param season The season the course was taken
 		 * @param year The year the course was taken
 		 * @param completed If the course has been completed or not
 		 * @param grade The grade obtained in the course
 		 * @param notes Any notes pertaining to the course
-		 * @return The string containing the XML tag
-		 * @author Katherine Miller
+		 * @return The string containing the CSV tag
+		 * @author g00gle
+		 * 
+		 * THIS NEEDS TO BE UPDATED STILL
 		 */
 	private String courseToCSV(String id, String season, String year, boolean completed, String grade, String notes) {
 		String str = "";
