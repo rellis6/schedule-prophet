@@ -255,6 +255,29 @@ public class Plan {
 	}
 	
 	/**
+	 * Change a completed course's grade and notes.
+	 * 
+	 * @param season of the semester
+	 * @param year of the semester
+	 * @param courseID eg, "CMSC 201"
+	 * @param grade "A", "B", derp
+	 * @param notes user's notes about the grade
+	 * @throws NonExistentSemesterException semester specified must exist
+	 * @throws NonExistentCourseException course must exist in specifed semester
+	 */
+	public void editCompletedCourse(String season, int year, String courseID, String grade,
+			String notes) throws NonExistentSemesterException, NonExistentCourseException {
+		Semester s = getSemester(season, year);
+		Course c = s.getCourse(courseID);
+		s.removeCourse(c.getCourseID());
+		
+		c.setGrade(grade);
+		c.setNotes(notes);
+		
+		s.addCourse(c);
+	}
+	
+	/**
 	 * Adds newly created semester to the end of the futureSemester list,
 	 * can be dragged to completedSemesters in GUI if completed
 	 * @param season season of semester to be added
