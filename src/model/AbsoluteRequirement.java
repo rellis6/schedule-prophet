@@ -21,6 +21,14 @@ public class AbsoluteRequirement extends Requirement {
 		this.setRequirements(requirements);
 		this.setMinCredits(minCredits);
 	}
+	
+	public String toString() {
+		String s = "AbsoluteRequirement";
+		s += "\nLength of requirements: " + getRequirements().size();
+		s += "\nMin Credits: " + getMinCredits();
+		s += "\n";
+		return s;
+	}
 
 	/* (non-Javadoc)
 	 * @see model.Requirement#isFulfilled(java.util.ArrayList)

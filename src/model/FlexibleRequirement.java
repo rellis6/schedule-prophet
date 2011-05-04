@@ -28,6 +28,14 @@ public class FlexibleRequirement extends Requirement {
 		this.numToTake = courseCount;
 		setMinCredits(minCredits);
 	}
+	
+	public String toString() {
+		String s = "Flexible Requirement\n";
+		s += "Length of Requirements: " + getRequirements().size();
+		s += "Min Credits: " + getMinCredits();
+		s += "Num To Take: " + numToTake;
+		return s;
+	}
 
 
 	/* (non-Javadoc)

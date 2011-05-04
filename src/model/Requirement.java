@@ -24,6 +24,14 @@ public abstract class Requirement {
 	 */
 	public abstract ArrayList<Course> isFulfilled(ArrayList<Course> courseList);
 	
+	public String toString() {
+		String s = "Requirement\n";
+		s += "Length: " + requirements.size();
+		s += "\nMin Credits: " + minCredits;
+		s += "\n";
+		return s;
+	}
+	
 	/**
 	 * @param requirements the requirements to set
 	 */

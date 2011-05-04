@@ -28,6 +28,14 @@ public class FlexibleRequirementSet extends Requirement {
 		setMinCredits(minCredits);
 	}
 	
+	public String toString() {
+		String s = "Flexible Requirement SET\n";
+		s += "Length of Requirements: " + getRequirements().size();
+		s += "\nMin Credits: " + getMinCredits();
+		s += "\nNum to take: " + numToTake;
+		return s;
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see model.Requirement#isFulfilled(java.util.ArrayList)

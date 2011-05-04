@@ -313,10 +313,18 @@ public class CoursePathDAO {
 					if (reqType.equals("absolutereq")) {
 						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new AbsoluteRequirement(courseList, numCredits));
+						
+						//TODO remove
+						System.out.println("From CoursePathDAO; just added: ");
+						System.out.println(trackReqs.get(trackReqs.size() - 1));
 					} else if (reqType.equals("flexiblereq")) {
 						numToTake = Integer.parseInt(req.getAttribute("number"));
 						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new FlexibleRequirement(courseList, numToTake, numCredits));
+						
+						//TODO remove
+						System.out.println("From CoursePathDAO; just added:");
+						System.out.println(trackReqs.get(trackReqs.size() - 1));
 					} else if (reqType.equals("flexiblereqset")) {
 						ArrayList<AbsoluteRequirement> absReqList = new ArrayList<AbsoluteRequirement>();
 						NodeList absReqs = req.getChildNodes();
@@ -356,6 +364,7 @@ public class CoursePathDAO {
 									}
 									// Finally, add to the list of absolute requirements
 									absReqList.add(new AbsoluteRequirement(arCourseList, arCredits));
+									
 								} 
 							}
 						}
@@ -363,6 +372,8 @@ public class CoursePathDAO {
 						numToTake = 0 /*Integer.parseInt(req.getAttribute("number"))*/;
 						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new FlexibleRequirementSet(absReqList, numToTake, numCredits));
+						System.out.println("From CoursePathDAO; just added:");
+						System.out.println(trackReqs.get(trackReqs.size() - 1));
 					}
 				}
 			}
