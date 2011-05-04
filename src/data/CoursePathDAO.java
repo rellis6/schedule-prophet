@@ -315,7 +315,7 @@ public class CoursePathDAO {
 						trackReqs.add(new AbsoluteRequirement(courseList, numCredits));
 						
 						//TODO remove
-						System.out.println("From CoursePathDAO; just added: ");
+						System.out.println("From CoursePathDAO; just added absolutereq: ");
 						System.out.println(trackReqs.get(trackReqs.size() - 1));
 					} else if (reqType.equals("flexiblereq")) {
 						numToTake = Integer.parseInt(req.getAttribute("number"));
@@ -323,11 +323,18 @@ public class CoursePathDAO {
 						trackReqs.add(new FlexibleRequirement(courseList, numToTake, numCredits));
 						
 						//TODO remove
-						System.out.println("From CoursePathDAO; just added:");
+						System.out.println("From CoursePathDAO; just added flexiblereq:");
 						System.out.println(trackReqs.get(trackReqs.size() - 1));
 					} else if (reqType.equals("flexiblereqset")) {
+						
+						//TODO This isn't working; absReqs is getting set to null.
+						if (true) {
+							continue;	
+						}
+						
 						ArrayList<AbsoluteRequirement> absReqList = new ArrayList<AbsoluteRequirement>();
 						NodeList absReqs = req.getChildNodes();
+						System.out.println("absReqs (from flexiblereqset search in CoursePathDAO: " + absReqs);
 						// Now, we have to iterate through a whole other list of
 						// child nodes, to construct the flexible requirement 
 						// set's list of absolute requirements.
@@ -371,8 +378,10 @@ public class CoursePathDAO {
 						// Get last parameters for flexible requirement set and add to list of track requirements
 						numToTake = 0 /*Integer.parseInt(req.getAttribute("number"))*/;
 						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
+						
+						
 						trackReqs.add(new FlexibleRequirementSet(absReqList, numToTake, numCredits));
-						System.out.println("From CoursePathDAO; just added:");
+						System.out.println("From CoursePathDAO; just added flexiblereqset:");
 						System.out.println(trackReqs.get(trackReqs.size() - 1));
 					}
 				}
