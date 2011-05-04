@@ -278,12 +278,36 @@ public class UserPlanDAO {
 	}
 
 	/**
-	 * Save a plan to a CSV file with the Plan information.
+	 * Save a plan to a CSV file with the Plan information. File will be saved to the desktop as "PlanName.csv".
 	 * @param planName Name of the user plan file.
 	 * @author g00gle
+	 * NOT DONE YET.
 	 */	
 	public void exportPlan(Plan plan)
 	{
+		String name = plan.getName();
+		String csvFileName = System.getProperty("user.home") + "\\desktop\\" + name + ".csv";
+		String csvFileText = null;
 		
+		FileWriter fwriter = null;
+		try {
+			fwriter = new FileWriter(csvFileName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        BufferedWriter out = new BufferedWriter(fwriter);
+        try {
+			out.write(csvFileText);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
