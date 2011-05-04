@@ -418,7 +418,7 @@ public class CoursePathDAO {
 			if (prereqParts.length > 1) {
 				minGrade = prereqParts[1].split("\\)")[0];
 			}
-			Course course = new Course(courseID, minGrade, "", "", 0, ""/*,""*/);
+			Course course = new Course(courseID, minGrade, "", "", 0, "COURSE_TITLE", "COURSE_CATEGORY", "COURSE_DESCRIPTION"/*,""*/);
 			courses.add(course);
 		}
 		prerequisite = new FlexibleRequirement(courses, 1, 1);

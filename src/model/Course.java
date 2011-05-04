@@ -50,7 +50,7 @@ public class Course {
 	 * @param grade "A", "B", ..., "F", "W", "P"
 	 * @param notes any notes about the course
 	 * @param minPassingGrade minimum passing grade
-	 * @param credits credit value of the course
+	 * @param credits credit value of the coursed
 	 * @param completed whether or not this course has been completed
 	 * @param courseTitle ex: "Introduction to Computer Science"
 	 */
