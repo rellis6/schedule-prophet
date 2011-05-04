@@ -113,6 +113,18 @@ public class ProphetController {
 				plan.getCourse(courseID, season, year).getNotes()};
 		return array;
 	}
+	
+	public void editCourse(String season, int year, String courseID, String grade, String notes){
+		try {
+			plan.editCompletedCourse(season, year, courseID, grade, notes);
+		} catch (NonExistentSemesterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NonExistentCourseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Name: 
