@@ -32,8 +32,8 @@ public class FlexibleRequirement extends Requirement {
 	public String toString() {
 		String s = "Flexible Requirement\n";
 		s += "Length of Requirements: " + getRequirements().size();
-		s += "Min Credits: " + getMinCredits();
-		s += "Num To Take: " + numToTake;
+		s += "\nMin Credits: " + getMinCredits();
+		s += "\nNum To Take: " + numToTake;
 		return s;
 	}
 
