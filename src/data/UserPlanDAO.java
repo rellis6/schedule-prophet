@@ -279,6 +279,7 @@ public class UserPlanDAO {
 
 	/**
 	 * Save a plan to a CSV file with the Plan information. File will be saved to the desktop as "PlanName.csv".
+	 * ReUse code from regular saving to XML with format changes for CSV instead of XML.
 	 * @param planName Name of the user plan file.
 	 * @author g00gle
 	 * NOT DONE YET.
@@ -287,7 +288,12 @@ public class UserPlanDAO {
 	{
 		String name = plan.getName();
 		String csvFileName = System.getProperty("user.home") + "\\desktop\\" + name + ".csv";
-		String csvFileText = null;
+        String csvFileText = "Plan Name =," + name + ",\n\n";
+        
+        ArrayList<Semester> semesters = plan.getSemesters();
+        for (int i = 0; i < semesters.size(); i++) {
+            csvFileText = csvFileText + semesterToCSV(semesters.get(i));
+        }
 		
 		FileWriter fwriter = null;
 		try {
@@ -309,5 +315,45 @@ public class UserPlanDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Creates a semester XML tag based on a semester object
+	 * to be written to a plan file.
+	 * @param s The semester to be written
+	 * @return The string containing the equivalent csv tag
+	 * @author g00gle
+	 */
+	private String semesterToCSV(Semester s) {
+		String str = "";
+	    ArrayList<Course> courses = s.getClasses();
+	    for (int i = 0; i < courses.size(); i++) {
+	    	Course c = courses.get(i);
+	        str = str + courseToCSV(c.getCourseID(), s.getSeason(), String.valueOf(s.getYear()), s.isCompleted(), c.getGrade(), c.getNotes());
+	    }
+	    return str;
+	}
+	    
+	    /**
+		 * Creates a populated course tag to be written to xml plan file.
+		 * @param id The id of the course
+		 * @param season The season the course was taken
+		 * @param year The year the course was taken
+		 * @param completed If the course has been completed or not
+		 * @param grade The grade obtained in the course
+		 * @param notes Any notes pertaining to the course
+		 * @return The string containing the XML tag
+		 * @author Katherine Miller
+		 */
+	private String courseToCSV(String id, String season, String year, boolean completed, String grade, String notes) {
+		String str = "";
+		str = str + "<course id=\"" + id; 
+		str = str + "\" season=\"" + season;
+		str = str + "\" year=\"" + year;
+		str = str + "\" grade=\"" + grade;
+		str = str + "\" completed=\"" + completed;
+		str = str + "\" notes=\"" + notes;
+		str = str + "\"/>\n";
+		return str;
 	}
 }
