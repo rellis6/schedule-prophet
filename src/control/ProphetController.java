@@ -199,20 +199,18 @@ public class ProphetController {
 	
 	/**
 	 * 
-	 * @return an arraylist of uncompleted courses
+	 * @return an arraylist of future courses
 	 */
-	public ArrayList<Course> getUncompletedCourses(){
-		ArrayList<Course> uncompleted = plan.getCourses();
+	public ArrayList<Course> getFutureCourses(){
+		ArrayList<Course> future = new ArrayList<Course>();
 		
 		//iterates through all completed semesters
-		for(Semester curSem: getCompletedSemesters()){
-			//iterates through all courses in a completed semester, removing their 
-			//occurence from uncompleted
-			for(Course curCourse: curSem.getClasses())
-				uncompleted.remove(curCourse);
+		for(Semester curSem: getFutureSemesters()){
+			for(Course course: curSem.getClasses())
+				future.add(course);
 		}
 		
-		return uncompleted;
+		return future;
 	}
 	
 	/**
@@ -220,14 +218,7 @@ public class ProphetController {
 	 * @return
 	 */
 	public ArrayList<Course> getUnplannedCourses(){
-		ArrayList<Course> unplanned = new ArrayList<Course>();
-		
-		//sets unplanned to be an arraylist of all courses for all applicable tracks
-		for(Track track: TrackList){
-			for(Course course: track.getClasses()){
-				unplanned.add(course);
-			}
-		}
+		ArrayList<Course> unplanned = plan.getCourses();
 		
 		//removes any planned courses(completed or future)
 		for(Course course: plan.getCourses()){
@@ -239,8 +230,7 @@ public class ProphetController {
 	
 	/**
 	 * 
-	 * @param string
-	 * @return
+	 * @return an ArrayList<Course> of ALL courses needed by the current plan
 	 */
 	public ArrayList<Course> getCourseList() {
 		return plan.getCourses();
@@ -248,10 +238,16 @@ public class ProphetController {
 
 	/**
 	 * 
-	 * @return
+	 * @return returns an ArrayList<String> of unique Categories used by the current plan
 	 */
-	public String[] getNeededCategories() {
-		return null;
+	public ArrayList<String> getNeededCategories() {
+		ArrayList<String> needed = new ArrayList<String>();
+		
+		for(Course course: plan.getCourses()){
+			if(needed.contains(course.getCategory()))
+				needed.add(course.getCategory());
+		}
+		return needed;
 	}	
 	
 	public static void main(String Args[]) {		
