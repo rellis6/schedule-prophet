@@ -246,7 +246,7 @@ public class TestController extends ProphetController{
 	 * 
 	 * @return
 	 */
-	public String[] getNeededCategories() {
+	public ArrayList<String> getNeededCategories() {
 		return null;
 	}	
 	
