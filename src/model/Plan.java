@@ -130,17 +130,22 @@ public class Plan {
 	}
 	
 	/**
-	 * get all of the planned courses within this plan, completed and uncompleted. 
+	 * returns an ArrayList<course> of unplanned, completed, and planned courses for 
+	 * all tracks used by the plan 
 	 * @return list of courses in this plan
 	 */
 	public ArrayList<Course> getCourses() {
 		ArrayList<Course> courses = new ArrayList<Course>();
-		for (Semester semester : completedSemesters) {
+		/*for (Semester semester : completedSemesters) {
 			courses.addAll(semester.getClasses());
 		}
 		for (Semester semester : futureSemesters) {
 			courses.addAll(semester.getClasses());
 		}
+		return courses;*/
+		for(Track track: tracks)
+			for(Course course: track.getClasses())
+				courses.add(course);
 		return courses;
 	}
 	
