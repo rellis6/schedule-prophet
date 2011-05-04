@@ -29,10 +29,11 @@ public class FlexibleRequirementSet extends Requirement {
 	}
 	
 	public String toString() {
-		String s = "Flexible Requirement SET\n";
+		String s = "\nFlexible Requirement SET\n";
 		s += "Length of Requirements: " + getRequirements().size();
 		s += "\nMin Credits: " + getMinCredits();
 		s += "\nNum to take: " + numToTake;
+		s += "\n";
 		return s;
 	}
 	
