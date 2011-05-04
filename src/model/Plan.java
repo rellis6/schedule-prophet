@@ -150,6 +150,25 @@ public class Plan {
 	}
 	
 	/**
+	 * 
+	 * @return an ArrayList<Course> of all courses not currently completed or planned
+	 */
+	public ArrayList<Course> getUnplannedCourses(){
+		ArrayList<Course> unplanned = getCourses();
+		
+		for(Semester semester: completedSemesters){
+			for(Course course: semester.getClasses())
+				unplanned.remove(course);
+		}
+		
+		for(Semester semester: futureSemesters){
+			for(Course course: semester.getClasses())
+				unplanned.remove(course);
+		}
+		return unplanned;
+	}
+	
+	/**
 	 * Find a semester in this plan from either completedSemesters or futureSemesters.
 	 * 
 	 * @param season "Spring", "Summer", "Fall", or "Winter"
