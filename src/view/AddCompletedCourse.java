@@ -186,6 +186,7 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
 			else{
 				controller.addCourse(needed, future[0], txtComments.getText(), Integer.parseInt(future[1]));
 			}
+			controller.editCourse(future[0], Integer.parseInt(future[1]), needed, (String) cbxGrade.getModel().getSelectedItem(), txtComments.getText());
 			this.dispose();
 			GUI.regenerateTrees();
 		}

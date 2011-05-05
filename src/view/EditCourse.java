@@ -165,6 +165,7 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		controller.editCourse(semester[0], Integer.parseInt(semester[1]), course, (String) cbxGrade.getModel().getSelectedItem(), txtComments.getText());
 		this.dispose();
 	}
 
