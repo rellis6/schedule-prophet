@@ -38,8 +38,9 @@ import control.ProphetController;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
-	
 	private boolean EXPORT_ENABLED=false;
+	private Object o1;
+	private Object o2;
 	
 	private JButton cmdAddCompletedCourse;
 	private JTree treeCompletedCourses;
@@ -229,7 +230,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				getContentPane().add(completedScrollPane);
 				completedScrollPane.setBounds(10, 69, 361, 211);
 				//treeCompletedCourses.setBounds(10, 40, 361, 240);
-				
+				o1=treeCompletedCourses;
 				
 			}
 			{
@@ -385,8 +386,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		neededScrollPane.setVisible(false);
 		futureScrollPane.setVisible(false);
 		{
-			DefaultMutableTreeNode completed =
-		        new DefaultMutableTreeNode("Completed Courses");
+			DefaultMutableTreeNode completed = new DefaultMutableTreeNode("Completed Courses");
 			
 			DefaultMutableTreeNode semester = null;
 			DefaultMutableTreeNode course = null;
@@ -398,15 +398,15 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				semester = new DefaultMutableTreeNode(temp);
 				completed.add(semester);
 				ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
-				ArrayList<Course> courseList=new ArrayList<Course>();
-				for(int j=0; j<tempCourses.size(); j++){
+				ArrayList<Course> completedCourses=new ArrayList<Course>();
+				for(int j=0; i<tempCourses.size(); i++){
 					if(tempCourses.get(j).getCourseID().equals(temp)){
-						courseList.add(tempCourses.get(j));
+						completedCourses.add(tempCourses.get(j));
 					}
 				}
-				String[] courses = new String[courseList.size()];
-				for(int j=0; j<courseList.size(); j++){
-					courses[j]=courseList.get(j).getCourseID();
+				String[] courses = new String[completedCourses.size()];
+				for(int j=0; j<completedCourses.size(); j++){
+					courses[j]=completedCourses.get(j).getCourseID();
 				}
 				for(int j=0; j<courses.length; j++){
 					course = new DefaultMutableTreeNode(courses[j]);
@@ -419,7 +419,10 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			treeCompletedCourses.setFont(new java.awt.Font("Tahoma",0,14));
 			getContentPane().add(completedScrollPane);
 			completedScrollPane.setBounds(10, 69, 361, 211);
-			//treeCompletedCourses.setBounds(10, 40, 361, 240);
+			treeCompletedCourses.setBounds(10, 40, 361, 240);
+			o2=treeCompletedCourses;
+			System.out.println(o1);
+			System.out.println(o2);
 		}
 		{
 			DefaultMutableTreeNode needed = new DefaultMutableTreeNode("Courses Needed");
