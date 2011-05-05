@@ -665,6 +665,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					});
 				}
 				else{
+					treeCompletedCourses.setSelectionRow(treeCompletedCourses.getRowCount()-1);
 					String[] semester = treeCompletedCourses.getSelectionPath().getPathComponent(1).toString().split(" ");
 					String season=semester[0];
 					int year=Integer.parseInt(semester[1]);
@@ -685,7 +686,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					regenerateTrees();
 				}
 			}
-			else{treeFuturePlan.setSelectionRow(treeFuturePlan.getRowCount()-1);
+			else{
+				treeFuturePlan.setSelectionRow(treeFuturePlan.getRowCount()-1);
 				String[] semester = treeFuturePlan.getSelectionPath().getPathComponent(1).toString().split(" ");
 				String season=semester[0];
 				int year=Integer.parseInt(semester[1]);
