@@ -651,25 +651,57 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			regenerateTrees();
 		}
 		else if(e.getActionCommand().equals("Add semester")){
-			treeFuturePlan.setSelectionRow(treeFuturePlan.getRowCount()-1);
-			String[] semester = treeFuturePlan.getSelectionPath().getPathComponent(1).toString().split(" ");
-			String season=semester[0];
-			int year=Integer.parseInt(semester[1]);
-			if(season.equals("Spring")){
-				season="Summer";
+			if(treeFuturePlan.getRowCount()<2){
+				if(treeCompletedCourses.getRowCount()<2){
+					SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							CreateSemester inst = new CreateSemester(controller, self);
+							inst.setLocationRelativeTo(null);
+							inst.setVisible(true);
+						}
+					});
+				}
+				else{
+					String[] semester = treeCompletedCourses.getSelectionPath().getPathComponent(1).toString().split(" ");
+					String season=semester[0];
+					int year=Integer.parseInt(semester[1]);
+					if(season.equals("Spring")){
+						season="Summer";
+					}
+					else if(season.equals("Summer")){
+						season="Fall";
+					}
+					else if(season.equals("Fall")){
+						season="Winter";
+					}
+					else{
+						season="Spring";
+						year++;
+					}
+					controller.addSemester(season, year);
+					regenerateTrees();
+				}
 			}
-			else if(season.equals("Summer")){
-				season="Fall";
+			else{treeFuturePlan.setSelectionRow(treeFuturePlan.getRowCount()-1);
+				String[] semester = treeFuturePlan.getSelectionPath().getPathComponent(1).toString().split(" ");
+				String season=semester[0];
+				int year=Integer.parseInt(semester[1]);
+				if(season.equals("Spring")){
+					season="Summer";
+				}
+				else if(season.equals("Summer")){
+					season="Fall";
+				}
+				else if(season.equals("Fall")){
+					season="Winter";
+				}
+				else{
+					season="Spring";
+					year++;
+				}
+				controller.addSemester(season, year);
+				regenerateTrees();
 			}
-			else if(season.equals("Fall")){
-				season="Winter";
-			}
-			else{
-				season="Spring";
-				year++;
-			}
-			controller.addSemester(season, year);
-			regenerateTrees();
 		}
 		else{
 			System.out.println(e.getActionCommand());
