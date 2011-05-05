@@ -97,6 +97,7 @@ public class UserPlanDAO {
 						// Then create a new semester and add the course
 						System.out.println("YEAR: " + year);
 						//TODO year is an empty string, cannot be cast to an int
+						
 						Semester newSemester = new Semester(season, Integer.parseInt(year));
 						if (completed.equals("true")) {
 							newSemester.setCompleted(true);
