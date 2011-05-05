@@ -40,6 +40,18 @@ public class Plan {
 		this.name = "";
 	}
 	
+	public String toString() {
+		String s = "\nPlan name: " + name;
+		s += "\nNumber of completed semesters: " + completedSemesters.size();
+		s += "\nNumber of future semesters: " + futureSemesters.size();
+		s += "\nNumber of credits: " + totalCredits;
+		s += "Track for this plan: ";
+		for (Track track : tracks) {
+			s += "\n" + track;
+		}
+		return s;
+	}
+	
 	/**
 	 * 
 	 * @param tracks ArrayList of desired Tracks for the plan

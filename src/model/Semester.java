@@ -41,6 +41,14 @@ public class Semester {
 		this.completed = s.isCompleted();
 	}
 	
+	public String toString() {
+		String s = "Season: " + season;
+		s += "Year: " + year;
+		s += "Number of classes: " + classes.size();
+		s += "completed: " + completed;
+		return s;
+	}
+	
 	/**
 	 * Returns whether or not two semesters are the same, based on name and year.
 	 * @return whether or not two semesters are the same, based on name and year
