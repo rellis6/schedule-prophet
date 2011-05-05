@@ -20,6 +20,7 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import model.Course;
+import model.NonExistentCourseException;
 import model.Semester;
 
 import control.ProphetController;
@@ -400,8 +401,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
 				ArrayList<Course> completedCourses=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
-					if(tempCourses.get(j).getCourseID().equals(temp)){
+					try {
+						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						completedCourses.add(tempCourses.get(j));
+					} catch (NonExistentCourseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 				String[] courses = new String[completedCourses.size()];
