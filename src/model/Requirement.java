@@ -37,12 +37,15 @@ public abstract class Requirement {
 	 */
 	public void setRequirements(ArrayList<Course> requirements) {
 		this.requirements = requirements;
+		requirements.remove(null);
 	}
 
 	/**
 	 * @return the requirements
 	 */
 	public ArrayList<Course> getRequirements() {
+		if(requirements == null)
+			System.out.println("FUUUUUUUUUUUUUUUUUUCK");
 		return requirements;
 	}
 

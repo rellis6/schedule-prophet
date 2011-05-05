@@ -134,6 +134,10 @@ public class ProphetController {
 	 */		
 	public void savePlan(){
 		System.out.println(plan.getName());
+		
+		planDAO = new UserPlanDAO(plan.getName());
+		if(planDAO == null)
+			System.out.println("FUUUUUUUUUUUUUUUUUUUUUCK");
 		planDAO.savePlan(plan);
 	}
 

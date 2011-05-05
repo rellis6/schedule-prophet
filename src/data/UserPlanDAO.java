@@ -95,6 +95,8 @@ public class UserPlanDAO {
 					
 					if (planSemesters.size() == 0) {
 						// Then create a new semester and add the course
+						System.out.println("YEAR: " + year);
+						//TODO year is an empty string, cannot be cast to an int
 						Semester newSemester = new Semester(season, Integer.parseInt(year));
 						if (completed.equals("true")) {
 							newSemester.setCompleted(true);
@@ -163,6 +165,7 @@ public class UserPlanDAO {
 		String filePath = System.getenv("APPDATA") + "\\prophet\\" + plan.getName() + ".xml";
 		FileWriter fwriter = null;
 		try {
+			System.out.println("FILEPATH: " + filePath);
 			fwriter = new FileWriter(filePath);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
