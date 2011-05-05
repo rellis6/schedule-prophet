@@ -253,7 +253,14 @@ public class Plan {
 		else{
 			Semester current = null;
 			//if not last semester
-			if(allSemesters.indexOf(semester) != allSemesters.size() - 1)
+			if(allSemesters.indexOf(semester) != allSemesters.size() - 1){
+				System.out.println(allSemesters.indexOf(semester));
+				System.out.println(allSemesters.size() - 1);
+				System.out.println(semester.equals(allSemesters.get(0)));
+				System.out.println(semester==allSemesters.get(0));//TODO the semester in allSemesters the semester we need to 
+																  //uncomplete are copies of each other, not the same object,
+																  //so it doesn't recognise that the semester is the last one
+																  //and doesn't uncomplete it.
 				//iterates through allSemesters after semester's index, adding each to needChanged
 				//until an uncompleted semester is hit or it reaches the end
 				for(int i = allSemesters.indexOf(new Semester(season, year)) + 1; i < allSemesters.size(); i++){
@@ -265,8 +272,10 @@ public class Plan {
 					if(current.isCompleted() != completed)
 						needChanged.add(current);
 				}
+			}
 			//if last semester
 			else{
+				System.out.println("bla");
 				semester.setCompleted(false);
 				futureSemesters.add(semester);
 				completedSemesters.remove(semester);
