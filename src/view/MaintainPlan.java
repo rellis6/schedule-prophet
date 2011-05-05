@@ -507,7 +507,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						courseList.add(tempCourses.get(j));
 					}
 				}
-				System.out.println(tempCourses.size());
+				//System.out.println(tempCourses.size());
 				String[] courses = new String[tempCourses.size()];
 				for(int j=0; j<tempCourses.size(); j++){
 					courses[j]=tempCourses.get(j).getCourseID();
