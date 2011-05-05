@@ -1,0 +1,10 @@
+<plan name="sadf" track=""/>
+<course id="CMSC201" season="Spring" year="34" grade="" completed="true" notes=""/>
+<course id="MATH151" season="Spring" year="34" grade="A" completed="true" notes=""/>
+<course id="CMSC202" season="Summer" year="34" grade="" completed="true" notes=""/>
+<course id="CMSC203" season="Summer" year="34" grade="" completed="true" notes=""/>
+<course id="MATH152" season="Summer" year="34" grade="B" completed="true" notes=""/>
+<course id="CMSC304" season="Fall" year="34" grade="" completed="false" notes=""/>
+<course id="CMSC341" season="Fall" year="34" grade="" completed="false" notes=""/>
+<course id="MATH221" season="Fall" year="34" grade="" completed="false" notes=""/>
+</plan>
