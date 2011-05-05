@@ -31,6 +31,13 @@ public class Track {
 		name = "";
 	}
 	
+	public String toString() {
+		String s = "Track name: name";
+		s += "\nnumber of courseRequirements in this track: " + courseRequirements.size();
+		s += "\n";
+		return s;
+	}
+	
 	/**
 	 * Create a new Track. 
 	 * 

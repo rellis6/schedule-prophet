@@ -209,7 +209,7 @@ public class Course {
 	 * @return this courseID
 	 */
 	public String toString() {
-		return new String(courseID);
+		return new String(courseID + "\nGrade: " + grade + "\nNotes: " + notes + "\n");
 	}
 	
 	/**
