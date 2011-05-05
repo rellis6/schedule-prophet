@@ -157,7 +157,9 @@ public class Plan {
 		return courses;*/
 		for(Track track: tracks)
 			for(Course course: track.getClasses())
-				courses.add(course);
+				if (!courses.contains(course)) {
+					courses.add(course);
+				}
 		return courses;
 	}
 	
