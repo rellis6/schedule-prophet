@@ -209,7 +209,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					completed.add(semester);
 					ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
 					ArrayList<Course> completedCourses=new ArrayList<Course>();
-					for(int j=0; i<tempCourses.size(); i++){
+					for(int j=0; j<tempCourses.size(); j++){
 						if(tempCourses.get(j).getCourseID().equals(temp)){
 							completedCourses.add(tempCourses.get(j));
 						}
@@ -399,7 +399,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				completed.add(semester);
 				ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
 				ArrayList<Course> completedCourses=new ArrayList<Course>();
-				for(int j=0; i<tempCourses.size(); i++){
+				for(int j=0; j<tempCourses.size(); j++){
 					if(tempCourses.get(j).getCourseID().equals(temp)){
 						completedCourses.add(tempCourses.get(j));
 					}
@@ -421,8 +421,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			completedScrollPane.setBounds(10, 69, 361, 211);
 			treeCompletedCourses.setBounds(10, 40, 361, 240);
 			o2=treeCompletedCourses;
-			System.out.println(o1);
-			System.out.println(o2);
 		}
 		{
 			DefaultMutableTreeNode needed = new DefaultMutableTreeNode("Courses Needed");
@@ -605,10 +603,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		else if(e.getActionCommand().equals("Add course")){
 			TreePath neededPath = treeNeededCourses.getSelectionPath();
 			TreePath futurePath = treeFuturePlan.getSelectionPath();
-			if(neededPath==null || futurePath==null || neededPath.getPathCount()<3 || futurePath.getPathCount()<2){
+			//System.out.println(neededPath.getPathCount());
+			//System.out.println(futurePath.getPathCount());
+			if(neededPath==null || futurePath==null || neededPath.getPathCount()<2 || futurePath.getPathCount()<2){
 				return;
 			}
-			String needed=neededPath.getPathComponent(2).toString();
+			String needed=neededPath.getPathComponent(1).toString();
 			String[] future=futurePath.getPathComponent(1).toString().split(" ");
 			controller.addCourse(needed, future[0], "", Integer.parseInt(future[1]));
 			regenerateTrees();
