@@ -500,16 +500,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 				semester = new DefaultMutableTreeNode(temp);
 				future.add(semester);
-				ArrayList<Course> tempCourses = controller.getCourseList();//getCourseList returns all courses completed or planned, regardless of what temp is.
+				ArrayList<Course> tempCourses = controller.getFutureCourses();
 				ArrayList<Course> courseList=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
 					if(tempCourses.get(j).getCourseID().equals(temp)){
 						courseList.add(tempCourses.get(j));
 					}
 				}
-				String[] courses = new String[courseList.size()];
-				for(int j=0; j<courseList.size(); j++){
-					courses[j]=courseList.get(j).getCourseID();
+				System.out.println(tempCourses.size());
+				String[] courses = new String[tempCourses.size()];
+				for(int j=0; j<tempCourses.size(); j++){
+					courses[j]=tempCourses.get(j).getCourseID();
 				}
 				for(int j=0; j<courses.length; j++){
 					course = new DefaultMutableTreeNode(courses[j]);
