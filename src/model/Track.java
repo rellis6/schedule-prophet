@@ -132,7 +132,7 @@ public class Track {
 	public ArrayList<Course> getClasses() {
 		ArrayList<Course> uniqueCourseList = new ArrayList<Course>();
 		
-		System.out.println("Length of course requirements: " + courseRequirements.size());
+		//System.out.println("Length of course requirements: " + courseRequirements.size());
 		
 		for (Requirement requirement : courseRequirements) {
 			System.out.println("Size of this requirement: " + requirement.getRequirements().size());
