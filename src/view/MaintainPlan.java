@@ -405,7 +405,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						completedCourses.add(tempCourses.get(j));
 					} catch (NonExistentCourseException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -508,14 +507,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				ArrayList<Course> tempCourses = controller.getFutureCourses();
 				ArrayList<Course> courseList=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
-					if(tempCourses.get(j).getCourseID().equals(temp)){
+					try {
+						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						courseList.add(tempCourses.get(j));
+					} catch (NonExistentCourseException e) {
+						e.printStackTrace();
 					}
 				}
 				//System.out.println(tempCourses.size());
-				String[] courses = new String[tempCourses.size()];
-				for(int j=0; j<tempCourses.size(); j++){
-					courses[j]=tempCourses.get(j).getCourseID();
+				String[] courses = new String[courseList.size()];
+				for(int j=0; j<courseList.size(); j++){
+					courses[j]=courseList.get(j).getCourseID();
 				}
 				for(int j=0; j<courses.length; j++){
 					course = new DefaultMutableTreeNode(courses[j]);
@@ -572,10 +574,10 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		else if(e.getActionCommand().equals("Add completed")){
 			TreePath neededPath = treeNeededCourses.getSelectionPath();
 			TreePath completedPath = treeCompletedCourses.getSelectionPath();
-			if(neededPath==null || neededPath.getPathCount()<3){
+			if(neededPath==null || neededPath.getPathCount()<2){
 				return;
 			}
-			final String needed=neededPath.getPathComponent(2).toString();
+			final String needed=neededPath.getPathComponent(1).toString();
 			final String[] future;
 			if(completedPath==null || completedPath.getPathCount()<2){
 				future=null;
