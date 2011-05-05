@@ -135,7 +135,7 @@ public class Track {
 		//System.out.println("Length of course requirements: " + courseRequirements.size());
 		
 		for (Requirement requirement : courseRequirements) {
-			System.out.println("Size of this requirement: " + requirement.getRequirements().size());
+			//System.out.println("Size of this requirement: " + requirement.getRequirements().size());
 			for (Course course : requirement.getRequirements())	{
 				if (!uniqueCourseList.contains(course)) {
 					uniqueCourseList.add(new Course(course));
