@@ -398,14 +398,14 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 				semester = new DefaultMutableTreeNode(temp);
 				completed.add(semester);
-				ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
+				ArrayList<Course> tempCourses = controller.getCourseList();
 				ArrayList<Course> completedCourses=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
 					try {
 						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						completedCourses.add(tempCourses.get(j));
 					} catch (NonExistentCourseException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 				}
 				String[] courses = new String[completedCourses.size()];
@@ -432,7 +432,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			DefaultMutableTreeNode category = null;
 			DefaultMutableTreeNode course = null;
 			
-			ArrayList<Course> courses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned
+			ArrayList<Course> courses = controller.getUnplannedCourses();//.getCourseList();
 			for(int i=0; i<courses.size(); i++){
 				course = new DefaultMutableTreeNode(courses.get(i).getCourseID());
 				needed.add(course);
@@ -511,7 +511,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						courseList.add(tempCourses.get(j));
 					} catch (NonExistentCourseException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 				}
 				//System.out.println(tempCourses.size());
