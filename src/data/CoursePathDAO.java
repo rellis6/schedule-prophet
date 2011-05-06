@@ -202,6 +202,7 @@ public class CoursePathDAO {
 			// in order to make this possible.
 			String name = tracks.get(i).getName();
 			if (name.equals("Computer Science Major")) {
+				System.out.println("cs major is true!");
 				csmajor = true;
 			} else if (name.equals("Computer Science Minor")) {
 				csminor = true;
@@ -308,6 +309,7 @@ public class CoursePathDAO {
 								String courseGrade = course.getAttribute("grade");
 								// Add course populated with these attributes
 								// to the list of courses for the requirement
+
 								courseList.add(populateTrackCourse(courseID, courseGrade));
 							} 
 						}
@@ -403,6 +405,7 @@ public class CoursePathDAO {
 		}
 		// Finally, create and return track
 		Track newTrack = new Track(trackReqs);
+		newTrack.setName(track);
 		return newTrack;
 	}
 	
@@ -426,7 +429,15 @@ public class CoursePathDAO {
 	 */
 	private Course populateTrackCourse(String id, String grade) {
 		Course course = null;
-		Course c = getCourse(id);//what is this line used for? Should this method return c?
+		Course c = getCourse(id); //what is this line used for? Should this method return c?
+								  // c is the course in the catalog, course is the course in a track.
+							      // They will have different information according to major. This
+								  // should not return c because catalog courses' don't have minimum grades
+								  // associated with them, and shouldn't, because that is major-specific.
+								  // In short, this method references the information in the catalog that
+								  // isn't in the major files (like description, name, etc) and fills
+								  // in the track-specific info. --Katherine
+
 		course = new Course(id, "", "", grade, 0/*c.getCredits()*/, c.getCourseTitle(), c.getCategory(), c.getDescription());
 
 		return course;
