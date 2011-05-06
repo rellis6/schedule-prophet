@@ -51,64 +51,110 @@ Complete Semester-Justin Ermer
 
 Module: EditCourse
 Initial Course: new Course("", "", 0, "", "", "")
-Change all values to a non-empty String
-Change all values to an empty String
 
-Test 1
-Description:
+ # Test 1
+
+   * Description: Make no changes
+
+   * Input Data: 
+
+   * Expected Output/Results:
+
+   * Actual Output:
+
+   * P/F:
+
+
+ # Test 2
+
+Description: Grade is blank, change notes to a non-empty String
+
 Input Data:
+
 Expected Output/Results:
+
 Actual Output:
+
 P/F:
 
-Test 2
-Description:
-Input Data:
-Expected Output/Results:
-Actual Output:
-P/F:
 
 Test 3
-Description:
+
+Description: Grade is selected, notes is empty
+
 Input Data:
+
 Expected Output/Results:
+
 Actual Output:
+
 P/F:
+
 
 Test 4
-Description:
+
+Description: Grade is selected, notes is not empty
+
 Input Data:
+
 Expected Output/Results:
+
 Actual Output:
+
 P/F:
 
+
 Module: CompleteSemester
+
 Initial Course: new Course("", "", 0, "", "", "")
 
 Test 1
-Description:
+
+Description: CompleteSemester of an empty plan
+
 Input Data:
+
 Expected Output/Results:
+
 Actual Output:
+
 P/F:
+
 
 Test 2
-Description:
+
+Description: CompleteSemester of a plan with a single semester
+
 Input Data:
+
 Expected Output/Results:
+
 Actual Output:
+
 P/F:
+
 
 Test 3
-Description:
+
+Description: CompleteSemester of a plan with two semesters
+
 Input Data:
+
 Expected Output/Results:
+
 Actual Output:
+
 P/F:
 
+
 Test 4
+
 Description:
+
 Input Data:
+
 Expected Output/Results:
+
 Actual Output:
+
 P/F:
