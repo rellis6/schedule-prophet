@@ -53,7 +53,21 @@ public class UserPlanDAO {
 	public UserPlanDAO(String name) {
 		this.name = name;
 		cpd = new CoursePathDAO();
-		loadPlan();
+		if (!isNewPlan(name)) loadPlan(); else userPlan = new Plan(new ArrayList<Track>());
+	}
+	
+	private boolean isNewPlan(String planName) {
+		String fileDir = System.getenv("APPDATA") + "\\prophet\\";
+		String filePath = fileDir + planName + ".xml";
+		System.out.println(filePath);
+		File planFile = new File(filePath);
+		File planFileDir = new File(fileDir);
+		boolean isNew = false;
+		if ((!planFileDir.exists())||(!planFile.exists())) {
+			isNew = true;
+			System.out.println("this is a new file");
+		}
+		return isNew;
 	}
 	
 	/**
@@ -64,13 +78,16 @@ public class UserPlanDAO {
 		try {
 			ArrayList<Semester> planSemesters = new ArrayList<Semester>();
 		
-			File courseListFile = new File("src\\data\\master_course_list.xml");
+			String fileDir = System.getenv("APPDATA") + "\\prophet\\";
+			String filePath = fileDir + this.name + ".xml";
+			File planFile = new File(filePath);
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			org.w3c.dom.Document planDoc = builder.parse(courseListFile);
+			org.w3c.dom.Document planDoc = builder.parse(planFile);
 			
 			Element rootElement = planDoc.getDocumentElement();
 			userPlan = new Plan(cpd.getTrackCourses(rootElement.getAttribute("track")));
+			userPlan.setName(rootElement.getAttribute("name"));
 			NodeList courseList = rootElement.getChildNodes();
 			
 			// Iterate through list of courses
@@ -148,7 +165,7 @@ public class UserPlanDAO {
 	 */	
 	public void savePlan(Plan plan) {
 		
-		String fileText = "";
+		String fileText = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		
 		// Before I can do this, there needs to be a way for
 		// this class to access a list of semesters from the Plan
@@ -156,16 +173,21 @@ public class UserPlanDAO {
 		// and Plan class needs to have a String name member
 		fileText = fileText + "<plan name=\"" + plan.getName();
 		fileText = fileText + "\" track=\"" + cpd.getTrackName(plan.getTracks());
-		fileText = fileText + "\"/>\n";
+		fileText = fileText + "\">\n";
 		ArrayList<Semester> semesters = plan.getSemesters();
 		for (int i = 0; i < semesters.size(); i++) {
 			fileText = fileText + semesterToXML(semesters.get(i));
 		}
 		fileText = fileText + "</plan>\n";
-		
-		String filePath = System.getenv("APPDATA") + "\\prophet\\" + plan.getName() + ".xml";
+		String fileDir = System.getenv("APPDATA") + "\\prophet\\";
+		String filePath = fileDir + plan.getName() + ".xml";
+		File planFile = new File(filePath);
+		File planFileDir = new File(fileDir);
 		FileWriter fwriter = null;
+		
 		try {
+			if (planFileDir.mkdir()) System.out.println("Prophet Directory Created");
+			if (planFile.createNewFile()) System.out.println("Created new file");
 			System.out.println("FILEPATH: " + filePath);
 			fwriter = new FileWriter(filePath);
 		} catch (IOException e) {
@@ -202,7 +224,10 @@ public class UserPlanDAO {
 		String[] fileList = prophetDir.list();
 		if (fileList != null) {
 			for (int i = 0; i < fileList.length; i++) {
-				planFiles.add(fileList[i]);
+				if (fileList[i].substring(fileList[i].length()-4).toUpperCase().equals(".xml".toUpperCase())) {
+					System.out.println(fileList[i].substring(fileList[i].length()-4));
+					planFiles.add(fileList[i].substring(0,fileList[i].length()-4));
+				}
 			}
 		}
 		return planFiles;

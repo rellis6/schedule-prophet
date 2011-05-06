@@ -1,84 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <track name="Information Systems Major">
-	<categories>
-		<category name="IS Core Courses I" minimum=9>
-			<courses>
-				<course id="IS300" grade="B"></course>
-				<course id="IS310" grade="B"></course>
-				<course id="IS410" grade="C"></course>
-				<course id="IS420" grade="C"></course>
-				<course id="IS425" grade="C"></course>
-				<course id="IS436" grade="C"></course>
-				<course id="IS450" grade="C"></course>
-				<course id="IS451" grade="C"></course>
-			</courses>
-		</category>
-		<category name="IS Core Courses II" minimum=1>
-			<courses>
-				<course id="IS303" grade="C"></course>
-				<course id="IS304" grade="C"></course>
-				<course id="IS410" grade="C"></course>
-				<course id="IS350" grade="C"></course>
-				<course id="IS387" grade="C"></course>
-				<course id="IS403" grade="C"></course>
-				<course id="IS413" grade="C"></course>
-				<course id="IS417" grade="C"></course>
-				<course id="IS430" grade="C"></course>
-				<course id="IS410" grade="C"></course>
-				<course id="IS440" grade="C"></course>
-				<course id="IS448" grade="C"></course>
-				<course id="IS451M" grade="C"></course>
-				<course id="IS451U" grade="C"></course>
-				<course id="IS452" grade="C"></course>
-			</courses>
-		</category>
-		<category name="IS Math Courses I" minimum=1>
-			<courses>
-				<course id="MATH151" grade="C"></course>
-				<course id="MATH155" grade="C"></course>
-			</courses>
-		</category>
-		<category name="IS Math Courses II" minimum=1>
-			<courses>
-				<course id="MATH215" grade="C"></course>
-				<course id="MATH221" grade="C"></course>
-			</courses>
-		</category>
-		<category name="IS Stat Requirement" minimum=1>
-			<courses>
-				<course id="STAT351" grade="C"></course>
-			</courses>
-		</category>
-		<category name="IS Comp Sci Requirement I" minimum=1>
-			<courses>
-				<course name="IS147" grade="C"></course>
-				<course name="CMSC201" grade="C"></course>
-			</courses>
-		</category>
-		<category name="IS Comp Sci Requirement II" minimum=1>
-			<courses>
-				<course name="IS247" grade="C"></course>
-				<course name="CMSC202" grade="C"></course>
-			</courses>
-		</category>
-		<category name="One Semester of a Programming Language" minimum=1>
-			<courses>
-				<course name="IS246" grade="C"></course>
-				<course name="IS403" grade="C"></course>
-				<course name="IS413" grade="C"></course>
-				<course name="IS448" grade="C"></course>
-			</courses>
-		</category>
-		<category name="Administrative Science" minimum=6>
-			<courses>
-				<course name="ECAD210" grade="C"></course>
-				<course name="ECON101" grade="C"></course>
-				<course name="ECON102" grade="C"></course>
-				<course name="ECON121" grade="C"></course>
-				<course name="ECON122" grade="C"></course>
-				<course name="ENGL393" grade="C"></course>
-			</courses>
-		</category>
-
-	</categories>
+	<absolutereq name="IS Core Courses I" credits="0">
+		<course id="IS300" grade="B"></course>
+		<course id="IS310" grade="B"></course>
+		<course id="IS410" grade="C"></course>
+		<course id="IS420" grade="C"></course>
+		<course id="IS425" grade="C"></course>
+		<course id="IS436" grade="C"></course>
+		<course id="IS450" grade="C"></course>
+		<course id="IS451" grade="C"></course>
+	</absolutereq>
+	<absolutereq name="IS Core Courses II" credits="0">
+		<course id="IS303" grade="C"></course>
+		<course id="IS304" grade="C"></course>
+		<course id="IS410" grade="C"></course>
+		<course id="IS350" grade="C"></course>
+		<course id="IS387" grade="C"></course>
+		<course id="IS403" grade="C"></course>
+		<course id="IS413" grade="C"></course>
+		<course id="IS417" grade="C"></course>
+		<course id="IS430" grade="C"></course>
+		<course id="IS410" grade="C"></course>
+		<course id="IS440" grade="C"></course>
+		<course id="IS448" grade="C"></course>
+		<course id="IS451M" grade="C"></course>
+		<course id="IS451U" grade="C"></course>
+		<course id="IS452" grade="C"></course>
+	</absolutereq>
+	<flexiblereq name="IS Math Courses I" number="1">
+		<course id="MATH151" grade="C"></course>
+		<course id="MATH155" grade="C"></course>
+	</flexiblereq>
+	<absolutereq name="IS Math Courses II" number="1">
+		<course id="MATH215" grade="C"></course>
+		<course id="MATH221" grade="C"></course>
+	</absolutereq>
+	<absolutereq name="IS Stat Requirement" number="1">
+		<course id="STAT351" grade="C"></course>
+	</absolutereq>
+	<flexiblereq name="IS Comp Sci Requirement I" number="1">
+		<course id="IS147" grade="C"></course>
+		<course id="CMSC201" grade="C"></course>
+	</flexiblereq>
+	<flexiblereq name="IS Comp Sci Requirement II" number="1">
+		<course id="IS247" grade="C"></course>
+		<course id="CMSC202" grade="C"></course>
+	</flexiblereq>
+	<flexiblereq name="One Semester of a Programming Language" number="1">
+		<course id="IS246" grade="C"></course>
+		<course id="IS403" grade="C"></course>
+		<course id="IS413" grade="C"></course>
+		<course id="IS448" grade="C"></course>
+	</flexiblereq>
+	<absolutereq name="Administrative Science" number="6">
+		<course id="MGMT210" grade="C"></course>
+		<course id="ECON101" grade="C"></course>
+		<course id="ECON102" grade="C"></course>
+		<course id="ECON121" grade="C"></course>
+		<course id="ECON122" grade="C"></course>
+		<course id="ENGL393" grade="C"></course>
+	</absolutereq>
 </track>

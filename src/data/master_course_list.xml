@@ -613,6 +613,12 @@ introduced. Students will be taught the basic use of a programming environment a
 	<description>This course introduces the basic principles and techniques involved in computer programming and computing. Methods of algorithm development, program development, and program design are taught using an object-oriented programming language. Projects are geared toward those typically encountered in the Information Systems field. </description>
 	<prerequisites/>
 </course>
+<course id="IS246" name="Topics in Programming Languages and Tools">
+	<description>This course will introduce a high-level programming language or a development tool. The specific language or tool may vary and more than one may be offered (the letter suffix will be used to distinguish them).</description>
+	<prerequisites>
+		<prerequisite>IS147|IS246|IS403|IS413|IS448</prerequisite>
+	</prerequisites>
+</course>
 <course id="IS247" name="Computer Programming II">
 	<description>This second course in a sequence continues the development of programming and problem-solving skills, focusing on topics such as: lists, searching and sorting, sets, stacks, queues, trees and an introduction to analyses of algorithm time and space requirements.</description>
 	<prerequisites>
@@ -622,6 +628,16 @@ introduced. Students will be taught the basic use of a programming environment a
 <course id="IS300" name="Management Information Systems">
 	<description>An overview of management information systems (MIS), including the development of transaction processing systems and their relationship to management reporting systems. The course objectives include developing an understanding of the purpose, functions, components and applications of transaction processing systems and management reporting systems in private and public organizations, and describing and evaluating policies for information resource management. </description>
 	<prerequisites/>
+</course>
+<course id="IS303" name="Fundamentals of Human-Computer Interaction" satisfies="AH">
+	<description>This course provides a survey of human factors and human computer interaction relevant to the design and use of information systems. It describes the contributions of information systems, computer science, psychology, sociology and engineering to human-computer interaction. Emphasis is placed on human factors theories, human information processing concepts, interaction design approaches and usability evaluation methods. Application areas and current research are also reviewed.</description>
+	<prerequisites>
+		<prerequisite>IS202(C)|IS300(C)</prerequisite>
+	</prerequisites>
+</course>
+<course id="IS304" name="Ethical Issues in Information Systems">
+	<description>A survey course that reviews the ethical impact of information systems and related technology throughout the world. The course examines the policy issues that relate to the use of information systems, such as persona, privacy, rights of access, security, transborder data flow and confidentiality.</description>
+		<prerequisites/>
 </course>
 <course id="IS310" name="Software and Hardware Concepts">
 	<description>A survey of technical topics related to computer systems with emphasis on the relationships between hardware architecture, system software and applications software. The architecture of processors and storage systems are explored, and the implications for systems software design are covered, along with the impact of hardware and system software design on the development of application programs in a business environment.</description>
