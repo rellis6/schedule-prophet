@@ -49,7 +49,66 @@ Use Cases
 Edit Course-Justin Ermer
 Complete Semester-Justin Ermer
 
-EditCourse
+Module: EditCourse
 Initial Course: new Course("", "", 0, "", "", "")
 Change all values to a non-empty String
 Change all values to an empty String
+
+Test 1
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
+
+Test 2
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
+
+Test 3
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
+
+Test 4
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
+
+Module: CompleteSemester
+Initial Course: new Course("", "", 0, "", "", "")
+
+Test 1
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
+
+Test 2
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
+
+Test 3
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
+
+Test 4
+Description:
+Input Data:
+Expected Output/Results:
+Actual Output:
+P/F:
