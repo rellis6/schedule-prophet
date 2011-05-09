@@ -20,8 +20,10 @@ import model.*;
 import data.*;
 
 /**
- * @author Mark Pallone
- *
+ * File: ProphetController.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
  * Description: Every action that can be taken using the GUI is called as a method 
  * in the ProphetController class.
  */
@@ -30,38 +32,41 @@ public class ProphetController {
 	ArrayList<Track> TrackList = new ArrayList<Track>();
 	CoursePathDAO courseDAO = new CoursePathDAO();
 	UserPlanDAO planDAO;
-	
+
 	/**
-	 * We shouldn't need these two since adding a completed course is exactly the same as adding an uncompleted
-	 * course except the semester it's added to is marked as completed
-	void addCompletedCourse(Course course){	
-	}	
-	void editCompletedCourse(String courseID, String season, int year, String grade, String comments){
-	}
-	**/
-	
-	
-	//how does TrackList get populated? Does clicking a button on the gui pass a designated
-	//string with the track name to PC, PC checks it's valid, then adds?
-	
-	//only called for creating new plans
+	 * 
+	 * @param track
+	 */
 	private void initTrackList(String track){
 		System.out.println("init: " + track);
 		
 		this.TrackList = courseDAO.getTrackCourses(track);
 	}
 	
+	/**
+	 * 
+	 * @param track
+	 */
 	public void newPlan(String track){
 		initTrackList(track);
 		this.plan = new Plan(TrackList);
 	}
 	
+	/**
+	 * 
+	 * @param track
+	 * @param name
+	 */
 	public void newPlan(String track, String name){
 		System.out.println("new: " + track);
 		initTrackList(track);
 		this.plan = new Plan(TrackList, name);
 	}
 	
+	/**
+	 * N
+	 * @param filename
+	 */
 	public void loadPlan(String filename){
 		planDAO = new UserPlanDAO(filename);
 		plan = planDAO.getPlan();
@@ -76,7 +81,11 @@ public class ProphetController {
 	public void addCourse(String courseID, String season, String comments, int year){
 		try {
 			//duplicate course exception?
+			System.out.println("TEST: " + courseDAO.getCourse(courseID).getCourseTitle());
 			plan.addCourse(courseDAO.getCourse(courseID), season, year);
+			for(Semester semester: plan.getSemesters(false)){
+				semester.toString();
+			}
 		} catch (NonExistentSemesterException e) {
 			System.out.print(e.toString());
 			//warning/error window
@@ -127,22 +136,23 @@ public class ProphetController {
 	}
 
 	/**
-	 * Name: 
-	 * Precondition(s): 
-	 * Postcondition(s): 
-	 * @param args                    
+	 * Name: savePlan()
+	 * Precondition(s): Plan plan is initialized
+	 * Postcondition(s): Saves the current plan in the program directory for later
+	 *                   retrieval through the loadPlan() function       
 	 */		
 	public void savePlan(){
 		System.out.println(plan.getName());
 		
 		planDAO = new UserPlanDAO(plan.getName());
-		if(planDAO == null)
-			System.out.println("FUUUUUUUUUUUUUUUUUUUUUCK");
 		planDAO.savePlan(plan);
 	}
 
 	/**
-	 *  Adds a new semester
+	 * Name: addSemester()
+	 * Precondition(s): Plan plan is initialized
+	 * Postcondition(s): adds a newly created semester object using the given season and
+	 *                   year to plan
 	 * @param season season of semester to be added
 	 * @param year year of semester to be added
 	 */
@@ -155,19 +165,24 @@ public class ProphetController {
 		}
 	}
 	
+	/**
+	 * Name: deletePlan()
+	 * Precondition(s): Plan plan is initialized
+	 * Postconditions(s): deletes the plan file which has the name String plan from
+	 *                    the program directory
+	 * @param plan the String name of the plan to be deleted
+	 */
 	public void deletePlan(String plan){
 		planDAO.deletePlan(plan);
 	}
-	
-//	public ArrayList<String> getPlans(){
-//		return planDAO.getPlanList();
-//	}
+
 	
 	/**
-	 * Gets the list of all files in the prophet directory
-	 * (located in the user's AppData folder). If no files
-	 * exist, returns an empty list.
-	 * @return The list of all files in the prophet directory
+	 * Name: getPlans()
+	 * Precondition(s): none
+	 * Postcondition(s): Gets the list of all files in the prophet directory
+	 * (located in the user's AppData folder). If no files exist, returns an empty list.
+	 * @return The ArrayList<String> of all files in the prophet directory
 	 * @author Katherine Miller
 	 */
 	public ArrayList<String> getPlans() {
@@ -202,6 +217,8 @@ public class ProphetController {
 	 * @return an arraylist of all completed semesters
 	 */
 	public ArrayList<Semester> getCompletedSemesters() {
+		for(Semester cur: plan.getSemesters(true))
+			System.out.println(cur.getSeason() + cur.getYear());
 		return plan.getSemesters(true);
 	}
 
