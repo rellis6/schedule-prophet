@@ -278,7 +278,7 @@ public class Plan {
 			else{
 				System.out.println("bla");
 				semester.setCompleted(false);
-				futureSemesters.add(semester);
+				futureSemesters.add(0, semester);
 				System.out.println("COMSEM SIZE: " + completedSemesters.size());
 				completedSemesters.remove(semester);
 				System.out.println("COMSEM SIZE: " + completedSemesters.size());
