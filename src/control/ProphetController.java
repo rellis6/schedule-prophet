@@ -34,8 +34,10 @@ public class ProphetController {
 	UserPlanDAO planDAO;
 
 	/**
-	 * 
-	 * @param track
+	 * Name: initTrackList()
+	 * Precondition(s): String track is a legitimate input for a track
+	 * PostCondition(s): initializes TrackList based on the passed String track
+	 * @param track String name of the chosen academic track
 	 */
 	private void initTrackList(String track){
 		System.out.println("init: " + track);
@@ -44,8 +46,10 @@ public class ProphetController {
 	}
 	
 	/**
-	 * 
-	 * @param track
+	 * Name: newPlan()
+	 * Precondition(s): String track is a legitimate input for a track
+	 * Postcondition(s): initializes TrackList, initializes plan using TrackList
+	 * @param track String name of the chosen academic track
 	 */
 	public void newPlan(String track){
 		initTrackList(track);
@@ -53,9 +57,12 @@ public class ProphetController {
 	}
 	
 	/**
-	 * 
-	 * @param track
-	 * @param name
+	 * Name: newPlan()
+	 * Precondition(s): String track is a legitimate input for a track
+	 * Postcondition(s): initializes TrackList, initializes plan using TrackList, sets plan's
+	 *  				 name to the passed String name
+	 * @param track String name of the chosen academic track
+	 * @param name String name of the plan
 	 */
 	public void newPlan(String track, String name){
 		System.out.println("new: " + track);
@@ -64,8 +71,11 @@ public class ProphetController {
 	}
 	
 	/**
-	 * N
-	 * @param filename
+	 * Name: loadPlan()
+	 * Precondition(s): String filename must be the name of a plan file in the working directory
+	 * Postcondition(s): initializes planDAO based on the passed filename, initializes plan
+	 * using on PlanDAO
+	 * @param filename the String name of the plan to be opened
 	 */
 	public void loadPlan(String filename){
 		planDAO = new UserPlanDAO(filename);
@@ -73,11 +83,15 @@ public class ProphetController {
 	}
 	
 	/**
-	 * Name: 
-	 * Precondition(s): 
-	 * Postcondition(s): returns array which contains grade + comments
-	 * @param args                    
-	 */		
+	 * Name: addCourse()
+	 * Precondition(s): Plan plan is initialized
+	 * 					Specified semester exists
+	 * Postcondition(s): returns array which contains grade + comments	
+	 * @param courseID ID of desired course
+	 * @param season String season semester identifier
+	 * @param comments initial comments to note about the course
+	 * @param year int year semester identifier
+	 */
 	public void addCourse(String courseID, String season, String comments, int year){
 		try {
 			//duplicate course exception?
@@ -93,17 +107,24 @@ public class ProphetController {
 	}	
 	
 	/**
-	 * Name: 
-	 * Precondition(s): 
-	 * Postcondition(s): returns True if other courses exist in semester
-	 * @param args                    
-	 */		
+	 * Name: removeCourse()	
+	 * Precondition(s): Plan plan is initialized
+	 * 					courseID is a valid course identifier
+	 * 					season and year are valid semester identifiers
+	 * Postcondition(s): removes a given course from a specific semester by calling plan's
+	 * 					 removeCourse() method
+	 * @param courseID ID of desired course
+	 * @param season String season semester identifier
+	 * @param year int year semester identifier
+	 * @return boolean true if successful, false otherwise
+	 */
 	public boolean removeCourse(String courseID, String season, int year){
 		
 		try {
 			plan.removeCourse(courseID, season, year);
 		} catch (NonExistentCourseException e) {
 			System.out.print(e.getMessage());
+			return false;
 			//warning/error window?
 		}
 		
@@ -112,25 +133,36 @@ public class ProphetController {
 	}
 
 	/**
-	 * Name: 
-	 * Precondition(s): 
-	 * Postcondition(s): returns array containing grade + comments
-	 * @param args                    
-	 */		
+	 * Name: getCourseInfo()
+	 * Precondition(s): Plan plan is initialized
+	 * 					a Course with the supplied CourseID exists in the specified Semester
+	 * @param courseID ID of desired course
+	 * @param season String season semester identifier
+	 * @param year int year semester identifier
+	 * @return A String array with two elements, the first being the Grade and the
+	 * second being any notes recorded for the course
+	 */
 	public String[] getCourseInfo(String courseID, String season, int year){
 		String[] array = {plan.getCourse(courseID, season, year).getGrade(), 
 				plan.getCourse(courseID, season, year).getNotes()};
 		return array;
 	}
 	
+	/**
+	 * Name: editCourse()
+	 * Precondition(s):
+	 * @param season String season semester identifier
+	 * @param year int year semester identifier
+	 * @param courseID String CourseID course identifier
+	 * @param grade String grade received in specified course
+	 * @param notes String notes about the specified course
+	 */
 	public void editCourse(String season, int year, String courseID, String grade, String notes){
 		try {
 			plan.editCompletedCourse(season, year, courseID, grade, notes);
 		} catch (NonExistentSemesterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NonExistentCourseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -200,7 +232,9 @@ public class ProphetController {
 
 	
 	/**
-	 * 
+	 * Name: setSemesterCompleted()
+	 * Precondition: Plan plan must contain at least one completed or uncompleted semester
+	 *               depending on if that semester is being uncompleted or completed, respectively
 	 * @param season season of semester to be completed
 	 * @param year year of semester to be completed
 	 * @param completed boolean of what the semesterCompleted value of the specified semester 
@@ -213,7 +247,8 @@ public class ProphetController {
 	}
 	
 	/**
-	 * 
+	 * Name: getCompletedSemesters()
+	 * Precondition(s): Plan plan is initialized
 	 * @return an arraylist of all completed semesters
 	 */
 	public ArrayList<Semester> getCompletedSemesters() {
@@ -223,16 +258,18 @@ public class ProphetController {
 	}
 
 	/**
-	 * 
-	 * @return an arraylist of all uncompleted semesters
+	 * Name: getFutureSemesters()
+	 * Precondition(s): Plan plan is initialized
+	 * @return an ArrayList<Semester> of all uncompleted semesters
 	 */
 	public ArrayList<Semester> getFutureSemesters() {
 		return plan.getSemesters(false);
 	}	
 	
 	/**
-	 * 
-	 * @return an arraylist of future courses
+	 * Name: getFutureCourses()
+	 * Precondition(s): Plan plan is initialized
+	 * @return an ArrayList<Course> of future/planned courses in the current plan
 	 */
 	public ArrayList<Course> getFutureCourses(){
 		ArrayList<Course> future = new ArrayList<Course>();
@@ -247,8 +284,10 @@ public class ProphetController {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Name: getUnplannedCourses()
+	 * Precondition(s): Plan plan is initialized
+	 * @return An ArrayList<Course> of Courses that are neither currently completed 
+	 * or uncompleted by the plan
 	 */
 	public ArrayList<Course> getUnplannedCourses(){
 		ArrayList<Course> unplanned = plan.getCourses();
@@ -262,7 +301,8 @@ public class ProphetController {
 	}
 	
 	/**
-	 * 
+	 * Name: getCourseList()
+	 * Precondition: Plan plan is initialized
 	 * @return an ArrayList<Course> of ALL courses needed by the current plan
 	 */
 	public ArrayList<Course> getCourseList() {
@@ -270,7 +310,8 @@ public class ProphetController {
 	}
 
 	/**
-	 * 
+	 * Name: getNeededCategories()
+	 * Precondition: Plan plan is initialized
 	 * @return returns an ArrayList<String> of unique Categories used by the current plan
 	 */
 	public ArrayList<String> getNeededCategories() {
