@@ -174,6 +174,10 @@ public class ProphetController {
 	 *                   retrieval through the loadPlan() function       
 	 */		
 	public void savePlan(){
+		//TODO does not save empty semesters as the xml file is course centric
+		//TODO possibly fixed by adding a dummy blank course to each empty semester during the save
+		//TODO and stripping it out during loads
+		
 		System.out.println(plan.getName());
 		
 		planDAO = new UserPlanDAO(plan.getName());
@@ -190,9 +194,11 @@ public class ProphetController {
 	 */
 	public void addSemester(String season, int year){
 		if(plan.addSemester(season, year) == false){
+			System.out.println("ADDSEM BAAAAD");
 			//error window
 		}
 		else{
+			System.out.println("ADDSEM ELSE(GOOD)");
 			//success window?
 		}
 	}
