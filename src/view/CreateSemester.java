@@ -116,7 +116,7 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 				btnSave.addActionListener(this);
 			}
 			pack();
-			this.setSize(190, 135);
+			this.setSize(210, 155);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();
