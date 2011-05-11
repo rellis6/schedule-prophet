@@ -227,7 +227,7 @@ public class Plan {
 		}
 		
 		
-		/**/
+		
 		ArrayList<Semester> allSemesters = getSemesters();
 		ArrayList<Semester> needChanged = new ArrayList<Semester>();
 		
@@ -245,6 +245,7 @@ public class Plan {
 			//if none need to be changed, complete
 			if(needChanged.size() == 0){
 				semester.setCompleted(true);
+				
 				futureSemesters.remove(semester);
 				completedSemesters.add(semester);
 			}
@@ -252,17 +253,17 @@ public class Plan {
 		//test for uncompleting semesters
 		else{
 			Semester current = null;
+		
 			//if not last semester
-			if(allSemesters.indexOf(semester) != allSemesters.size() - 1){
-				System.out.println(allSemesters.indexOf(semester));
-				System.out.println(allSemesters.size() - 1);
-				System.out.println(semester.equals(allSemesters.get(0)));
-				System.out.println(semester==allSemesters.get(0));//TODO the semester in allSemesters the semester we need to 
-																  //uncomplete are copies of each other, not the same object,
-																  //so it doesn't recognise that the semester is the last one
-																  //and doesn't uncomplete it.
-				//iterates through allSemesters after semester's index, adding each to needChanged
-				//until an uncompleted semester is hit or it reaches the end
+			if(allSemesters.indexOf(semester) != completedSemesters.size() - 1){
+				System.out.println("INDEXOFSEM: " + allSemesters.indexOf(semester));
+				System.out.println("ALLSEMSIZE: " + allSemesters.size());
+				System.out.println("SEM.EQ(ALL.GET): " + semester.equals(allSemesters.get(0)));
+				System.out.println("SEM == ALL.GET: " + (semester == allSemesters.get(0)));
+				//TODO the semester in allSemesters the semester we need to uncomplete are copies 
+				//of each other, not the same object, so it doesn't recognise that the semester is the last one
+				//and doesn't uncomplete it. iterates through allSemesters after semester's index, adding 
+				//each to needChanged until an uncompleted semester is hit or it reaches the end
 				for(int i = allSemesters.indexOf(new Semester(season, year)) + 1; i < allSemesters.size(); i++){
 					current = allSemesters.get(i);
 					
@@ -278,7 +279,9 @@ public class Plan {
 				System.out.println("bla");
 				semester.setCompleted(false);
 				futureSemesters.add(semester);
+				System.out.println("COMSEM SIZE: " + completedSemesters.size());
 				completedSemesters.remove(semester);
+				System.out.println("COMSEM SIZE: " + completedSemesters.size());
 			}
 		}
 		
@@ -357,11 +360,18 @@ public class Plan {
 	public ArrayList<Semester> getSemesters() {
 		ArrayList<Semester> allSemesters = new ArrayList<Semester>();
 		
+//		for (Semester s : completedSemesters) {
+//			allSemesters.add(new Semester(s));
+//		}
+//		for (Semester s : futureSemesters) {
+//			allSemesters.add(new Semester(s));
+//		}
+		
 		for (Semester s : completedSemesters) {
-			allSemesters.add(new Semester(s));
+			allSemesters.add(s);
 		}
 		for (Semester s : futureSemesters) {
-			allSemesters.add(new Semester(s));
+			allSemesters.add(s);
 		}
 		
 		return allSemesters;
