@@ -80,6 +80,13 @@ public class ProphetController {
 	public void loadPlan(String filename){
 		planDAO = new UserPlanDAO(filename);
 		plan = planDAO.getPlan();
+		for(int i=0; i<plan.getSemesters().size(); i++){
+			try {
+				plan.getSemesters().get(i).removeCourse("Dummy");
+			} catch (NonExistentCourseException e) {
+				// TODO Auto-generated catch block
+			}
+		}
 	}
 	
 	/**
@@ -179,7 +186,11 @@ public class ProphetController {
 		//TODO and stripping it out during loads
 		
 		System.out.println(plan.getName());
-		
+		Course dummy = new Course("Dummy", "E", 0, "Dummy", "Dummy", "Dummy");
+		ArrayList<Semester> semesters = new ArrayList<Semester>();
+		for(int i=0; i<plan.getSemesters().size(); i++){
+			plan.getSemesters().get(i).addCourse(dummy);
+		}
 		planDAO = new UserPlanDAO(plan.getName());
 		planDAO.savePlan(plan);
 	}
