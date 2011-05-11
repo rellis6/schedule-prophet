@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -240,11 +241,47 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				DefaultMutableTreeNode category = null;
 				DefaultMutableTreeNode course = null;
 				
-				ArrayList<Course> courses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned
+				ArrayList<Course> courses = controller.getCourseList();
+				ArrayList<Course> futureList = controller.getFutureCourses();
+				ArrayList<Course> courseList = new ArrayList<Course>();
 				for(int i=0; i<courses.size(); i++){
-					course = new DefaultMutableTreeNode(courses.get(i).getCourseID());
+					if(!futureList.contains(courses.get(i))){
+						courseList.add(courses.get(i));
+					}
+				}
+				for(int i=0; i<courseList.size(); i++){
+					course = new DefaultMutableTreeNode(courseList.get(i).getCourseID());
 					needed.add(course);
 				}
+				/*ArrayList<Course> courses = controller.getUnplannedCourses();//.getCourseList();
+				ArrayList<Course> futureList = controller.getFutureCourses();
+				ArrayList<Course> courseList = new ArrayList<Course>();
+				for(int i=0; i<courses.size(); i++){
+					if(!futureList.contains(courses.get(i))){
+						courseList.add(courses.get(i));
+					}
+				}
+				ArrayList<String> categories = new ArrayList<String>();
+				for(int i=0; i<courseList.size(); i++){
+					System.out.println(courseList.get(i).getCategory());
+					if(!categories.contains(courseList.get(i).getCategory())){
+						categories.add(courseList.get(i).getCategory());
+					}
+				}
+				for(int i=0; i<categories.size(); i++){
+					category = new DefaultMutableTreeNode(categories.get(i));
+					needed.add(category);
+					ArrayList<Course> tempCourses=new ArrayList<Course>();
+					for(int j=0; j<courseList.size(); j++){
+						if(courseList.get(j).getCategory().equals(categories.get(i))){
+							tempCourses.add(courseList.get(j));
+						}
+					}
+					for(int j=0; j<tempCourses.size(); j++){
+						course = new DefaultMutableTreeNode(tempCourses.get(j).getCourseID());
+						needed.add(course);
+					}
+				}*/
 				/*
 				String[] categories = controller.getNeededCategories();//FIXED  getNeededCategories is unimplemented and returns null
 				for(int i=0; i<categories.length; i++){
@@ -432,11 +469,48 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			DefaultMutableTreeNode category = null;
 			DefaultMutableTreeNode course = null;
 			
-			ArrayList<Course> courses = controller.getUnplannedCourses();//.getCourseList();
+			ArrayList<Course> courses = controller.getCourseList();
+			ArrayList<Course> futureList = controller.getFutureCourses();
+			System.out.println(futureList.size());
+			ArrayList<Course> courseList = new ArrayList<Course>();
 			for(int i=0; i<courses.size(); i++){
-				course = new DefaultMutableTreeNode(courses.get(i).getCourseID());
+				if(!futureList.contains(courses.get(i))){
+					courseList.add(courses.get(i));
+				}
+			}
+			for(int i=0; i<courseList.size(); i++){
+				course = new DefaultMutableTreeNode(courseList.get(i).getCourseID());
 				needed.add(course);
 			}
+			/*
+			ArrayList<Course> courses = controller.getUnplannedCourses();//.getCourseList();
+			ArrayList<Course> futureList = controller.getFutureCourses();
+			ArrayList<Course> courseList = new ArrayList<Course>();
+			for(int i=0; i<courses.size(); i++){
+				if(!futureList.contains(courses.get(i))){
+					courseList.add(courses.get(i));
+				}
+			}
+			ArrayList<String> categories = new ArrayList<String>();
+			for(int i=0; i<courseList.size(); i++){
+				if(!categories.contains(courseList.get(i).getCategory())){
+					categories.add(courseList.get(i).getCategory());
+				}
+			}
+			for(int i=0; i<categories.size(); i++){
+				category = new DefaultMutableTreeNode(categories.get(i));
+				needed.add(category);
+				ArrayList<Course> tempCourses=new ArrayList<Course>();
+				for(int j=0; j<courseList.size(); j++){
+					if(courseList.get(j).getCategory().equals(categories.get(i))){
+						tempCourses.add(courseList.get(j));
+					}
+				}
+				for(int j=0; j<tempCourses.size(); j++){
+					course = new DefaultMutableTreeNode(tempCourses.get(j).getCourseID());
+					needed.add(course);
+				}
+			}*/
 			/*
 			String[] categories = controller.getNeededCategories();//FIXED  getNeededCategories is unimplemented and returns null
 			for(int i=0; i<categories.length; i++){
@@ -632,8 +706,19 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			regenerateTrees();
 		}
 		else if(e.getActionCommand().equals("Mark completed")){
-			String[] semester = treeFuturePlan.getPathForRow(1).getPathComponent(1).toString().split(" ");
+			final String[] semester = treeFuturePlan.getPathForRow(1).getPathComponent(1).toString().split(" ");
 			controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
+			Enumeration temp=((DefaultMutableTreeNode) treeFuturePlan.getPathForRow(1).getPathComponent(1)).children();
+			while(temp.hasMoreElements()){
+				final String course=temp.nextElement().toString();
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						EditCourse inst = new EditCourse(controller, course, semester);
+						inst.setLocationRelativeTo(null);
+						inst.setVisible(true);
+					}
+				});
+			}
 			regenerateTrees();
 			/* lets the user complete semesters out of order, may have bugs
 			TreePath path = treeFuturePlan.getSelectionPath();

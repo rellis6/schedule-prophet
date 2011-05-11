@@ -74,7 +74,7 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			this.setTitle("Prerequisites Needed");
+			this.setTitle("");
 			getContentPane().setLayout(null);
 			{
 				lblSeason = new JLabel();
@@ -87,14 +87,8 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 				lblName = new JLabel();
 				getContentPane().add(lblName);
 				lblName.setText("Year:");
-				lblName.setBounds(10, 39, 80, 20);
+				lblName.setBounds(10, 45, 80, 20);
 				lblName.setFont(new java.awt.Font("Tahoma",0,14));
-			}
-			{
-				txtYear = new JTextField();
-				getContentPane().add(txtYear);
-				txtYear.setBounds(100, 11, 50, 20);
-				txtYear.setFont(new java.awt.Font("Tahoma",0,14));
 			}
 			{
 				ComboBoxModel cbxGradeModel = 
@@ -103,20 +97,26 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 				cbxSeason = new JComboBox();
 				getContentPane().add(cbxSeason);
 				cbxSeason.setModel(cbxGradeModel);
-				cbxSeason.setBounds(115, 68, 80, 20);
+				cbxSeason.setBounds(67, 13, 110, 20);
 				cbxSeason.setFont(new java.awt.Font("Tahoma",0,14));
+			}
+			{
+				txtYear = new JTextField();
+				getContentPane().add(txtYear);
+				txtYear.setBounds(70, 46, 50, 20);
+				txtYear.setFont(new java.awt.Font("Tahoma",0,14));
 			}
 			{
 				btnSave = new JButton();
 				getContentPane().add(btnSave);
 				btnSave.setText("Save");
-				btnSave.setBounds(194, 95, 88, 23);
+				btnSave.setBounds(50, 80, 88, 23);
 				btnSave.setFont(new java.awt.Font("Tahoma",0,14));
 				btnSave.setActionCommand("No");
 				btnSave.addActionListener(this);
 			}
 			pack();
-			this.setSize(370, 150);
+			this.setSize(190, 135);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();
