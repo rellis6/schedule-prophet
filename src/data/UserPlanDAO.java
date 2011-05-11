@@ -58,7 +58,7 @@ public class UserPlanDAO {
 	
 	private boolean isNewPlan(String planName) {
 		String fileDir = System.getenv("APPDATA") + "\\prophet\\";
-		String filePath = fileDir + planName + ".xml";
+		String filePath = fileDir + planName;
 		System.out.println(filePath);
 		File planFile = new File(filePath);
 		File planFileDir = new File(fileDir);
@@ -79,7 +79,7 @@ public class UserPlanDAO {
 			ArrayList<Semester> planSemesters = new ArrayList<Semester>();
 		
 			String fileDir = System.getenv("APPDATA") + "\\prophet\\";
-			String filePath = fileDir + this.name + ".xml";
+			String filePath = fileDir + this.name;
 			File planFile = new File(filePath);
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
