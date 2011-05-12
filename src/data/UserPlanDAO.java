@@ -406,6 +406,7 @@ public class UserPlanDAO {
 	    	Course c = courses.get(i);
 	        str = str + courseToCSV(c.getCourseID(), s.getSeason(), String.valueOf(s.getYear()), s.isCompleted(), c.getGrade(), c.getNotes());
 	    }
+	    str = str + "\n";
 	    return str;
 	}
 	    
