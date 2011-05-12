@@ -141,14 +141,15 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		if(e.getActionCommand().equals("Select") && row>=0){
 			controller.loadPlan((String) tblSavedPlans.getValueAt(row, 0));
 			this.dispose();
+			final MaintainPlan inst = new MaintainPlan(controller);
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					MaintainPlan inst = new MaintainPlan(controller);
 					inst.setSelf(inst);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}
 			});
+			inst.regenerateTrees();
 		}
 		else if(e.getActionCommand().equals("Delete") && row>=0){
 			controller.deletePlan((String) tblSavedPlans.getValueAt(row, 0));

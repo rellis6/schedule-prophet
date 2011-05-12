@@ -113,7 +113,9 @@ public class UserPlanDAO {
 					String completed = course.getAttribute("completed");
 					String grade = course.getAttribute("grade");
 					String notes = course.getAttribute("notes");
-					
+					if(cpd.getCourse(courseID)==null){
+						continue;
+					}
 					Course formalCourse = new Course(cpd.getCourse(courseID));
 					formalCourse.setGrade(grade);
 					formalCourse.setNotes(notes);

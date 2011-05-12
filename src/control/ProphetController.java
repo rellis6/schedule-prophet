@@ -335,7 +335,7 @@ public class ProphetController {
 		ArrayList<String> needed = new ArrayList<String>();
 		
 		for(Course course: plan.getCourses()){
-			if(needed.contains(course.getCategory()))
+			if(!needed.contains(course.getCategory()))
 				needed.add(course.getCategory());
 		}
 		return needed;
