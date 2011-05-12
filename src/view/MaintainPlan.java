@@ -40,7 +40,7 @@ import control.ProphetController;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
-	private boolean EXPORT_ENABLED=false;
+	private boolean EXPORT_ENABLED=true;
 	private Object o1;
 	private Object o2;
 	
@@ -379,7 +379,13 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						courses[j]=courseList.get(j).getCourseID();
 					}
 					for(int j=0; j<courses.length; j++){
-						course = new DefaultMutableTreeNode(courses[j]);
+						System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID()));
+						if(controller.meetsPrereqs(courseList.get(j).getCourseID())){
+							course = new DefaultMutableTreeNode(courses[j]);
+						}
+						else{
+							course = new DefaultMutableTreeNode(courses[j]+" (needs prerequisites)");
+						}
 						semester.add(course);
 					}
 				}
@@ -594,7 +600,14 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					courses[j]=courseList.get(j).getCourseID();
 				}
 				for(int j=0; j<courses.length; j++){
-					course = new DefaultMutableTreeNode(courses[j]);
+					System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID()));
+					System.out.println(courseList.get(j).getCourseID());
+					if(controller.meetsPrereqs(courseList.get(j).getCourseID())){
+						course = new DefaultMutableTreeNode(courses[j]);
+					}
+					else{
+						course = new DefaultMutableTreeNode(courses[j]+" (needs prerequisites)");
+					}
 					semester.add(course);
 				}
 			}
