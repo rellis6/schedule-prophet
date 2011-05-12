@@ -242,13 +242,18 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				completedScrollPane.setBounds(10, 69, 361, 211);
 				treeCompletedCourses.setBounds(10, 40, 361, 240);
 			}
-			{//TODO add categories by requirement
+			{
 				DefaultMutableTreeNode needed = new DefaultMutableTreeNode("Courses Needed");
 				
 				DefaultMutableTreeNode category = null;
 				DefaultMutableTreeNode course = null;
 				
 				ArrayList<Requirement> requirementsList = controller.getRequirements();
+				ArrayList<Course> futureList = controller.getFutureCourses();
+				ArrayList<Course> temp = controller.getCompletedCourses();
+				for(int i=0; i<temp.size(); i++){
+					futureList.add(temp.get(i));
+				}
 				for(int i=0; i<requirementsList.size(); i++){
 					Requirement requirement = requirementsList.get(i);
 					if(requirement instanceof AbsoluteRequirement){
@@ -257,6 +262,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						needed.add(category);
 						for(int j=0; j<courses.size(); j++){
 							String name = courses.get(j).getCourseID();
+							for(int k=0; k<futureList.size(); k++){
+								if(futureList.get(k).equals(courses.get(j))){
+									name=name.concat(" (planned)");
+									break;
+								}
+							}
 							course = new DefaultMutableTreeNode(name);
 							category.add(course);
 						}
@@ -268,6 +279,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						needed.add(category);
 						for(int j=0; j<courses.size(); j++){
 							String name = courses.get(j).getCourseID();
+							for(int k=0; k<futureList.size(); k++){
+								if(futureList.get(k).equals(courses.get(j))){
+									name=name.concat(" (planned)");
+									break;
+								}
+							}
 							course = new DefaultMutableTreeNode(name);
 							category.add(course);
 						}
@@ -279,86 +296,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						needed.add(category);
 						for(int j=0; j<courses.size(); j++){
 							String name = courses.get(j).getCourseID();
+							for(int k=0; k<futureList.size(); k++){
+								if(futureList.get(k).equals(courses.get(j))){
+									name=name.concat(" (planned)");
+									break;
+								}
+							}
 							course = new DefaultMutableTreeNode(name);
 							category.add(course);
 						}
 					}
 				}
-				/*ArrayList<Course> courses = controller.getUnplannedCourses();//.getCourseList();
-				ArrayList<Course> futureList = controller.getFutureCourses();
-				ArrayList<Course> courseList = new ArrayList<Course>();
-				for(int i=0; i<courses.size(); i++){
-					if(!futureList.contains(courses.get(i))){
-						courseList.add(courses.get(i));
-					}
-				}
-				ArrayList<String> categories = new ArrayList<String>();
-				for(int i=0; i<courseList.size(); i++){
-					System.out.println(courseList.get(i).getCategory());
-					if(!categories.contains(courseList.get(i).getCategory())){
-						categories.add(courseList.get(i).getCategory());
-					}
-				}
-				for(int i=0; i<categories.size(); i++){
-					category = new DefaultMutableTreeNode(categories.get(i));
-					needed.add(category);
-					ArrayList<Course> tempCourses=new ArrayList<Course>();
-					for(int j=0; j<courseList.size(); j++){
-						if(courseList.get(j).getCategory().equals(categories.get(i))){
-							tempCourses.add(courseList.get(j));
-						}
-					}
-					for(int j=0; j<tempCourses.size(); j++){
-						course = new DefaultMutableTreeNode(tempCourses.get(j).getCourseID());
-						needed.add(course);
-					}
-				}*/
-				/*
-				String[] categories = controller.getNeededCategories();//FIXED  getNeededCategories is unimplemented and returns null
-				for(int i=0; i<categories.length; i++){
-					category = new DefaultMutableTreeNode(categories[i]);
-					needed.add(category);
-					ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);//RESOLVED  getCourseList returns all courses completed or planned
-					ArrayList<Course> courseList=new ArrayList<Course>();
-					for(int j=0; j<tempCourses.size(); j++){
-						if(tempCourses.get(j).getCategory().equals(categories[i])){
-							courseList.add(tempCourses.get(j));
-						}
-					}
-					String[] courses = new String[courseList.size()];
-					for(int j=0; j<courseList.size(); j++){
-						courses[j]=courseList.get(j).getCourseID();
-					}
-					for(int j=0; j<courses.length; j++){
-						course = new DefaultMutableTreeNode(courses[j]);
-						category.add(course);
-					}
-				}*/
-				/*
-				String[] categories = controller.getNeededCategories();//unimplemented, returns null
-				for(int i=0; i<categories.length; i++){
-					category = new DefaultMutableTreeNode(categories[i]);
-					needed.add(category);
-					ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);//getCourseList returns all courses completed or planned
-					String[] courses = new String[tempCourses.size()];
-					for(int j=0; j<tempCourses.size(); j++){
-						courses[j]=tempCourses.get(j).getCourseID();
-					}
-					for(int j=0; j<courses.length; j++){
-						course = new DefaultMutableTreeNode(courses[j]);
-						category.add(course);
-					}
-				}*/
-				/*
-				ArrayList<Course> categories = controller.getCourseList("bla");
-				for(int i=0; i<1; i++){
-					category = new DefaultMutableTreeNode("Needed courses");
-					needed.add(category);
-					for(int j=0; j<categories.size(); j++){
-						course = new DefaultMutableTreeNode(categories.get(j).getCourseID());
-						category.add(course);
-					}
-				}*/
 				
 				treeNeededCourses = new JTree(needed);
 				neededScrollPane = new JScrollPane(treeNeededCourses);
@@ -513,6 +461,11 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			DefaultMutableTreeNode course = null;
 			
 			ArrayList<Requirement> requirementsList = controller.getRequirements();
+			ArrayList<Course> futureList = controller.getFutureCourses();
+			ArrayList<Course> temp = controller.getCompletedCourses();
+			for(int i=0; i<temp.size(); i++){
+				futureList.add(temp.get(i));
+			}
 			for(int i=0; i<requirementsList.size(); i++){
 				Requirement requirement = requirementsList.get(i);
 				if(requirement instanceof AbsoluteRequirement){
@@ -521,6 +474,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					needed.add(category);
 					for(int j=0; j<courses.size(); j++){
 						String name = courses.get(j).getCourseID();
+						for(int k=0; k<futureList.size(); k++){
+							if(futureList.get(k).equals(courses.get(j))){
+								name=name.concat(" (planned)");
+								break;
+							}
+						}
 						course = new DefaultMutableTreeNode(name);
 						category.add(course);
 					}
@@ -532,6 +491,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					needed.add(category);
 					for(int j=0; j<courses.size(); j++){
 						String name = courses.get(j).getCourseID();
+						for(int k=0; k<futureList.size(); k++){
+							if(futureList.get(k).equals(courses.get(j))){
+								name=name.concat(" (planned)");
+								break;
+							}
+						}
 						course = new DefaultMutableTreeNode(name);
 						category.add(course);
 					}
@@ -543,113 +508,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					needed.add(category);
 					for(int j=0; j<courses.size(); j++){
 						String name = courses.get(j).getCourseID();
+						for(int k=0; k<futureList.size(); k++){
+							if(futureList.get(k).equals(courses.get(j))){
+								name=name.concat(" (planned)");
+								break;
+							}
+						}
 						course = new DefaultMutableTreeNode(name);
 						category.add(course);
 					}
 				}
 			}
-			/*ArrayList<Course> courses = controller.getCourseList();
-			ArrayList<Course> futureList = controller.getFutureCourses();
-			System.out.println(futureList.size());
-			ArrayList<Course> courseList = new ArrayList<Course>();
-			for(int i=0; i<courses.size(); i++){
-				if(!futureList.contains(courses.get(i))){
-					courseList.add(courses.get(i));
-				}
-			}
-			for(int i=0; i<courseList.size(); i++){
-				course = new DefaultMutableTreeNode(courseList.get(i).getCourseID());
-				needed.add(course);
-			}
-			/*ArrayList<Course> courses = controller.getCourseList();
-			ArrayList<Course> futureList = controller.getFutureCourses();
-			for(int i=0; i<futureList.size(); i++){
-				for(int j=0; j<courses.size(); j++){
-					if(futureList.get(i).equals(courses.get(j))){
-						courses.remove(j);
-						break;
-					}
-				}
-			}
-			for(int i=0; i<courses.size(); i++){
-				course = new DefaultMutableTreeNode(courses.get(i).getCourseID());
-				needed.add(course);
-			}
-			/*
-			ArrayList<Course> courses = controller.getUnplannedCourses();//.getCourseList();
-			ArrayList<Course> futureList = controller.getFutureCourses();
-			ArrayList<Course> courseList = new ArrayList<Course>();
-			for(int i=0; i<courses.size(); i++){
-				if(!futureList.contains(courses.get(i))){
-					courseList.add(courses.get(i));
-				}
-			}
-			ArrayList<String> categories = new ArrayList<String>();
-			for(int i=0; i<courseList.size(); i++){
-				if(!categories.contains(courseList.get(i).getCategory())){
-					categories.add(courseList.get(i).getCategory());
-				}
-			}
-			for(int i=0; i<categories.size(); i++){
-				category = new DefaultMutableTreeNode(categories.get(i));
-				needed.add(category);
-				ArrayList<Course> tempCourses=new ArrayList<Course>();
-				for(int j=0; j<courseList.size(); j++){
-					if(courseList.get(j).getCategory().equals(categories.get(i))){
-						tempCourses.add(courseList.get(j));
-					}
-				}
-				for(int j=0; j<tempCourses.size(); j++){
-					course = new DefaultMutableTreeNode(tempCourses.get(j).getCourseID());
-					needed.add(course);
-				}
-			}*/
-			/*
-			String[] categories = controller.getNeededCategories();//FIXED  getNeededCategories is unimplemented and returns null
-			for(int i=0; i<categories.length; i++){
-				category = new DefaultMutableTreeNode(categories[i]);
-				needed.add(category);
-				ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);//RESOLVED  getCourseList returns all courses completed or planned
-				ArrayList<Course> courseList=new ArrayList<Course>();
-				for(int j=0; j<tempCourses.size(); j++){
-					if(tempCourses.get(j).getCategory().equals(categories[i])){
-						courseList.add(tempCourses.get(j));
-					}
-				}
-				String[] courses = new String[courseList.size()];
-				for(int j=0; j<courseList.size(); j++){
-					courses[j]=courseList.get(j).getCourseID();
-				}
-				for(int j=0; j<courses.length; j++){
-					course = new DefaultMutableTreeNode(courses[j]);
-					category.add(course);
-				}
-			}*/
-			/*
-			String[] categories = controller.getNeededCategories();//unimplemented, returns null
-			for(int i=0; i<categories.length; i++){
-				category = new DefaultMutableTreeNode(categories[i]);
-				needed.add(category);
-				ArrayList<Course> tempCourses = controller.getCourseList(categories[i]);//getCourseList returns all courses completed or planned
-				String[] courses = new String[tempCourses.size()];
-				for(int j=0; j<tempCourses.size(); j++){
-					courses[j]=tempCourses.get(j).getCourseID();
-				}
-				for(int j=0; j<courses.length; j++){
-					course = new DefaultMutableTreeNode(courses[j]);
-					category.add(course);
-				}
-			}*/
-			/*
-			ArrayList<Course> categories = controller.getCourseList("bla");
-			for(int i=0; i<1; i++){
-				category = new DefaultMutableTreeNode("Needed courses");
-				needed.add(category);
-				for(int j=0; j<categories.size(); j++){
-					course = new DefaultMutableTreeNode(categories.get(j).getCourseID());
-					category.add(course);
-				}
-			}*/
 			
 			treeNeededCourses = new JTree(needed);
 			neededScrollPane = new JScrollPane(treeNeededCourses);
