@@ -165,6 +165,7 @@ public class CoursePathDAO {
 			
 		ArrayList<Track> track = new ArrayList<Track>();
 		
+		track.add(getTrack("General Education Program"));
 		if(name.equals("Computer Science Major")){
 			track.add(getTrack("Computer Science Major"));
 		} else if(name.equals("Information Systems Major")){
@@ -261,6 +262,9 @@ public class CoursePathDAO {
 			} else if (track.equals("Computer Science Minor")) {
 				// Open the cs minor track XML file
 				trackFile = new File("src/data/cs_minor_reqs.xml");
+			} else if (track.equals("General Education Program")) {
+				// Open the gep track XML file
+				trackFile = new File("src/data/gep_reqs.xml");
 			}
 			// Create new instances of DocumentBuilder, DocumentBuilderFactory,
 			// and create the DOM out of the selected trackfile
