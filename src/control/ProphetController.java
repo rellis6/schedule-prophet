@@ -342,14 +342,14 @@ public class ProphetController {
 		return plan.getCourses();
 	}
 
-	public boolean meetsPrereqs(String CourseID){
-		ArrayList<Course> CourseList = new ArrayList<Course>();
-		Course test = new Course(CourseID, "", 0, "", "", "");
-		for(Course cur: CourseList){
-			if(cur.equals(test))
-				test = cur;
-		}
-		if(plan.meetsPrereqs(test).size() == 0)
+	/**
+	 * 
+	 * @param CourseID
+	 * @return
+	 */
+	public boolean meetsPrereqs(String CourseID, String season, int year){
+		
+		if(plan.meetsPrereqs(plan.getCourse(CourseID, season, year)).size() == 0)
 			return true;
 		else
 			return false;
