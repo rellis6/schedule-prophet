@@ -20,8 +20,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import model.AbsoluteRequirement;
 import model.Course;
+import model.FlexibleRequirement;
+import model.FlexibleRequirementSet;
 import model.NonExistentCourseException;
+import model.Requirement;
 import model.Semester;
 
 import control.ProphetController;
@@ -478,12 +482,48 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			completedScrollPane.setBounds(10, 69, 361, 211);
 			treeCompletedCourses.setBounds(10, 40, 361, 240);
 		}
-		{//TODO add categories by requirement
+		{
 			DefaultMutableTreeNode needed = new DefaultMutableTreeNode("Courses Needed");
 			
 			DefaultMutableTreeNode category = null;
 			DefaultMutableTreeNode course = null;
 			
+			ArrayList<Requirement> requirementsList = controller.getRequirements();
+			for(int i=0; i<requirementsList.size(); i++){
+				Requirement requirement = requirementsList.get(i);
+				if(requirement instanceof AbsoluteRequirement){
+					requirement=(AbsoluteRequirement)requirement;
+					ArrayList<Course> courses=requirement.getRequirements();
+					category = new DefaultMutableTreeNode("Take all of these:");
+					for(int j=0; j<courses.size(); j++){
+						String name = courses.get(j).getCourseID();
+						course = new DefaultMutableTreeNode(name);
+						category.add(course);
+					}
+				}
+				else if(requirement instanceof FlexibleRequirement){
+					requirement=(FlexibleRequirement)requirement;
+					ArrayList<Course> courses=requirement.getRequirements();
+					String title = "Take all of these:";
+					category = new DefaultMutableTreeNode(title);
+					for(int j=0; j<courses.size(); j++){
+						String name = courses.get(j).getCourseID();
+						course = new DefaultMutableTreeNode(name);
+						category.add(course);
+					}
+				}
+				else if(requirement instanceof FlexibleRequirementSet){
+					requirement=(FlexibleRequirementSet)requirement;
+					ArrayList<Course> courses=requirement.getRequirements();
+					String title = "Take all of these:";
+					category = new DefaultMutableTreeNode(title);
+					for(int j=0; j<courses.size(); j++){
+						String name = courses.get(j).getCourseID();
+						course = new DefaultMutableTreeNode(name);
+						category.add(course);
+					}
+				}
+			}
 			ArrayList<Course> courses = controller.getCourseList();
 			ArrayList<Course> futureList = controller.getFutureCourses();
 			System.out.println(futureList.size());
@@ -495,6 +535,20 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			}
 			for(int i=0; i<courseList.size(); i++){
 				course = new DefaultMutableTreeNode(courseList.get(i).getCourseID());
+				needed.add(course);
+			}
+			/*ArrayList<Course> courses = controller.getCourseList();
+			ArrayList<Course> futureList = controller.getFutureCourses();
+			for(int i=0; i<futureList.size(); i++){
+				for(int j=0; j<courses.size(); j++){
+					if(futureList.get(i).equals(courses.get(j))){
+						courses.remove(j);
+						break;
+					}
+				}
+			}
+			for(int i=0; i<courses.size(); i++){
+				course = new DefaultMutableTreeNode(courses.get(i).getCourseID());
 				needed.add(course);
 			}
 			/*
