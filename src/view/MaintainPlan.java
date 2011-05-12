@@ -379,8 +379,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						courses[j]=courseList.get(j).getCourseID();
 					}
 					for(int j=0; j<courses.length; j++){
-						System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID()));
-						if(controller.meetsPrereqs(courseList.get(j).getCourseID())){
+						System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear()));
+						if(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear())){
 							course = new DefaultMutableTreeNode(courses[j]);
 						}
 						else{
@@ -600,9 +600,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					courses[j]=courseList.get(j).getCourseID();
 				}
 				for(int j=0; j<courses.length; j++){
-					System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID()));
+					System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear()));
 					System.out.println(courseList.get(j).getCourseID());
-					if(controller.meetsPrereqs(courseList.get(j).getCourseID())){
+					if(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear())){
 						course = new DefaultMutableTreeNode(courses[j]);
 					}
 					else{
