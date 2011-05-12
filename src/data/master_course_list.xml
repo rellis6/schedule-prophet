@@ -58,7 +58,9 @@ introduced. Students will be taught the basic use of a programming environment a
 </course>
 <course id="CMSC345" name="Software Design and Development" satisfies="WI">
 	<description>This course introduces the basic concepts of software engineering, including software life cycle, requirements analysis and software design methods. Professional ethics in computer science and the social impact of computing are discussed as an integral part of the software development process. Additional topics may include tools for software development, software testing, software metrics and software maintenance.</description>
-	<prerequisites/>
+	<prerequisites>
+	<prerequisite>CMSC341</prerequisite>
+	</prerequisites>
 </course>
 <course id="CMSC411" name="Computer Architecture">
 	<description>This course covers the design of complex computer systems making heavy use of the components and techniques discussed in CMSC 313, CMPE 212 and CMPE 310. All parts of the computer system - CPU, memory and input/output - are discussed in detail. Topics include information representation, floating-point arithmetic, instructions set design issues (RISC vs. CISC), microprogrammed control, hardwired control, pipelining, memory cashes, bus control and timing,input/output mechanism and issues in the construction of parallel processors.</description>
