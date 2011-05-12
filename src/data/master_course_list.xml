@@ -323,9 +323,12 @@ introduced. Students will be taught the basic use of a programming environment a
 </course>
 <course id="MATH151" name="Calculus and Analytic Geometry I" satisfies="M">
 	<description>Topics of this course include limits, continuity, the rate of change, derivatives, differentiations formulas for algebraic and trigonometric functions, maxima and minima, integration and computation of areas. Areas and volumes of solids of revolution, applications.   Note: Non-science oriented students should consider Math 155.  Credit will not be given for both Math 151 and Math 155.</description>
-	<prerequisites>
+	<prerequisites/>
+	<!-- 
+		<prerequisites>
 		<prerequisite>MATH150(C)</prerequisite>
 	</prerequisites>
+	-->
 </course>
 <course id="MATH152" name="Calculus and Analytic Geometry II" satisfies="M">
 	<description>Topics of this course include logarithmic and exponential functions, inverse functions, methods of integration, improper integrals, hyperbolic functions, sequences and infinite series, power series, Taylor series, applications, conic sections and polar coordinates.</description>
