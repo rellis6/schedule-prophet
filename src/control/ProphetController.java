@@ -282,8 +282,25 @@ public class ProphetController {
 	public ArrayList<Course> getFutureCourses(){
 		ArrayList<Course> future = new ArrayList<Course>();
 		
-		//iterates through all completed semesters
+		//iterates through all future semesters
 		for(Semester curSem: getFutureSemesters()){
+			for(Course course: curSem.getClasses())
+				future.add(course);
+		}
+		
+		return future;
+	}
+	
+	/**
+	 * Name: getFutureCourses()
+	 * Precondition(s): Plan plan is initialized
+	 * @return an ArrayList<Course> of completed courses in the current plan
+	 */
+	public ArrayList<Course> getCompletedCourses(){
+		ArrayList<Course> future = new ArrayList<Course>();
+		
+		//iterates through all completed semesters
+		for(Semester curSem: getCompletedSemesters()){
 			for(Course course: curSem.getClasses())
 				future.add(course);
 		}
