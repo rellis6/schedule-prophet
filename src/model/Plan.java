@@ -87,6 +87,9 @@ public class Plan {
 	 * to a semester already created in this Plan.
 	 */
 	public void addCourse(Course course, String season, int year) throws NonExistentSemesterException {
+		//if prereqs not met, don't add
+		//if(meetsPrereqs(course).size() > 0)
+		//	return;
 		getSemester(season, year).addCourse(course);
 		totalCredits += course.getCredits();
 	}
