@@ -56,6 +56,10 @@ public class FlexibleRequirement extends Requirement {
 		} 
 		return fulfillingCourses;
 	}
+	
+	public int getNumNeeded(){
+		return numToTake;
+	}
 
 	/**
 	 * @param args

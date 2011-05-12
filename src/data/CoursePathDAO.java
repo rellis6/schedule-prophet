@@ -441,7 +441,8 @@ public class CoursePathDAO {
 								  // In short, this method references the information in the catalog that
 								  // isn't in the major files (like description, name, etc) and fills
 								  // in the track-specific info. --Katherine
-
+		//System.out.println(c);
+		//System.out.println(id);
 		course = new Course(id, "", "", grade, 0/*c.getCredits()*/, c.getCourseTitle(), c.getCategory(), c.getDescription());
 
 		return course;
