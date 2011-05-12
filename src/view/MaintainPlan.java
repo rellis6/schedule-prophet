@@ -197,8 +197,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				cmdMarkSemesterUncomplete.addActionListener(this);
 			}
 			{
-				DefaultMutableTreeNode completed =
-			        new DefaultMutableTreeNode("Completed Courses");
+				DefaultMutableTreeNode completed = new DefaultMutableTreeNode("Completed Courses");
 				
 				DefaultMutableTreeNode semester = null;
 				DefaultMutableTreeNode course = null;
@@ -209,11 +208,17 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					completed.add(semester);
-					ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
+					ArrayList<Course> tempCourses = controller.getCourseList();
 					ArrayList<Course> completedCourses=new ArrayList<Course>();
 					for(int j=0; j<tempCourses.size(); j++){
-						if(tempCourses.get(j).getCourseID().equals(temp)){
+						if(completedCourses.contains(tempCourses.get(j))){
+							continue;
+						}
+						try {
+							semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 							completedCourses.add(tempCourses.get(j));
+						} catch (NonExistentCourseException e) {
+							//e.printStackTrace();
 						}
 					}
 					String[] courses = new String[completedCourses.size()];
@@ -231,11 +236,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				treeCompletedCourses.setFont(new java.awt.Font("Tahoma",0,14));
 				getContentPane().add(completedScrollPane);
 				completedScrollPane.setBounds(10, 69, 361, 211);
-				//treeCompletedCourses.setBounds(10, 40, 361, 240);
-				o1=treeCompletedCourses;
-				
+				treeCompletedCourses.setBounds(10, 40, 361, 240);
 			}
-			{
+			{//TODO add categories by requirement
 				DefaultMutableTreeNode needed = new DefaultMutableTreeNode("Courses Needed");
 				
 				DefaultMutableTreeNode category = null;
@@ -367,19 +370,25 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					temp=temp.concat(Integer.toString(semesters.get(i).getYear()));
 					semester = new DefaultMutableTreeNode(temp);
 					future.add(semester);
-					ArrayList<Course> tempCourses = controller.getCourseList();//RESOLVED  getCourseList returns all courses completed or planned, regardless of what temp is.
+					ArrayList<Course> tempCourses = controller.getFutureCourses();
 					ArrayList<Course> courseList=new ArrayList<Course>();
 					for(int j=0; j<tempCourses.size(); j++){
-						if(tempCourses.get(j).getCourseID().equals(temp)){
+						if(courseList.contains(tempCourses.get(j))){
+							continue;
+						}
+						try {
+							semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 							courseList.add(tempCourses.get(j));
+						} catch (NonExistentCourseException e) {
+							//e.printStackTrace();
 						}
 					}
+					//System.out.println(tempCourses);
 					String[] courses = new String[courseList.size()];
 					for(int j=0; j<courseList.size(); j++){
 						courses[j]=courseList.get(j).getCourseID();
 					}
 					for(int j=0; j<courses.length; j++){
-						System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear()));
 						if(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear())){
 							course = new DefaultMutableTreeNode(courses[j]);
 						}
@@ -396,8 +405,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				futureScrollPane.setBounds(381, 70, 359, 459);
 				treeFuturePlan.setFont(new java.awt.Font("Tahoma",0,14));
 				treeFuturePlan.setSize(357, 450);
-
-
 			}
 			{
 				cmdMarkSemesterComplete = new JButton();
@@ -444,6 +451,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				ArrayList<Course> tempCourses = controller.getCourseList();
 				ArrayList<Course> completedCourses=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
+					if(completedCourses.contains(tempCourses.get(j))){
+						continue;
+					}
 					try {
 						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						completedCourses.add(tempCourses.get(j));
@@ -467,9 +477,8 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			getContentPane().add(completedScrollPane);
 			completedScrollPane.setBounds(10, 69, 361, 211);
 			treeCompletedCourses.setBounds(10, 40, 361, 240);
-			o2=treeCompletedCourses;
 		}
-		{
+		{//TODO add categories by requirement
 			DefaultMutableTreeNode needed = new DefaultMutableTreeNode("Courses Needed");
 			
 			DefaultMutableTreeNode category = null;
@@ -587,6 +596,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				ArrayList<Course> tempCourses = controller.getFutureCourses();
 				ArrayList<Course> courseList=new ArrayList<Course>();
 				for(int j=0; j<tempCourses.size(); j++){
+					if(courseList.contains(tempCourses.get(j))){
+						continue;
+					}
 					try {
 						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						courseList.add(tempCourses.get(j));
@@ -594,14 +606,12 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						//e.printStackTrace();
 					}
 				}
-				//System.out.println(tempCourses.size());
+				//System.out.println(tempCourses);
 				String[] courses = new String[courseList.size()];
 				for(int j=0; j<courseList.size(); j++){
 					courses[j]=courseList.get(j).getCourseID();
 				}
 				for(int j=0; j<courses.length; j++){
-					System.out.println(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear()));
-					System.out.println(courseList.get(j).getCourseID());
 					if(controller.meetsPrereqs(courseList.get(j).getCourseID(), semesters.get(i).getSeason(), semesters.get(i).getYear())){
 						course = new DefaultMutableTreeNode(courses[j]);
 					}
