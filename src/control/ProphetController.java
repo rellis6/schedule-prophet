@@ -381,10 +381,15 @@ public class ProphetController {
 
 	
 	/**
-	 * not currently implemented
+	 * Name: exportPlan()
+	 * Precondition(s): Plan plan is initialized
+	 * Postcondition(s): Exports the current plan to a CSV file on the users desktop.    
 	 */
 	public void exportPlan() {
-		// TODO Auto-generated method stub
+		
+		System.out.println(plan.getName());
+		planDAO = new UserPlanDAO(plan.getName());
+		planDAO.exportPlan(plan);
 		
 	}
 

@@ -356,7 +356,7 @@ public class UserPlanDAO {
 	 * ReUse code from regular saving to XML with format changes for CSV instead of XML.
 	 * @param planName Name of the user plan file.
 	 * @author g00gle
-	 * NOT DONE YET.
+	 * 
 	 */	
 	public void exportPlan(Plan plan)
 	{
@@ -401,6 +401,7 @@ public class UserPlanDAO {
 	private String semesterToCSV(Semester s) {
 		String str = "";
 	    ArrayList<Course> courses = s.getClasses();
+	    str = str + "Semester: ," + s.getSeason() + "," + s.getYear() + "," + courses.size() + " courses:, \n";
 	    for (int i = 0; i < courses.size(); i++) {
 	    	Course c = courses.get(i);
 	        str = str + courseToCSV(c.getCourseID(), s.getSeason(), String.valueOf(s.getYear()), s.isCompleted(), c.getGrade(), c.getNotes());
@@ -419,17 +420,14 @@ public class UserPlanDAO {
 		 * @return The string containing the CSV tag
 		 * @author g00gle
 		 * 
-		 * THIS NEEDS TO BE UPDATED STILL
 		 */
 	private String courseToCSV(String id, String season, String year, boolean completed, String grade, String notes) {
 		String str = "";
-		str = str + "<course id=\"" + id; 
-		str = str + "\" season=\"" + season;
-		str = str + "\" year=\"" + year;
-		str = str + "\" grade=\"" + grade;
-		str = str + "\" completed=\"" + completed;
-		str = str + "\" notes=\"" + notes;
-		str = str + "\"/>\n";
+		str = str + "Course:," + id + ","; 
+		str = str + "Grade:," + grade + ",";
+		str = str + "Completed:," + completed + ",";
+		str = str + "Notes:," + notes + ",";
+		str = str + "\n";
 		return str;
 	}
 }
