@@ -132,7 +132,22 @@ public class UserPlanDAO {
 						
 						Semester newSemester = new Semester(season, Integer.parseInt(year));
 						if (completed.equals("true")) {
-							newSemester.setCompleted(true);
+							newSemester.setCompleted(true);//TODO This doesn't seem to work
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
+							//TODO
 						}
 						newSemester.addCourse(formalCourse);
 						planSemesters.add(newSemester);
@@ -146,7 +161,22 @@ public class UserPlanDAO {
 							// Then create a new semester and add the course
 							Semester newSemester = new Semester(season, Integer.parseInt(year));
 							if (completed.equals("true")) {
-								newSemester.setCompleted(true);
+								newSemester.setCompleted(true);//TODO This doesn't seem to work
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
+								//TODO
 							}
 							newSemester.addCourse(formalCourse);
 							planSemesters.add(newSemester);
