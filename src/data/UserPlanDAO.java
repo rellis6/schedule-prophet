@@ -114,6 +114,17 @@ public class UserPlanDAO {
 					String grade = course.getAttribute("grade");
 					String notes = course.getAttribute("notes");
 					if(cpd.getCourse(courseID)==null){
+						if (planSemesters.size() == 0) {
+							// Then create a new semester and add the course
+							System.out.println("YEAR: " + year);
+							//TODO year is an empty string, cannot be cast to an int
+							
+							Semester newSemester = new Semester(season, Integer.parseInt(year));
+							if (completed.equals("true")) {
+								newSemester.setCompleted(true);
+							}
+							planSemesters.add(newSemester);
+						}
 						continue;
 					}
 					Course formalCourse = new Course(cpd.getCourse(courseID));
