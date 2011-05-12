@@ -131,6 +131,9 @@ public class UserPlanDAO {
 						//TODO year is an empty string, cannot be cast to an int
 						
 						Semester newSemester = new Semester(season, Integer.parseInt(year));
+						System.out.println(completed);
+						System.out.println(completed.equals("true"));
+						System.out.println();
 						if (completed.equals("true")) {
 							newSemester.setCompleted(true);//TODO This doesn't seem to work
 							//TODO
@@ -160,6 +163,9 @@ public class UserPlanDAO {
 						} else {
 							// Then create a new semester and add the course
 							Semester newSemester = new Semester(season, Integer.parseInt(year));
+							System.out.println(completed);
+							System.out.println(completed.equals("true"));
+							System.out.println();
 							if (completed.equals("true")) {
 								newSemester.setCompleted(true);//TODO This doesn't seem to work
 								//TODO

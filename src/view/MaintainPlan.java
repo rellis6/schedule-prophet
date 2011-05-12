@@ -624,7 +624,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			final String needed=neededPath.getPathComponent(2).toString();
 			final String[] future;
 			if(completedPath==null || completedPath.getPathCount()<2){
-				future=null;
+				return;
 			}
 			else{
 				future=completedPath.getPathComponent(1).toString().split(" ");
@@ -690,25 +690,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				});
 			}
 			regenerateTrees();
-			/* lets the user complete semesters out of order, may have bugs
-			TreePath path = treeFuturePlan.getSelectionPath();
-			if(path==null || path.getPathCount()<2){
-				return;
-			}
-			DefaultMutableTreeNode component = (DefaultMutableTreeNode) path.getPathComponent(1);
-			String[] semester=component.toString().split(" ");
-			final ArrayList<String[]> prerequisites=controller.setSemesterCompleted(semester[0], Integer.parseInt(semester[1]), true);
-			if(prerequisites.size()==0){
-				return;
-			}
-			prerequisites.add(semester);
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					AskCompleteSemesters inst = new AskCompleteSemesters(controller, prerequisites, self);
-					inst.setLocationRelativeTo(null);
-					inst.setVisible(true);
-				}
-			});*/
 		}
 		else if(e.getActionCommand().equals("Remove completed")){
 			treeCompletedCourses.setSelectionRow(treeCompletedCourses.getRowCount()-1);
