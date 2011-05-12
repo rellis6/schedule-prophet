@@ -39,9 +39,7 @@ public class ProphetController {
 	 * PostCondition(s): initializes TrackList based on the passed String track
 	 * @param track String name of the chosen academic track
 	 */
-	private void initTrackList(String track){
-		System.out.println("init: " + track);
-		
+	private void initTrackList(String track){		
 		this.TrackList = courseDAO.getTrackCourses(track);
 	}
 	
@@ -65,7 +63,6 @@ public class ProphetController {
 	 * @param name String name of the plan
 	 */
 	public void newPlan(String track, String name){
-		System.out.println("new: " + track);
 		initTrackList(track);
 		this.plan = new Plan(TrackList, name);
 	}
@@ -102,7 +99,6 @@ public class ProphetController {
 	public void addCourse(String courseID, String season, String comments, int year){
 		try {
 			//duplicate course exception?
-			System.out.println("TEST: " + courseDAO.getCourse(courseID).getCourseTitle());
 			plan.addCourse(courseDAO.getCourse(courseID), season, year);
 			for(Semester semester: plan.getSemesters(false)){
 				semester.toString();
@@ -185,7 +181,6 @@ public class ProphetController {
 		//TODO possibly fixed by adding a dummy blank course to each empty semester during the save
 		//TODO and stripping it out during loads
 		
-		System.out.println(plan.getName());
 		Course dummy = new Course("Dummy", "E", 0, "Dummy", "Dummy", "Dummy");
 		ArrayList<Semester> semesters = new ArrayList<Semester>();
 		for(int i=0; i<plan.getSemesters().size(); i++){
@@ -205,12 +200,8 @@ public class ProphetController {
 	 */
 	public void addSemester(String season, int year){
 		if(plan.addSemester(season, year) == false){
-			System.out.println("ADDSEM BAAAAD");
-			//error window
 		}
 		else{
-			System.out.println("ADDSEM ELSE(GOOD)");
-			//success window?
 		}
 	}
 	
