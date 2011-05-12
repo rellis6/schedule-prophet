@@ -45,7 +45,7 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	private String comments;
 	private ProphetController controller;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

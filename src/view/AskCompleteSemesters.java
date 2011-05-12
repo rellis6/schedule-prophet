@@ -41,7 +41,7 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 	private MaintainPlan GUI;
 	private ProphetController controller;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

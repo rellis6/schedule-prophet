@@ -38,7 +38,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdSelectPlan;
 	private JScrollPane scrollPane;
 	private ProphetController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

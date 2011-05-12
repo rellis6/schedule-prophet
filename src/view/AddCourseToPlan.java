@@ -41,7 +41,7 @@ public class AddCourseToPlan extends javax.swing.JFrame implements ActionListene
 	private JScrollPane scrollpaneComments;
 	private ProphetController controller;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

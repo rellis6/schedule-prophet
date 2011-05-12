@@ -32,7 +32,7 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdISMajor;
 	private ProphetController controller;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

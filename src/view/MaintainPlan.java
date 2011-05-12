@@ -74,7 +74,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private MaintainPlan self;
 	private ProphetController controller;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {
