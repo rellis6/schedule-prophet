@@ -29,9 +29,11 @@ public class FlexibleRequirement extends Requirement {
 		setMinCredits(minCredits);
 	}
 	
+	
 	public String toString() {
 		String s = "\nFlexible Requirement\n";
 		s += "Length of Requirements: " + getRequirements().size();
+		s += "Potential courses: " + getRequirements();
 		s += "\nMin Credits: " + getMinCredits();
 		s += "\nNum To Take: " + numToTake + "\n";
 		return s;
@@ -43,17 +45,42 @@ public class FlexibleRequirement extends Requirement {
 	 */
 	@Override
 	public ArrayList<Course> isFulfilled(ArrayList<Course> courseList) {
+		System.out.println("EXAMINING isFulfilled()");
+		System.out.println("was passed courseList: " + courseList);
 		ArrayList<Course> fulfillingCourses = new ArrayList<Course>();
 		int creditCount = 0;
-		for (int i = 0; i < courseList.size(); i++) {
+		for (int i = 0; i < courseList.size(); i++) {		
+			System.out.println("\n------------\nCurrently examining: " + courseList.get(i));
+			// TODO REMOVE
+			for (Course c : getRequirements()) {
+				System.out.println("Comparing" + c + " and " 
+						+ courseList.get(i));
+				System.out.println(".equals()?");
+				System.out.println(c.equals(courseList.get(i)) + "\n");
+				
+				if (c.equals(courseList.get(i))) {
+					fulfillingCourses.add(new Course(courseList.get(i)));
+					creditCount += courseList.get(i).getCredits();
+				}
+			}
+			/*
 			if (getRequirements().contains(courseList.get(i))) {
+				
+
+				
 				fulfillingCourses.add(new Course(courseList.get(i)));
 				creditCount += courseList.get(i).getCredits();
 			}
+			*/
 		}
-		if (fulfillingCourses.size() < numToTake || creditCount < getMinCredits()) {
+		System.out.println("[from isFulfilled() in FlexibleRequirement: ");
+		System.out.println("getRequirements(): " + getRequirements());
+		System.out.println("fulfillingCourses: " + fulfillingCourses);
+		System.out.println("creditCount: " + creditCount);
+		if (fulfillingCourses.size() < numToTake){ //|| creditCount < getMinCredits()) {
 			return new ArrayList<Course>();
 		} 
+		System.out.println("DONE EXAMINING isFulfilled()");
 		return fulfillingCourses;
 	}
 	

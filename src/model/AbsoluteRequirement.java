@@ -25,6 +25,7 @@ public class AbsoluteRequirement extends Requirement {
 	public String toString() {
 		String s = "\nAbsoluteRequirement";
 		s += "\nLength of requirements: " + getRequirements().size();
+		s += "Courses required: " + getRequirements();
 		s += "\nMin Credits: " + getMinCredits();
 		s += "\n";
 		return s;

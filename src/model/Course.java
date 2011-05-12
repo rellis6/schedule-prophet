@@ -209,7 +209,7 @@ public class Course {
 	 * @return this courseID
 	 */
 	public String toString() {
-		return new String(courseID + "\nGrade: " + grade + "\nNotes: " + notes + "\n");
+		return new String(courseID + "\nGrade: " + grade + "\nNotes: " + notes + "\nCredits: " + credits + "\n");
 	}
 	
 	/**
@@ -258,6 +258,21 @@ public class Course {
 	 */
 	public String getDescription() {
 		return description;
+	}
+	
+	public static void main (String[] args) {
+		
+		/*
+		 * 
+		 *	public Course(String courseID, String minPassingGrade,
+		 * int credits, String courseTitle,
+				  String category, String description) {
+		 */
+		Course c1 = new Course("CMSC 201", "B", 4, "title",
+				"CMSC", "description");
+		Course c2 = new Course("CMSC 201", "B", 4, "title",
+				"CMSC", "description");
+		System.out.println(c1.equals(c2));
 	}
 
 }

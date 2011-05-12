@@ -131,12 +131,19 @@ public class Plan {
 	 *  that still need to be fulfilled otherwise
 	 */
 	public ArrayList<Requirement> meetsPrereqs(Course course) {
+		
+		System.out.println("Checking to see if " + course.getCourseID() + 
+				" has met its prereqs.");
+		System.out.println("Prerequisites: ");
+		System.out.println(course.getPreReqs());
+		
 		ArrayList<Requirement> unfulfilledReqs = new ArrayList<Requirement>();
-		ArrayList<Course> courses = getCourses();
+		ArrayList<Course> courses = getTakenAndPlannedCourses();
 		ArrayList<Requirement> courseReqs = course.getPreReqs();
 		
 		for (Requirement req : courseReqs) {
-			if (req.isFulfilled(courses).size() == 0) { // remember that isFulfilled() returns an empty list if it's not fulfilled 
+			if (req.isFulfilled(courses).size() == 0) { // remember that isFulfilled() returns an empty list if it's not fulfilled
+				System.out.println("Adding an unfulfilled requirement!: " + req);
 				unfulfilledReqs.add(req);
 			}
 		}
@@ -163,6 +170,21 @@ public class Plan {
 				if (!courses.contains(course)) {
 					courses.add(course);
 				}
+		return courses;
+	}
+	
+	/**
+	 * Get courses in the user's plan.
+	 * @return
+	 */
+	public ArrayList<Course> getTakenAndPlannedCourses() {
+		ArrayList<Course> courses = new ArrayList<Course>();
+		for (Semester semester : completedSemesters) {
+			courses.addAll(semester.getClasses());
+		}
+		for (Semester semester : futureSemesters) {
+			courses.addAll(semester.getClasses());
+		}
 		return courses;
 	}
 	
