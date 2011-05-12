@@ -31,7 +31,7 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 	private ProphetController controller;
 	//private TestController controller;
 	private String track;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

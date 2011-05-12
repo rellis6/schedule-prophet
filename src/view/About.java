@@ -32,7 +32,7 @@ public class About extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblName;
 	private JButton cmdClose;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {
@@ -64,13 +64,55 @@ public class About extends javax.swing.JFrame implements ActionListener{
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			this.setTitle("Edit Course");
+			this.setTitle("About");
 			getContentPane().setLayout(null);
 			{
 				lblName = new JLabel();
 				getContentPane().add(lblName);
 				lblName.setText("UMBC CS/IS Schedule Prophet");
 				lblName.setBounds(10, 11, 350, 17);
+				lblName.setFont(new java.awt.Font("Tahoma",0,14));
+			}
+			{
+				lblName = new JLabel();
+				getContentPane().add(lblName);
+				lblName.setText("Made by:");
+				lblName.setBounds(10, 39, 350, 17);
+				lblName.setFont(new java.awt.Font("Tahoma",0,14));
+			}
+			{
+				lblName = new JLabel();
+				getContentPane().add(lblName);
+				lblName.setText("Justin Ermer");
+				lblName.setBounds(10, 67, 350, 17);
+				lblName.setFont(new java.awt.Font("Tahoma",0,14));
+			}
+			{
+				lblName = new JLabel();
+				getContentPane().add(lblName);
+				lblName.setText("Mark Pallone");
+				lblName.setBounds(10, 95, 350, 17);
+				lblName.setFont(new java.awt.Font("Tahoma",0,14));
+			}
+			{
+				lblName = new JLabel();
+				getContentPane().add(lblName);
+				lblName.setText("Robert Ellis");
+				lblName.setBounds(10, 123, 350, 17);
+				lblName.setFont(new java.awt.Font("Tahoma",0,14));
+			}
+			{
+				lblName = new JLabel();
+				getContentPane().add(lblName);
+				lblName.setText("John LaCourse");
+				lblName.setBounds(10, 151, 350, 17);
+				lblName.setFont(new java.awt.Font("Tahoma",0,14));
+			}
+			{
+				lblName = new JLabel();
+				getContentPane().add(lblName);
+				lblName.setText("Katherine Miller");
+				lblName.setBounds(10, 179, 350, 17);
 				lblName.setFont(new java.awt.Font("Tahoma",0,14));
 			}
 			{

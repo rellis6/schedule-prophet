@@ -36,7 +36,7 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdCreatePlan;
 	private ProphetController controller;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

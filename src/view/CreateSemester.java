@@ -39,7 +39,7 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 	private MaintainPlan GUI;
 	private ProphetController controller;
 	//private TestController controller;
-	/*
+	
 	{
 		//Set Look & Feel
 		try {

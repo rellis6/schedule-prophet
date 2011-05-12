@@ -47,7 +47,7 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
         private MaintainPlan GUI;
         private ProphetController controller;
         //private TestController controller;
-        /*
+        
         {
                 //Set Look & Feel
                 try {
