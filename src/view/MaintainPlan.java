@@ -749,10 +749,10 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		else if(e.getActionCommand().equals("Add completed")){
 			TreePath neededPath = treeNeededCourses.getSelectionPath();
 			TreePath completedPath = treeCompletedCourses.getSelectionPath();
-			if(neededPath==null || neededPath.getPathCount()<2){
+			if(neededPath==null || neededPath.getPathCount()<3){
 				return;
 			}
-			final String needed=neededPath.getPathComponent(1).toString();
+			final String needed=neededPath.getPathComponent(2).toString();
 			final String[] future;
 			if(completedPath==null || completedPath.getPathCount()<2){
 				future=null;
@@ -788,10 +788,10 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			TreePath futurePath = treeFuturePlan.getSelectionPath();
 			//System.out.println(neededPath.getPathCount());
 			//System.out.println(futurePath.getPathCount());
-			if(neededPath==null || futurePath==null || neededPath.getPathCount()<2 || futurePath.getPathCount()<2){
+			if(neededPath==null || futurePath==null || neededPath.getPathCount()<3 || futurePath.getPathCount()<2){
 				return;
 			}
-			String needed=neededPath.getPathComponent(1).toString();
+			String needed=neededPath.getPathComponent(2).toString();
 			String[] future=futurePath.getPathComponent(1).toString().split(" ");
 			controller.addCourse(needed, future[0], "", Integer.parseInt(future[1]));
 			regenerateTrees();
