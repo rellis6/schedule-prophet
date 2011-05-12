@@ -43,11 +43,13 @@ public class AbsoluteRequirement extends Requirement {
 			courseListCopy.add(new Course(c));
 		}
 		// don't bother with courses that don't meet min grade requirement
+		/*
 		for (Course c : courseListCopy) {
 			if (!c.meetsGradeRequirement()) {
 				courseListCopy.remove(c);
 			}
 		}
+		*/
 		ArrayList<Course> requirements = getRequirements();
 		
 		for (int i = 0; i < requirements.size(); i++) {
