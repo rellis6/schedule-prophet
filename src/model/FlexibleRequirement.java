@@ -46,8 +46,7 @@ public class FlexibleRequirement extends Requirement {
 		ArrayList<Course> fulfillingCourses = new ArrayList<Course>();
 		int creditCount = 0;
 		for (int i = 0; i < courseList.size(); i++) {
-			if (getRequirements().contains(courseList.get(i)) && 
-					courseList.get(i).meetsGradeRequirement()) {
+			if (getRequirements().contains(courseList.get(i))) {
 				fulfillingCourses.add(new Course(courseList.get(i)));
 				creditCount += courseList.get(i).getCredits();
 			}
