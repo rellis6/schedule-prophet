@@ -326,6 +326,19 @@ public class ProphetController {
 		return plan.getCourses();
 	}
 
+	public boolean meetsPrereqs(String CourseID){
+		ArrayList<Course> CourseList = new ArrayList<Course>();
+		Course test = new Course(CourseID, "", 0, "", "", "");
+		for(Course cur: CourseList){
+			if(cur.equals(test))
+				test = cur;
+		}
+		if(plan.meetsPrereqs(test).size() == 0)
+			return true;
+		else
+			return false;
+	}
+	
 	/**
 	 * Name: getNeededCategories()
 	 * Precondition: Plan plan is initialized
