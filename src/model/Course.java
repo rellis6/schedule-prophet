@@ -95,7 +95,7 @@ public class Course {
 	 * @return whether or not these courses are the same
 	 */
 	public boolean equals(Course c) {
-		return this.courseID == c.getCourseID();
+		return this.courseID.equals(c.getCourseID());
 	}
 	
 	/**
