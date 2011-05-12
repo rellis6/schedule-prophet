@@ -125,6 +125,14 @@ public class Track {
 	}
 	
 	/**
+	 * Get the list of requirements for this course.
+	 * @return list of Requirements 
+	 */
+	public ArrayList<Requirement> getRequirements() {
+		return courseRequirements;
+	}
+	
+	/**
 	 * Get a unique list of courses needed by this track.
 	 * 
 	 * @return list of classes needec by this Track. No duplicates in the list

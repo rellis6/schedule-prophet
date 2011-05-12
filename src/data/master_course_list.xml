@@ -7,9 +7,15 @@ introduced. Students will be taught the basic use of a programming environment a
 </course>
 <course id="CMSC201" name="Computer Science I for Majors" credits="4">
 	<description>An introduction to computer science through problem solving and computer programming. Programming techniques covered by this course include modularity, abstraction, top-down design, specifications documentation, debugging and testing. The core material for this course includes control structures, functions, lists, strings, abstract data types, file I/O, and recursion. It is assumed that students already know the basics of a modern high level language such as Java, Python, or C (expressions, basic data types, arrays/lists, and control structures).</description>
+	
+	<!--  
 	<prerequisites>
 		<prerequisite>MATH150(C)</prerequisite>
 	</prerequisites>
+	-->
+	
+	<prerequisites/>
+	
 </course>
 <course id="CMSC202" name="Computer Science II for Majors">
 	<description>This course continues the student's development of programming and problem-solving skills by providing an introduction to object-oriented design and programming (OOP). The primary focus is on OOP principles and techniques, including encapsulation, composition, inheritance, and polymorphism. Other OOP topics such as exception handling, containers, and generic programming are also covered. This is the second course for students interested in pursuing further study in computer science.</description>
