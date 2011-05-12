@@ -103,8 +103,6 @@ public class ProphetController {
 		try {
 			//duplicate course exception?
 			System.out.println("TEST: " + courseDAO.getCourse(courseID).getCourseTitle());
-			System.out.println("\n-----meetsPreReqs(" + courseID + "): " 
-					+ plan.meetsPrereqs(new Course("CMSC 201", "B", 3, "d", "CS", "derp")) + "\n-----");
 			plan.addCourse(courseDAO.getCourse(courseID), season, year);
 			for(Semester semester: plan.getSemesters(false)){
 				semester.toString();
