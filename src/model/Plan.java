@@ -269,8 +269,14 @@ public class Plan {
 			
 			//if none need to be changed, complete
 			if(needChanged.size() == 0){
-				semester.setCompleted(true);
 				
+				//do not complete if a prereq is unfulfilled
+				for(Course course: semester.getClasses()){
+					if(meetsPrereqs(course).size() > 0)
+						return null;
+				}
+				
+				semester.setCompleted(true);
 				futureSemesters.remove(semester);
 				completedSemesters.add(semester);
 			}
