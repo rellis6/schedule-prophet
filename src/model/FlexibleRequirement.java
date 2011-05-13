@@ -16,6 +16,7 @@ public class FlexibleRequirement extends Requirement {
 	
 	/** this number of courses must be taken from courseList */
 	private int numToTake;
+	private String name;
 	
 	
 	/**
@@ -23,10 +24,11 @@ public class FlexibleRequirement extends Requirement {
 	 * @param courseList list of courses that make up this requirement
 	 * @param courseCount how many courses out of courseList need to be taken
 	 */
-	public FlexibleRequirement(ArrayList<Course> courseList, int courseCount, int minCredits) {
+	public FlexibleRequirement(ArrayList<Course> courseList, int courseCount, int minCredits, String name) {
 		setRequirements(courseList);
 		this.numToTake = courseCount;
 		setMinCredits(minCredits);
+		setName(name);
 	}
 	
 	
@@ -88,12 +90,14 @@ public class FlexibleRequirement extends Requirement {
 		return numToTake;
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	
 
 }
