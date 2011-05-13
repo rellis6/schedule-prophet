@@ -141,7 +141,7 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
                         {
                                 ComboBoxModel cbxGradeModel = 
                                         new DefaultComboBoxModel(
-                                                        new String[] { "A", "B", "C", "D", "E", "Pass", "Fail"});
+                                                        new String[] { "A", "B", "C", "D", "E", "Pass", "Fail", "Drop"});
                                 cbxGrade = new JComboBox();
                                 getContentPane().add(cbxGrade);
                                 cbxGrade.setModel(cbxGradeModel);
