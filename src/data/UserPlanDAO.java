@@ -135,6 +135,7 @@ public class UserPlanDAO {
 						System.out.println(completed.equals("true"));
 						System.out.println();
 						if (completed.equals("true")) {
+							System.out.println("hello");
 							newSemester.setCompleted(true);//TODO This doesn't seem to work
 							//TODO
 							//TODO
@@ -194,6 +195,10 @@ public class UserPlanDAO {
 			for (int j = 0; j < planSemesters.size(); j++) {
 				// Need to be able to do this
 				userPlan.addSemester(planSemesters.get(j));
+				if (planSemesters.get(j).isCompleted()) {
+					userPlan.setSemesterCompleted(planSemesters.get(j).getSeason(),
+							planSemesters.get(j).getYear(), planSemesters.get(j).isCompleted());
+				}
 			}
 			
 		} catch (Exception e) {
