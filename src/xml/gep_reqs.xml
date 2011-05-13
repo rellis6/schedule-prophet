@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<track name="General Education Program">
+	<absolutereq name="English Composition" credits="0" number="0">
+		<course id="ENGL100"/>
+	</absolutereq>
+	<absolutereq name="Physical Education Courses" credits="0" number="0">
+		<course id="PHED1"/>
+		<course id="PHED2"/>
+	</absolutereq>
+	<absolutereq name="Arts and Humanities Courses" credits="0" number="0">
+		<course id="AH1"/>
+		<course id="AH2"/>
+		<course id="AH3"/>
+	</absolutereq>
+	<absolutereq name="Social Sciences Courses" credits="0" number="0">
+		<course id="SS1"/>
+		<course id="SS2"/>
+		<course id="SS3"/>
+	</absolutereq>
+	<absolutereq name="Mathematics Course" credits="0" number="0">
+		<course id="M"/>
+	</absolutereq>
+	<absolutereq name="Science Courses" credits="0" number="0">
+		<course id="S1"/>
+		<course id="S2"/>
+		<course id="LAB"/>
+	</absolutereq>
+	<absolutereq name="Culture Courses" credits="0" number="0">
+		<course id="C1"/>
+		<course id="C2"/>
+	</absolutereq>
+	<absolutereq name="Language Courses" credits="0" number="0">
+		<course id="LANG101"/>
+		<course id="LANG102"/>
+		<course id="LANG201"/>
+	</absolutereq>
+</track>
