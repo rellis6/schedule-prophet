@@ -44,7 +44,6 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	private String grade;
 	private String comments;
 	private ProphetController controller;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -125,7 +124,7 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 			{
 				ComboBoxModel cbxGradeModel = 
 					new DefaultComboBoxModel(
-							new String[] { "A", "B", "C", "D", "E", "Pass", "Fail"});
+							new String[] { "A", "B", "C", "D", "E", "Pass", "Fail", "Drop"});
 				cbxGrade = new JComboBox();
 				getContentPane().add(cbxGrade);
 				cbxGrade.setModel(cbxGradeModel);
@@ -158,10 +157,7 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 			}
 			pack();
 			this.setSize(370, 300);
-		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
-		}
+		} catch (Exception e) {}
 	}
 
 	public void actionPerformed(ActionEvent e) {
