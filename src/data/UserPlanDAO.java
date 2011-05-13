@@ -306,7 +306,7 @@ public class UserPlanDAO {
 	 */
 	public void deletePlan(String name) throws IllegalArgumentException {
 		
-		String fileName = System.getenv("APPDATA") + "\\prophet\\" + name + ".xml";
+		String fileName = System.getenv("APPDATA") + "\\prophet\\" + name;// + ".xml";
 	    // A File object to represent the filename
 	    File file = new File(fileName);
 
