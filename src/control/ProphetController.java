@@ -1,12 +1,3 @@
-/**
- * File:    ProphetController.java
- * Project: CS 345 
- * Author:  Mark Pallone
- * Date:    Mar 31, 2011
- * Section: 
- * Email:   markpa1@umbc.edu OR mark.c.pallone@gmail.com
- * Class Invariant(s):
- */
 package control;
 
 import java.io.File;
@@ -81,7 +72,6 @@ public class ProphetController {
 			try {
 				plan.getSemesters().get(i).removeCourse("Dummy");
 			} catch (NonExistentCourseException e) {
-				// TODO Auto-generated catch block
 			}
 		}
 	}
@@ -153,7 +143,9 @@ public class ProphetController {
 	
 	/**
 	 * Name: editCourse()
-	 * Precondition(s):
+	 * Precondition(s): Specified course exists in the given semester, which also exists
+	 * Postcondition(s): Replaces the grade and notes String members of the specified course
+	 * 					 with the passed parameters
 	 * @param season String season semester identifier
 	 * @param year int year semester identifier
 	 * @param courseID String CourseID course identifier
@@ -177,9 +169,6 @@ public class ProphetController {
 	 *                   retrieval through the loadPlan() function       
 	 */		
 	public void savePlan(){
-		//TODO does not save empty semesters as the xml file is course centric
-		//TODO possibly fixed by adding a dummy blank course to each empty semester during the save
-		//TODO and stripping it out during loads
 		
 		Course dummy = new Course("Dummy", "E", 0, "Dummy", "Dummy", "Dummy");
 		ArrayList<Semester> semesters = new ArrayList<Semester>();
@@ -215,6 +204,7 @@ public class ProphetController {
 	public void deletePlan(String plan){
 		planDAO = new UserPlanDAO(plan);
 		planDAO.deletePlan(plan);
+		planDAO = null;
 	}
 
 	
@@ -327,8 +317,9 @@ public class ProphetController {
 	}
 	
 	/**
-	 * Return requirements needed to satisfy the plan.
-	 * @return list of requirements
+	 * Name: getRequirements()
+	 * Precondition(s): Track track must be initialized
+	 * @return list of requirements needed to satisfy the plan
 	 */
 	public ArrayList<Requirement> getRequirements() {
 		ArrayList<Requirement> requirements = new ArrayList<Requirement>();
@@ -350,9 +341,12 @@ public class ProphetController {
 	}
 
 	/**
-	 * 
-	 * @param CourseID
-	 * @return
+	 * Name: meetsPrereqs()
+	 * @param CourseID String CourseID identifier of specified course
+	 * @param season String season identifier of specified semester
+	 * @param year int year identifier of specified semester
+	 * @return returns true if the given course has its prereqs currently fulfilled
+	 * by the plan, else false
 	 */
 	public boolean meetsPrereqs(String CourseID, String season, int year){
 		
