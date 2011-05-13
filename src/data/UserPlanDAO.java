@@ -216,20 +216,17 @@ public class UserPlanDAO {
 			System.out.println("FILEPATH: " + filePath);
 			fwriter = new FileWriter(filePath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         BufferedWriter out = new BufferedWriter(fwriter);
         try {
 			out.write(fileText);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         try {
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -344,6 +341,8 @@ public class UserPlanDAO {
 		String csvFileName = System.getProperty("user.home") + "\\desktop\\" + name + ".csv";
         String csvFileText = "Plan Name =," + name + ",\n\n";
         
+        csvFileText = "Course, Semester, Year, Completed, Grade, Notes\n\n";
+        
         ArrayList<Semester> semesters = plan.getSemesters();
         for (int i = 0; i < semesters.size(); i++) {
             csvFileText = csvFileText + semesterToCSV(semesters.get(i));
@@ -381,7 +380,6 @@ public class UserPlanDAO {
 	private String semesterToCSV(Semester s) {
 		String str = "";
 	    ArrayList<Course> courses = s.getClasses();
-	    str = str + "Semester: ," + s.getSeason() + "," + s.getYear() + "," + courses.size() + " courses:, \n";
 	    for (int i = 0; i < courses.size(); i++) {
 	    	Course c = courses.get(i);
 	    	if (!c.getCourseID().equals("Dummy")) {
@@ -405,11 +403,12 @@ public class UserPlanDAO {
 		 * 
 		 */
 	private String courseToCSV(String id, String season, String year, boolean completed, String grade, String notes) {
-		String str = "";
-		str = str + "Course:," + id + ","; 
-		str = str + "Grade:," + grade + ",";
-		str = str + "Completed:," + completed + ",";
-		str = str + "Notes:," + notes + ",";
+		String str = id + ", ";
+		str = str + season + ", ";
+		str = str + year + ", ";
+		str = str + completed + ",";
+		str = str + grade + ",";
+		str = str + notes + ",";
 		str = str + "\n";
 		return str;
 	}
