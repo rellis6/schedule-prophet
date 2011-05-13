@@ -213,6 +213,7 @@ public class ProphetController {
 	 * @param plan the String name of the plan to be deleted
 	 */
 	public void deletePlan(String plan){
+		planDAO = new UserPlanDAO(plan);
 		planDAO.deletePlan(plan);
 	}
 
