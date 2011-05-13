@@ -198,7 +198,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 			if(GUI==null){
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						StartMenu inst = new StartMenu(null);
+						StartMenu inst = new StartMenu(controller);
 						inst.setLocationRelativeTo(null);
 						inst.setVisible(true);
 					}
