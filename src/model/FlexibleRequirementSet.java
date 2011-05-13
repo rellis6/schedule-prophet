@@ -14,6 +14,7 @@ public class FlexibleRequirementSet extends Requirement {
 	
 	private ArrayList<AbsoluteRequirement> requirements;
 	private int numToTake;
+	private String name;
 
 
 	
@@ -22,10 +23,11 @@ public class FlexibleRequirementSet extends Requirement {
 	 * @param requirements list of absolute requirements
 	 * @param numToTake number of absolute requirements to fulfill in order to fulfill this FlexibleRequirementSet
 	 */
-	public FlexibleRequirementSet(ArrayList<AbsoluteRequirement> requirements, int numToTake, int minCredits) {
+	public FlexibleRequirementSet(ArrayList<AbsoluteRequirement> requirements, int numToTake, int minCredits, String name) {
 		this.requirements = requirements;
 		this.numToTake = numToTake;
 		setMinCredits(minCredits);
+		this.name = name;
 	}
 	
 	public String toString() {
@@ -72,9 +74,13 @@ public class FlexibleRequirementSet extends Requirement {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Test all requirement courses.
-
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getName() {
+		return name;
+	}
+
 
 }

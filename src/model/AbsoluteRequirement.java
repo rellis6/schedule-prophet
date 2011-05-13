@@ -12,14 +12,16 @@ import java.util.ArrayList;
  * @author g00gle
  */
 public class AbsoluteRequirement extends Requirement {
+	private String name;
 	
 	/**
 	 * Create and AbsoluteRequirement.
 	 * @param requirements required courses
 	 */
-	public AbsoluteRequirement(ArrayList<Course> requirements, int minCredits) {
+	public AbsoluteRequirement(ArrayList<Course> requirements, int minCredits, String name) {
 		this.setRequirements(requirements);
 		this.setMinCredits(minCredits);
+		this.setName(name);
 	}
 	
 	public String toString() {
@@ -69,4 +71,13 @@ public class AbsoluteRequirement extends Requirement {
 		
 		return usedCourses;
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
 }

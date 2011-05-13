@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public abstract class Requirement {
 	private ArrayList<Course> requirements;
 	private int minCredits;
+	private String name;
 	
 	/**
 	 * Determine whether or not a list of Courses fulfills this requirement.
@@ -61,6 +62,14 @@ public abstract class Requirement {
 	 */
 	public int getMinCredits() {
 		return minCredits;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 
