@@ -270,7 +270,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					Requirement requirement = requirementsList.get(i);
 					if(requirement instanceof AbsoluteRequirement){
 						ArrayList<Course> courses=requirement.getRequirements();
-						category = new DefaultMutableTreeNode("Take all of these:");
+						category = new DefaultMutableTreeNode(requirement.getName() + ": Take all of these:");
 						needed.add(category);
 						for(int j=0; j<courses.size(); j++){
 							String name = courses.get(j).getCourseID();
@@ -286,7 +286,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					}
 					else if(requirement instanceof FlexibleRequirement){
 						ArrayList<Course> courses=requirement.getRequirements();
-						String title = "Take "+((FlexibleRequirement) requirement).getNumNeeded()+" of these:";
+						String title = requirement.getName() + ": Take "+((FlexibleRequirement) requirement).getNumNeeded()+" of these:";
 						category = new DefaultMutableTreeNode(title);
 						needed.add(category);
 						for(int j=0; j<courses.size(); j++){
@@ -303,9 +303,10 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 					}
 					else if(requirement instanceof FlexibleRequirementSet){
 						ArrayList<Course> courses=requirement.getRequirements();
-						String title = "Take "+((FlexibleRequirementSet) requirement).getNumNeeded()+" of these:";
+						String title = requirement.getName() + ": Take "+((FlexibleRequirementSet) requirement).getNumNeeded()+" of these:";
 						category = new DefaultMutableTreeNode(title);
 						needed.add(category);
+						
 						for(int j=0; j<courses.size(); j++){
 							String name = courses.get(j).getCourseID();
 							for(int k=0; k<futureList.size(); k++){
@@ -317,6 +318,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 							course = new DefaultMutableTreeNode(name);
 							category.add(course);
 						}
+						
 					}
 				}
 				
@@ -485,7 +487,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				Requirement requirement = requirementsList.get(i);
 				if(requirement instanceof AbsoluteRequirement){
 					ArrayList<Course> courses=requirement.getRequirements();
-					category = new DefaultMutableTreeNode("Take all of these:");
+					category = new DefaultMutableTreeNode(requirement.getName() + ": Take all of these:");
 					needed.add(category);
 					for(int j=0; j<courses.size(); j++){
 						String name = courses.get(j).getCourseID();
@@ -501,7 +503,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				}
 				else if(requirement instanceof FlexibleRequirement){
 					ArrayList<Course> courses=requirement.getRequirements();
-					String title = "Take "+((FlexibleRequirement) requirement).getNumNeeded()+" of these:";
+					String title = requirement.getName() + ": Take "+((FlexibleRequirement) requirement).getNumNeeded()+" of these:";
 					category = new DefaultMutableTreeNode(title);
 					needed.add(category);
 					for(int j=0; j<courses.size(); j++){
@@ -518,7 +520,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 				}
 				else if(requirement instanceof FlexibleRequirementSet){
 					ArrayList<Course> courses=requirement.getRequirements();
-					String title = "Take "+((FlexibleRequirementSet) requirement).getNumNeeded()+" of these:";
+					String title = requirement.getName() + ": Take "+((FlexibleRequirementSet) requirement).getNumNeeded()+" of these:";
 					category = new DefaultMutableTreeNode(title);
 					needed.add(category);
 					for(int j=0; j<courses.size(); j++){
