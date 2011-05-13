@@ -135,23 +135,7 @@ public class UserPlanDAO {
 						System.out.println(completed.equals("true"));
 						System.out.println();
 						if (completed.equals("true")) {
-							System.out.println("hello");
-							newSemester.setCompleted(true);//TODO This doesn't seem to work
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
-							//TODO
+							newSemester.setCompleted(true);
 						}
 						newSemester.addCourse(formalCourse);
 						planSemesters.add(newSemester);
@@ -168,22 +152,7 @@ public class UserPlanDAO {
 							System.out.println(completed.equals("true"));
 							System.out.println();
 							if (completed.equals("true")) {
-								newSemester.setCompleted(true);//TODO This doesn't seem to work
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
-								//TODO
+								newSemester.setCompleted(true);
 							}
 							newSemester.addCourse(formalCourse);
 							planSemesters.add(newSemester);
@@ -415,7 +384,9 @@ public class UserPlanDAO {
 	    str = str + "Semester: ," + s.getSeason() + "," + s.getYear() + "," + courses.size() + " courses:, \n";
 	    for (int i = 0; i < courses.size(); i++) {
 	    	Course c = courses.get(i);
-	        str = str + courseToCSV(c.getCourseID(), s.getSeason(), String.valueOf(s.getYear()), s.isCompleted(), c.getGrade(), c.getNotes());
+	    	if (!c.getCourseID().equals("Dummy")) {
+	    		str = str + courseToCSV(c.getCourseID(), s.getSeason(), String.valueOf(s.getYear()), s.isCompleted(), c.getGrade(), c.getNotes());
+	    	}
 	    }
 	    str = str + "\n";
 	    return str;
