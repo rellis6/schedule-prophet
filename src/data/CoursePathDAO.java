@@ -472,8 +472,4 @@ public class CoursePathDAO {
 		return prerequisite;
 	}
 
-	public static void main(String Args[]) {
-		CoursePathDAO test = new CoursePathDAO();
-	}
-	
 }
