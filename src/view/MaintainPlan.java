@@ -581,10 +581,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//System.out.println(e.getActionCommand());
 		if(e.getActionCommand().equals("Open")){
-			this.dispose();
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					LoadPlan inst = new LoadPlan(controller);
+					LoadPlan inst = new LoadPlan(controller, self);
 					inst.setLocationRelativeTo(null);
 					inst.setVisible(true);
 				}

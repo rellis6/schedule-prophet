@@ -37,6 +37,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdCancel;
 	private JButton cmdSelectPlan;
 	private JScrollPane scrollPane;
+	private MaintainPlan GUI;
 	private ProphetController controller;
 	
 	{
@@ -65,9 +66,17 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	public LoadPlan(ProphetController controller) {
 		super();
 		this.controller=controller;
+		this.GUI=null;
 		initGUI();
 	}
 	
+	public LoadPlan(ProphetController controller, MaintainPlan GUI) {
+		super();
+		this.controller=controller;
+		this.GUI=GUI;
+		initGUI();
+	}
+
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -140,6 +149,9 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		int row=tblSavedPlans.getSelectedRow();
 		if(e.getActionCommand().equals("Select") && row>=0){
 			controller.loadPlan((String) tblSavedPlans.getValueAt(row, 0));
+			if(GUI!=null){
+				GUI.dispose();
+			}
 			this.dispose();
 			final MaintainPlan inst = new MaintainPlan(controller);
 			SwingUtilities.invokeLater(new Runnable() {
@@ -176,13 +188,15 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		}
 		else if(e.getActionCommand().equals("Cancel")){
 			this.dispose();
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					StartMenu inst = new StartMenu(null);
-					inst.setLocationRelativeTo(null);
-					inst.setVisible(true);
-				}
-			});
+			if(GUI==null){
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						StartMenu inst = new StartMenu(null);
+						inst.setLocationRelativeTo(null);
+						inst.setVisible(true);
+					}
+				});
+			}
 		}
 	}
 
