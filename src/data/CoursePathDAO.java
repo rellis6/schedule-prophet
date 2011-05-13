@@ -1,7 +1,7 @@
 /**
  * File:    CoursePathDAO.java
  * Project: 
- * Author:  Katherine Miller, Mark Pallone
+ * Author:  g00gle
  * Date:    Mar 31, 2011
  * Section: 
  * Email:   markpa1@umbc.edu OR mark.c.pallone@gmail.com
@@ -29,7 +29,7 @@ import model.Track;
 
 
 /**
- * @author Katherine Miller, Mark Pallone
+ * @author g00gle
  *
  * Description: This class handles importing the course and track data stored
  * in the filesystem into course and track objects.
@@ -41,7 +41,9 @@ public class CoursePathDAO {
 	
 	/**
 	 * Default constructor that populates the master course list.
-	 * @author Katherine Miller
+	 * Precondition: None
+	 * Postcondition: CoursePathDAO and master course list are initialized
+	 * @author g00gle
 	 */
 	public CoursePathDAO () {
 		// First we initialize the master list of courses.
@@ -51,7 +53,9 @@ public class CoursePathDAO {
 	/**
 	 * Parses the master course list XML file and imports the
 	 * data into an ArrayList of courses.
-	 * @author Katherine Miller
+	 * Precondition: master_course_list.xml is present
+	 * Postcondition: Loads master course list into list object
+	 * @author g00gle
 	 */
 	private void initializeMasterCourseList() {
 		
@@ -153,8 +157,10 @@ public class CoursePathDAO {
 	
 	/**
 	 * returns an ArrayList<Track> object containing the pertaining track combos
+	 * Precondition: String Name is a valid track name
+	 * Postcondition: Returns a list of the track objects representing these tracks
 	 * @param name Name of specified Track
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	public ArrayList<Track> getTrackCourses(String name){
 		if(PRINT){
@@ -179,9 +185,7 @@ public class CoursePathDAO {
 		}
 		
 		return track;
-			//should Track cons take in a string and create a Track obj 
-			//by parsing through the .xml?
-		
+
 	}
 	
 	/**
@@ -189,9 +193,11 @@ public class CoursePathDAO {
 	 * For example, if a student has both the cs major and is 
 	 * major in his track list, this function will return
 	 * "Computer Science and Information Systems Double Major"
+	 * Precondition: ArrayList tracks is a list containing valid track options
+	 * Postcondition: Returns string which describes the major for the tracks selected
 	 * @param tracks ArrayList of tracks 
 	 * @return The string representing the major
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	public String getTrackName(ArrayList<Track> tracks) {
 		String trackName = "";
@@ -226,9 +232,11 @@ public class CoursePathDAO {
 	
 	/**
 	 * Gets a course using the courseID from the master course list
+	 * Precondition: Course ID is valid
+	 * Postcondition: Returns a Course object populated accordingly
 	 * @param courseID The course's ID
 	 * @return The course object corresponding to the ID
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	public Course getCourse(String courseID){
 		Course c = null;
@@ -241,10 +249,11 @@ public class CoursePathDAO {
 	}
 	
 	/**
-	 * 
+	 * Precondition: String track is a valid track option
+	 * Postcondition: Returns track object populated with track requirements
 	 * @param track The name of the track we'd like to get
 	 * @return A track object containing all the requirements of the track requested
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	private Track getTrack(String track){
 		File trackFile = null;
@@ -323,27 +332,15 @@ public class CoursePathDAO {
 						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new AbsoluteRequirement(courseList, numCredits));
 						
-						//TODO remove
-						if(PRINT){
-							System.out.println("From CoursePathDAO; just added absolutereq: ");
-							System.out.println(trackReqs.get(trackReqs.size() - 1));
-						}
+
 					} else if (reqType.equals("flexiblereq")) {
 						numToTake = Integer.parseInt(req.getAttribute("number"));
 						numCredits = 0 /*Integer.parseInt(req.getAttribute("credits"))*/;
 						trackReqs.add(new FlexibleRequirement(courseList, numToTake, numCredits));
 						
-						//TODO remove
-						if(PRINT){
-							System.out.println("From CoursePathDAO; just added flexiblereq:");
-							System.out.println(trackReqs.get(trackReqs.size() - 1));
-						}
+
 					} else if (reqType.equals("flexiblereqset")) {
 						
-						//TODO This isn't working; absReqs is getting set to null.
-						if (true) {
-							continue;	
-						}
 						
 						ArrayList<AbsoluteRequirement> absReqList = new ArrayList<AbsoluteRequirement>();
 						NodeList absReqs = req.getChildNodes();
@@ -413,9 +410,11 @@ public class CoursePathDAO {
 		return newTrack;
 	}
 	
-	/**
-	 * returns a list of valid String options for Tracks
-	 */
+/**
+ * Precondition: None
+ * Postcondition: Returns a list of possible tracks
+ * @return a list of the valid tracks for a user to choose
+ */
 	public List<String> getMasterTrackList(){
 		final List<String> MTList =
 	        Arrays.asList("Computer Science Major", "Information Systems Major", 
@@ -425,34 +424,27 @@ public class CoursePathDAO {
 	}
 	
 	/**
-	 * 
+	 * Precondition: String id is a valid course, grade a valid grade
+	 * Postcondition: Returns a course taken from the catalog populated with the specified grade
 	 * @param id The ID for the course we want to populate
 	 * @param grade Minimum grade required by the track
 	 * @return The course object as it appears in the master course list, with the minimum grade parameter added
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	private Course populateTrackCourse(String id, String grade) {
 		Course course = null;
-		Course c = getCourse(id); //what is this line used for? Should this method return c?
-								  // c is the course in the catalog, course is the course in a track.
-							      // They will have different information according to major. This
-								  // should not return c because catalog courses' don't have minimum grades
-								  // associated with them, and shouldn't, because that is major-specific.
-								  // In short, this method references the information in the catalog that
-								  // isn't in the major files (like description, name, etc) and fills
-								  // in the track-specific info. --Katherine
-		//System.out.println(c);
-		//System.out.println(id);
+		Course c = getCourse(id); 
 		course = new Course(id, "", "", grade, 0/*c.getCredits()*/, c.getCourseTitle(), c.getCategory(), c.getDescription());
 
 		return course;
 	}
 	
 	/**
-	 * 
+	 * Precondition: String prereq is formatted correctly
+	 * Postcondition: Returns a FlexibleRequirement describing the prerequisite requirement
 	 * @param prereq A string in the format "courseID(grade)|courseID(grade)|...|courseID(grade)"
 	 * @return A FlexibleRequirement containing the list of courses described with numToTake set to one
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	private FlexibleRequirement parsePrerequisite(String prereq) {
 		FlexibleRequirement prerequisite;
