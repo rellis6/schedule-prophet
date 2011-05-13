@@ -194,7 +194,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			{
 				cmdMarkSemesterUncomplete = new JButton();
 				getContentPane().add(cmdMarkSemesterUncomplete);
-				cmdMarkSemesterUncomplete.setText("Remove Completed Semester");
+				cmdMarkSemesterUncomplete.setText("Uncompleted Semester");
 				cmdMarkSemesterUncomplete.setBounds(10, 40, 360, 23);
 				cmdMarkSemesterUncomplete.setFont(new java.awt.Font("Tahoma",0,14));
 				cmdMarkSemesterUncomplete.setActionCommand("Remove completed");
