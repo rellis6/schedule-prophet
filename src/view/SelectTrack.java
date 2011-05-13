@@ -24,6 +24,14 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: SelectTrack.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Allows the user to select which track they want a new plan to follow.
+ */
 public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblSelectTrack;
 	private JButton cmdCSMajor;
@@ -31,7 +39,6 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	private JButton cmdCSISDoubleMajor;
 	private JButton cmdISMajor;
 	private ProphetController controller;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -59,10 +66,14 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	public SelectTrack(ProphetController controller) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -114,8 +125,7 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 			pack();
 			this.setSize(502, 230);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 

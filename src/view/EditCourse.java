@@ -28,6 +28,14 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: EditCourse.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Allows the user to record the grade they got in a course and any comments they have on that course.
+ */
 public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblName;
 	private JLabel cbxName;
@@ -72,7 +80,6 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	public EditCourse(ProphetController controller, String course, String[] semester) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		this.course=course;
 		this.semester=semester;
 		String[] data=controller.getCourseInfo(course, semester[0], Integer.parseInt(semester[1]));
@@ -81,6 +88,11 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -157,12 +169,17 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 			}
 			pack();
 			this.setSize(370, 300);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		controller.editCourse(semester[0], Integer.parseInt(semester[1]), course, (String) cbxGrade.getModel().getSelectedItem(), txtComments.getText());
-		this.dispose();
+		try{
+			controller.editCourse(semester[0], Integer.parseInt(semester[1]), course, (String) cbxGrade.getModel().getSelectedItem(), txtComments.getText());
+			this.dispose();
+		}
+		catch(Exception f){}
 	}
 
 }

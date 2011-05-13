@@ -30,6 +30,14 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: CreateSemester.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Prompts the user for the season and year of the first semester they add to their plan.
+ */
 public class CreateSemester extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblSeason;
 	private JLabel lblName;
@@ -38,7 +46,6 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 	private JButton btnSave;
 	private MaintainPlan GUI;
 	private ProphetController controller;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -66,11 +73,15 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 	public CreateSemester(ProphetController controller, MaintainPlan GUI) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		this.GUI=GUI;
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -118,15 +129,17 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 			pack();
 			this.setSize(210, 155);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		this.dispose();
-		controller.addSemester((String) cbxSeason.getModel().getSelectedItem(), Integer.parseInt(txtYear.getText()));
-		GUI.regenerateTrees();
+		try{
+			controller.addSemester((String) cbxSeason.getModel().getSelectedItem(), Integer.parseInt(txtYear.getText()));
+			this.dispose();
+			GUI.regenerateTrees();
+		}
+		catch(Exception f){}
 	}
 
 }

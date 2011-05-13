@@ -30,6 +30,14 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: LoadPlan.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Allows the user to select a plan to load.
+ */
 public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblSelectPlan;
 	private JTable tblSavedPlans;
@@ -77,6 +85,11 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		initGUI();
 	}
 
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -96,10 +109,9 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 				for(int i=0; i<tempRows.size(); i++){
 					String temp[] = new String[1];
 					temp[0]=tempRows.get(i);
-					//temp[1]="bla";
 					rows[i]=temp;
 				}
-				String headers[] = { "Plan Name"};//, "Date Created"};
+				String headers[] = { "Plan Name"};
 				numRows=rows.length;
 				if(numRows<1){
 					numRows=1;
@@ -147,8 +159,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 			pack();
 			this.setSize(415, 20*numRows+125);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 

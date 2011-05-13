@@ -30,12 +30,19 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: StartMenu.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: The first window the user sees.  Allows the user to choose between creating a new plan and loading a plan.
+ */
 public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblSelectOption;
 	private JButton cmdLoadPlan;
 	private JButton cmdCreatePlan;
 	private ProphetController controller;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -63,10 +70,14 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	public StartMenu(ProphetController controller) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -100,7 +111,6 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 			pack();
 			this.setSize(334, 218);
 		} catch (Exception e) {
-		    //add your error handling code here
 			e.printStackTrace();
 		}
 	}

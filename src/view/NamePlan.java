@@ -24,12 +24,19 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: NamePlan.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Allows the user to choose a name for their plan.
+ */
 public class NamePlan extends javax.swing.JFrame implements ActionListener{
 	private JButton cmd;
 	private JTextField txtName;
 	private JLabel lblNamePlan;
 	private ProphetController controller;
-	//private TestController controller;
 	private String track;
 	
 	{
@@ -58,11 +65,15 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 	public NamePlan(ProphetController controller, String track) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		this.track=track;
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -92,8 +103,7 @@ public class NamePlan extends javax.swing.JFrame implements ActionListener{
 			pack();
 			this.setSize(400, 167);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 
