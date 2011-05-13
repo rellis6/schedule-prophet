@@ -907,7 +907,11 @@ introduced. Students will be taught the basic use of a programming environment a
 		<prerequisite>ENGL100(C)</prerequisite>
 	</prerequisites>
 </course>
-<course id="PHED" name="Physical Education Course" credits="0">
+<course id="PHED1" name="Physical Education Course" credits="0">
+	<description>Any 1.5 credit course which satifies a physical rducation requirement.</description>
+	<prerequisites/>
+</course>
+<course id="PHED2" name="Physical Education Course" credits="0">
 	<description>Any 1.5 credit course which satifies a physical rducation requirement.</description>
 	<prerequisites/>
 </course>
@@ -915,7 +919,11 @@ introduced. Students will be taught the basic use of a programming environment a
 	<description>Any course with AH designation: first discipline.</description>
 	<prerequisites/>
 </course>
-<course id="AH2" name="Arts/Humanities Course Discipline 2" credits="3">
+<course id="AH2" name="Arts/Humanities Course Discipline 1" credits="3">
+	<description>Any course with AH designation: second discipline.</description>
+	<prerequisites/>
+</course>
+<course id="AH3" name="Arts/Humanities Course Discipline 2" credits="3">
 	<description>Any course with AH designation: second discipline.</description>
 	<prerequisites/>
 </course>
@@ -923,7 +931,11 @@ introduced. Students will be taught the basic use of a programming environment a
 	<description>Any course with a SS designation: first discipline</description>
 	<prerequisites/>
 </course>
-<course id="SS2" name="Social Sciences Course Discipline 2" credits="3">
+<course id="SS2" name="Social Sciences Course Discipline 1" credits="3">
+	<description>Any course with a SS designation: second discipline</description>
+	<prerequisites/>
+</course>
+<course id="SS3" name="Social Sciences Course Discipline 2" credits="3">
 	<description>Any course with a SS designation: second discipline</description>
 	<prerequisites/>
 </course>
@@ -931,7 +943,11 @@ introduced. Students will be taught the basic use of a programming environment a
 	<description>Any course with an M designation</description>
 	<prerequisites/>
 </course>
-<course id="S" name="Science Course" credits="3">
+<course id="S1" name="Science Course" credits="3">
+	<description>Any course with an S designation</description>
+	<prerequisites/>
+</course>
+<course id="S2" name="Science Course" credits="3">
 	<description>Any course with an S designation</description>
 	<prerequisites/>
 </course>
@@ -939,7 +955,11 @@ introduced. Students will be taught the basic use of a programming environment a
 	<description>Any course with lab designation, denoted by the letter L following the course number.</description>
 	<prerequisites/>
 </course>
-<course id="C" name="Culture Course" credits="3">
+<course id="C1" name="Culture Course" credits="3">
+	<description>Any course with the C designation</description>
+	<prerequisites/>
+</course>
+<course id="C2" name="Culture Course" credits="3">
 	<description>Any course with the C designation</description>
 	<prerequisites/>
 </course>
