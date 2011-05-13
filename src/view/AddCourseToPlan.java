@@ -59,9 +59,6 @@ public class AddCourseToPlan extends javax.swing.JFrame implements ActionListene
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -72,12 +69,22 @@ public class AddCourseToPlan extends javax.swing.JFrame implements ActionListene
 		});
 	}
 	
+	/**
+	 * Create an AddCourseToPlan object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 */
 	public AddCourseToPlan(ProphetController controller) {
 		super();
 		this.controller=controller;
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -163,6 +170,11 @@ public class AddCourseToPlan extends javax.swing.JFrame implements ActionListene
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		this.dispose();
 	}

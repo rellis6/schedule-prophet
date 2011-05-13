@@ -58,9 +58,6 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -71,6 +68,11 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		});
 	}
 	
+	/**
+	 * Create a LoadPlan object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 */
 	public LoadPlan(ProphetController controller) {
 		super();
 		this.controller=controller;
@@ -78,6 +80,13 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		initGUI();
 	}
 	
+	/**
+	 * Create a LoadPlan object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 * @param GUI the MaintainPlan object that this window must either return 
+	 * to if the user hits the cancel button, or close if the user hits the select button.
+	 */
 	public LoadPlan(ProphetController controller, MaintainPlan GUI) {
 		super();
 		this.controller=controller;
@@ -163,6 +172,11 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		int row=tblSavedPlans.getSelectedRow();
 		if(e.getActionCommand().equals("Select") && row>=0){

@@ -63,9 +63,6 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -77,6 +74,13 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 		});
 	}
 	
+	/**
+	 * Create an EditCourse object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 * @param course the name of the course being edited
+	 * @param semester an array containing the season and year of the semester the course is in
+	 */
 	public EditCourse(ProphetController controller, String course, String[] semester) {
 		super();
 		this.controller=controller;
@@ -174,6 +178,11 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		try{
 			controller.editCourse(semester[0], Integer.parseInt(semester[1]), course, (String) cbxGrade.getModel().getSelectedItem(), txtComments.getText());

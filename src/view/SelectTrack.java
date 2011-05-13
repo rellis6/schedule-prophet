@@ -50,9 +50,6 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -63,6 +60,11 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 		});
 	}
 	
+	/**
+	 * Create a SelectTrack object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 */
 	public SelectTrack(ProphetController controller) {
 		super();
 		this.controller=controller;
@@ -129,6 +131,11 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("CSMajor")){
 			this.dispose();
@@ -148,6 +155,11 @@ public class SelectTrack extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Name: namePlan()
+	 * Precondition(s): none
+	 * PostCondition(s): creates a new NamePlan object
+	 */
 	private void namePlan(final String track){
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
