@@ -82,6 +82,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			this.setTitle("UMBC CS/IS Schedule Prophet");
+			int numRows;
 			{
 				lblSelectPlan = new JLabel();
 				getContentPane().add(lblSelectPlan);
@@ -91,22 +92,28 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 			}
 			{
 				ArrayList<String> tempRows = controller.getPlans();
-				String rows[][] = new String[tempRows.size()][2];
+				String rows[][] = new String[tempRows.size()][1];
 				for(int i=0; i<tempRows.size(); i++){
-					String temp[] = new String[2];
+					String temp[] = new String[1];
 					temp[0]=tempRows.get(i);
-					temp[1]="bla";
+					//temp[1]="bla";
 					rows[i]=temp;
 				}
-				String headers[] = { "Plan Name", "Date Created"};
+				String headers[] = { "Plan Name"};//, "Date Created"};
+				numRows=rows.length;
+				if(numRows<1){
+					numRows=1;
+				}
+				numRows++;
+				numRows=6;
 				tblSavedPlans = new JTable(rows,headers);
-				tblSavedPlans.setBounds(20, 41, 360, 142);
+				tblSavedPlans.setBounds(20, 41, 360, 20*numRows);
 				tblSavedPlans.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 				tblSavedPlans.setFont(new java.awt.Font("Tahoma",0,14));
 				tblSavedPlans.setPreferredSize(new java.awt.Dimension(358, 111));
 
 				scrollPane = new JScrollPane(tblSavedPlans);
-				scrollPane.setBounds(20, 41, 360, 139);
+				scrollPane.setBounds(20, 41, 360, 20*numRows);
 				scrollPane.setFont(new java.awt.Font("Tahoma",0,14));
 				getContentPane().add(scrollPane);
 			}
@@ -114,7 +121,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 				cmdSelectPlan = new JButton();
 				getContentPane().add(cmdSelectPlan);
 				cmdSelectPlan.setText("Select Plan");
-				cmdSelectPlan.setBounds(20, 191, 115, 23);
+				cmdSelectPlan.setBounds(20, 20*numRows+50, 115, 23);
 				cmdSelectPlan.setFont(new java.awt.Font("Tahoma",0,14));
 				cmdSelectPlan.setActionCommand("Select");
 				cmdSelectPlan.addActionListener(this);
@@ -123,7 +130,7 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 				cmdDeletePlan = new JButton();
 				getContentPane().add(cmdDeletePlan);
 				cmdDeletePlan.setText("Delete Plan");
-				cmdDeletePlan.setBounds(145, 191, 116, 23);
+				cmdDeletePlan.setBounds(145, 20*numRows+50, 116, 23);
 				cmdDeletePlan.setFont(new java.awt.Font("Tahoma",0,14));
 				cmdDeletePlan.setActionCommand("Delete");
 				cmdDeletePlan.addActionListener(this);
@@ -132,13 +139,13 @@ public class LoadPlan extends javax.swing.JFrame implements ActionListener{
 				cmdCancel = new JButton();
 				getContentPane().add(cmdCancel);
 				cmdCancel.setText("Cancel");
-				cmdCancel.setBounds(271, 191, 109, 23);
+				cmdCancel.setBounds(271, 20*numRows+50, 109, 23);
 				cmdCancel.setFont(new java.awt.Font("Tahoma",0,14));
 				cmdCancel.setActionCommand("Cancel");
 				cmdCancel.addActionListener(this);
 			}
 			pack();
-			this.setSize(415, 266);
+			this.setSize(415, 20*numRows+125);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();
