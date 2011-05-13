@@ -47,8 +47,10 @@ public class UserPlanDAO {
 	
 	/**
 	 * Create a UserPlanDAO.
+	 * Precondition: String name is a valid plan file
+	 * Postcondtion: UserPlanDAO and CoursePathDAO are initialized
 	 * @param name Name of the user plan.
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */	
 	public UserPlanDAO(String name) {
 		this.name = name;
@@ -76,7 +78,9 @@ public class UserPlanDAO {
 	
 	/**
 	 * Loads plan from file into userPlan member.
-	 * @author Katherine Miller
+	 * Precondition: String name member is initizalized to valid value
+	 * Postcondition: userPlan is loaded
+	 * @author g00gle
 	 */
 	private void loadPlan() {
 		try {
@@ -177,7 +181,9 @@ public class UserPlanDAO {
 	
 	/**
 	 * Open and read a plan from file, return plan object.
-	 * @author Katherine Miller
+	 * Precondition: userPlan has been loaded
+	 * Postcondition: userPlan is returned
+	 * @author g00gle
 	 */	
 	public Plan getPlan() {
 		return userPlan;
@@ -185,8 +191,10 @@ public class UserPlanDAO {
 	
 	/**
 	 * Open and save a file with the Plan information.
+	 * Precondition: Plan plan is valid
+	 * Postcondition: Plan is saved in XML format in AppData/prophet directory
 	 * @param planName Name of the user plan file.
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */	
 	public void savePlan(Plan plan) {
 		
@@ -236,8 +244,10 @@ public class UserPlanDAO {
 	 * Gets the list of all files in the prophet directory
 	 * (located in the user's AppData folder). If no files
 	 * exist, returns an empty list.
+	 * Precondition: None
+	 * Postcondition: Returns list of plans saved in user's AppData folder, if any
 	 * @return The list of all files in the prophet directory
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	public ArrayList<String> getPlanList() {
 		ArrayList<String> planFiles = new ArrayList<String>();
@@ -257,6 +267,8 @@ public class UserPlanDAO {
 	
 	/**
 	 * Creates a populated course tag to be written to xml plan file.
+	 * Precondition: All params are valid and correct
+	 * Postcondition: Returns course in XML format
 	 * @param id The id of the course
 	 * @param season The season the course was taken
 	 * @param year The year the course was taken
@@ -264,7 +276,7 @@ public class UserPlanDAO {
 	 * @param grade The grade obtained in the course
 	 * @param notes Any notes pertaining to the course
 	 * @return The string containing the XML tag
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	private String courseToXML(String id, String season, String year, boolean completed, String grade, String notes) {
 		String str = "";
@@ -281,9 +293,11 @@ public class UserPlanDAO {
 	/**
 	 * Creates a semester XML tag based on a semester object
 	 * to be written to a plan file.
+	 * Precondition: Semester s is valid
+	 * Postcondition: Returns semester in XML format
 	 * @param s The semester to be written
 	 * @return The string containing the equivalent xml tag
-	 * @author Katherine Miller
+	 * @author g00gle
 	 */
 	private String semesterToXML(Semester s) {
 		String str = "";
@@ -331,6 +345,8 @@ public class UserPlanDAO {
 	/**
 	 * Save a plan to a CSV file with the Plan information. File will be saved to the desktop as "PlanName.csv".
 	 * ReUse code from regular saving to XML with format changes for CSV instead of XML.
+	 * Precondtion: Plan plan is valid
+	 * Postcondition: Plan is saved in CSV format on the Desktop
 	 * @param planName Name of the user plan file.
 	 * @author g00gle
 	 * 
@@ -373,6 +389,8 @@ public class UserPlanDAO {
 	/**
 	 * Creates a semester XML tag based on a semester object
 	 * to be written to a plan file.
+	 * Precondition: Semester s is valide
+	 * Postcondition: Returns string containing all courses from semester in CSV format
 	 * @param s The semester to be written
 	 * @return The string containing the equivalent csv tag
 	 * @author g00gle
@@ -392,6 +410,8 @@ public class UserPlanDAO {
 	    
 	    /**
 		 * Creates a populated course tag to be written to CSV plan file.
+		 * Precondition: All params are correct
+		 * Postcondition: Returns string with all params separated in order by commas
 		 * @param id The id of the course
 		 * @param season The season the course was taken
 		 * @param year The year the course was taken
