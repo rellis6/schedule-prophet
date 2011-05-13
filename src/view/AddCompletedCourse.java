@@ -29,6 +29,14 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: AddCompletedCourse.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Allows the user to record a grade and comments for a course they've completed.
+ */
 public class AddCompletedCourse extends javax.swing.JFrame implements ActionListener{
         private JLabel lblName;
         private JLabel cbxName;
@@ -46,14 +54,13 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
         private String[] future;
         private MaintainPlan GUI;
         private ProphetController controller;
-        //private TestController controller;
         
         {
                 //Set Look & Feel
                 try {
-                        javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                	javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                 } catch(Exception e) {
-                        e.printStackTrace();
+                	e.printStackTrace();
                 }
         }
 
@@ -75,7 +82,6 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
         public AddCompletedCourse(ProphetController controller, String needed, String[] future, MaintainPlan GUI) {
                 super();
                 this.controller=controller;
-                //this.controller=(TestController) controller;
                 this.needed=needed;
                 this.future=future;
                 this.GUI=GUI;
@@ -173,8 +179,7 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
                         pack();
                         this.setSize(370, 300);
                 } catch (Exception e) {
-                    //add your error handling code here
-                        e.printStackTrace();
+                    e.printStackTrace();
                 }
         }
 
@@ -190,8 +195,7 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
                         this.dispose();
                         GUI.regenerateTrees();
                 }
-                catch (Exception f) {
-                }
+                catch (Exception f) {}
         }
 
 }

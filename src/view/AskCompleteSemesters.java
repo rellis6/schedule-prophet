@@ -29,6 +29,15 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: AskCompleteSemesters.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Informs the user that they tried to complete a semester that has courses who's prerequisites
+ *  have not been met and asks if they want to complete the necessary semesters as well.  Not currently used.
+ */
 public class AskCompleteSemesters extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblMessage1;
 	private JLabel lblMessage2;
@@ -40,7 +49,6 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 	private ArrayList<String[]> prerequisites;
 	private MaintainPlan GUI;
 	private ProphetController controller;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -75,7 +83,6 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 	public AskCompleteSemesters(ProphetController controller, ArrayList<String[]> prerequisites, MaintainPlan GUI) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		this.prerequisites=prerequisites;
 		this.GUI=GUI;
 		initGUI();
@@ -146,8 +153,7 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 			pack();
 			this.setSize(370, 150+28*i);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 

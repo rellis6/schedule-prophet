@@ -43,10 +43,17 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: MaintainPlan.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Allows the user to modify a plan, including things such as adding a course to a future semester, 
+ * completing semesters, and adding grades and comments to completed courses.
+ */
 public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private boolean EXPORT_ENABLED=true;
-	private Object o1;
-	private Object o2;
 	
 	private JButton cmdAddCompletedCourse;
 	private JTree treeCompletedCourses;
@@ -73,7 +80,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	private JScrollPane neededScrollPane;
 	private MaintainPlan self;
 	private ProphetController controller;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -101,10 +107,14 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	public MaintainPlan(ProphetController controller) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -222,7 +232,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 							semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 							completedCourses.add(tempCourses.get(j));
 						} catch (NonExistentCourseException e) {
-							//e.printStackTrace();
+							e.printStackTrace();
 						}
 					}
 					String[] courses = new String[completedCourses.size()];
@@ -356,10 +366,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 							semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 							courseList.add(tempCourses.get(j));
 						} catch (NonExistentCourseException e) {
-							//e.printStackTrace();
+							e.printStackTrace();
 						}
 					}
-					//System.out.println(tempCourses);
 					String[] courses = new String[courseList.size()];
 					for(int j=0; j<courseList.size(); j++){
 						courses[j]=courseList.get(j).getCourseID();
@@ -403,8 +412,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			pack();
 			this.setSize(772, 600);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 	
@@ -434,7 +442,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						completedCourses.add(tempCourses.get(j));
 					} catch (NonExistentCourseException e) {
-						//e.printStackTrace();
+						e.printStackTrace();
 					}
 				}
 				String[] courses = new String[completedCourses.size()];
@@ -550,10 +558,9 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 						semesters.get(i).getCourse(tempCourses.get(j).getCourseID());
 						courseList.add(tempCourses.get(j));
 					} catch (NonExistentCourseException e) {
-						//e.printStackTrace();
+						e.printStackTrace();
 					}
 				}
-				//System.out.println(tempCourses);
 				String[] courses = new String[courseList.size()];
 				for(int j=0; j<courseList.size(); j++){
 					courses[j]=courseList.get(j).getCourseID();
@@ -579,7 +586,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		//System.out.println(e.getActionCommand());
 		if(e.getActionCommand().equals("Open")){
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -600,7 +606,7 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 			});
 		}
 		else if(e.getActionCommand().equals("Export")){
-			controller.exportPlan();//stub, doesn't cause problems
+			controller.exportPlan();
 		}
 		else if(e.getActionCommand().equals("Save")){
 			controller.savePlan();
@@ -654,8 +660,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		else if(e.getActionCommand().equals("Add course")){
 			TreePath neededPath = treeNeededCourses.getSelectionPath();
 			TreePath futurePath = treeFuturePlan.getSelectionPath();
-			//System.out.println(neededPath.getPathCount());
-			//System.out.println(futurePath.getPathCount());
 			if(neededPath==null || futurePath==null || neededPath.getPathCount()<3 || futurePath.getPathCount()<2){
 				return;
 			}

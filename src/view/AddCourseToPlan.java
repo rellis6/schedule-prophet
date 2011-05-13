@@ -28,6 +28,14 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: AddCourseToPlan.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Asks the user what semester they want to add a course to.  Not currently used.
+ */
 public class AddCourseToPlan extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblName;
 	private JComboBox cbxName;
@@ -40,7 +48,6 @@ public class AddCourseToPlan extends javax.swing.JFrame implements ActionListene
 	private JComboBox cbxSemester;
 	private JScrollPane scrollpaneComments;
 	private ProphetController controller;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -68,7 +75,6 @@ public class AddCourseToPlan extends javax.swing.JFrame implements ActionListene
 	public AddCourseToPlan(ProphetController controller) {
 		super();
 		this.controller=controller;
-		//this.controller=(TestController) controller;
 		initGUI();
 	}
 	
@@ -153,8 +159,7 @@ public class AddCourseToPlan extends javax.swing.JFrame implements ActionListene
 			pack();
 			this.setSize(370, 300);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 

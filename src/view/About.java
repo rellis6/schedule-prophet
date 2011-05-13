@@ -28,10 +28,17 @@ import control.ProphetController;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
+
+/**
+ * File: About.java
+ * Project: schedule-prophet
+ * @author g00gle
+ * Date: 
+ * Description: Displays some info about the program.
+ */
 public class About extends javax.swing.JFrame implements ActionListener{
 	private JLabel lblName;
 	private JButton cmdClose;
-	//private TestController controller;
 	
 	{
 		//Set Look & Feel
@@ -126,8 +133,7 @@ public class About extends javax.swing.JFrame implements ActionListener{
 			pack();
 			this.setSize(370, 300);
 		} catch (Exception e) {
-		    //add your error handling code here
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 
