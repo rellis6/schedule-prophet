@@ -124,7 +124,7 @@ public class EditCourse extends javax.swing.JFrame implements ActionListener{
 			{
 				ComboBoxModel cbxGradeModel = 
 					new DefaultComboBoxModel(
-							new String[] { "A", "B", "C", "D", "E", "Pass", "Fail", "Drop"});
+							new String[] { "A", "B", "C", "D", "E", "Pass", "Fail", "Dropped"});
 				cbxGrade = new JComboBox();
 				getContentPane().add(cbxGrade);
 				cbxGrade.setModel(cbxGradeModel);
