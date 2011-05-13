@@ -60,9 +60,6 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -80,6 +77,13 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 		});
 	}
 	
+	/**
+	 * Create an AskCompleteSemesters object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 * @param prerequisites an arrayList of arrays of Strings describing all of the semesters that need to be completed
+	 * @param GUI the MaintainPlan object that this window should return to
+	 */
 	public AskCompleteSemesters(ProphetController controller, ArrayList<String[]> prerequisites, MaintainPlan GUI) {
 		super();
 		this.controller=controller;
@@ -88,6 +92,11 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -157,6 +166,11 @@ public class AskCompleteSemesters extends javax.swing.JFrame implements ActionLi
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		this.dispose();
 		if(e.getActionCommand().equals("Yes")){

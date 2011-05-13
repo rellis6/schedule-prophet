@@ -57,9 +57,6 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -70,6 +67,12 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 		});
 	}
 	
+	/**
+	 * Create a CreateSemester object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 * @param GUI the MaintainPlan object that this object should return to.
+	 */
 	public CreateSemester(ProphetController controller, MaintainPlan GUI) {
 		super();
 		this.controller=controller;
@@ -133,6 +136,11 @@ public class CreateSemester extends javax.swing.JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		try{
 			controller.addSemester((String) cbxSeason.getModel().getSelectedItem(), Integer.parseInt(txtYear.getText()));

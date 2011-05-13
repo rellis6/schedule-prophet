@@ -65,9 +65,6 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
         }
 
 
-        /**
-        * Auto-generated main method to display this JFrame
-        */
         public static void main(String[] args) {
                 SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
@@ -79,7 +76,15 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
                 });
         }
         
-        public AddCompletedCourse(ProphetController controller, String needed, String[] future, MaintainPlan GUI) {
+        /**
+    	 * Create an AddCompletedCourse object.
+    	 * 
+    	 * @param controller the ProphetController object this object should use.
+    	 * @param needed the name of the course being completed
+    	 * @param future a String array describing the semester that the course is being added to
+    	 * @param GUI the MaintainPlan object that this window should return to
+    	 */
+    	public AddCompletedCourse(ProphetController controller, String needed, String[] future, MaintainPlan GUI) {
                 super();
                 this.controller=controller;
                 this.needed=needed;
@@ -88,7 +93,12 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
                 initGUI();
         }
         
-        private void initGUI() {
+        /**
+    	 * Name: initGUI()
+    	 * Precondition(s): none
+    	 * PostCondition(s): Initializes the window.
+    	 */
+    	private void initGUI() {
                 try {
                         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                         this.setTitle("Add Completed Course");
@@ -183,7 +193,12 @@ public class AddCompletedCourse extends javax.swing.JFrame implements ActionList
                 }
         }
 
-        public void actionPerformed(ActionEvent e) {
+    	/**
+    	 * Name: actionPerformed()
+    	 * Precondition(s): none
+    	 * PostCondition(s): Responds to whatever action was performed
+    	 */
+    	public void actionPerformed(ActionEvent e) {
                 try{
                         if(future==null){
                                 controller.addCourse(needed, (String) cbxSeason.getModel().getSelectedItem(), txtComments.getText(), Integer.parseInt(txtYear.getText()));

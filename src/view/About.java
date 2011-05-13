@@ -50,9 +50,6 @@ public class About extends javax.swing.JFrame implements ActionListener{
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -63,11 +60,21 @@ public class About extends javax.swing.JFrame implements ActionListener{
 		});
 	}
 	
+	/**
+	 * Create a  object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 */
 	public About() {
 		super();
 		initGUI();
 	}
 	
+	/**
+	 * Name: initGUI()
+	 * Precondition(s): none
+	 * PostCondition(s): Initializes the window.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -137,6 +144,11 @@ public class About extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		this.dispose();
 	}

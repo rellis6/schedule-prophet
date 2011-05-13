@@ -54,9 +54,6 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -67,6 +64,11 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 		});
 	}
 	
+	/**
+	 * Create a StartMenu object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 */
 	public StartMenu(ProphetController controller) {
 		super();
 		this.controller=controller;
@@ -115,6 +117,11 @@ public class StartMenu extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("New")){
 			this.dispose();

@@ -91,9 +91,6 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 	}
 
 
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -104,6 +101,11 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		});
 	}
 	
+	/**
+	 * Create a MaintainPlan object.
+	 * 
+	 * @param controller the ProphetController object this object should use.
+	 */
 	public MaintainPlan(ProphetController controller) {
 		super();
 		this.controller=controller;
@@ -416,6 +418,11 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Name: regenerateTrees()
+	 * Precondition(s): none
+	 * PostCondition(s): the trees displaying all semesters and courses in the plan are updated
+	 */
 	public void regenerateTrees(){
 		completedScrollPane.setVisible(false);
 		neededScrollPane.setVisible(false);
@@ -585,6 +592,11 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Name: actionPerformed()
+	 * Precondition(s): none
+	 * PostCondition(s): Responds to whatever action was performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Open")){
 			SwingUtilities.invokeLater(new Runnable() {
@@ -760,10 +772,20 @@ public class MaintainPlan extends javax.swing.JFrame implements ActionListener{
 		}
 	}
 
+	/**
+	 * Name: setSelf()
+	 * Precondition(s): none
+	 * PostCondition(s): sets the self variable
+	 */
 	public void setSelf(MaintainPlan inst) {
 		self=inst;
 	}
 
+	/**
+	 * Name: completeSemesters()
+	 * Precondition(s): none
+	 * PostCondition(s): completes all semesters described by the list passed to it.  Not currently used.
+	 */
 	public void completeSemesters(ArrayList<String[]> prerequisites) {
 		for(int i=0; i<prerequisites.size(); i++){
 			String[] semester=prerequisites.get(i);
