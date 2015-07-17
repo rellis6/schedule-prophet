@@ -1,0 +1,157 @@
+# Introduction #
+
+Add your content here.
+
+
+# Details #
+
+Outline
+Remember to create a new page for your own use cases, complete with test cases and defects.
+
+For each testing session, state:
+
+date
+location
+time started
+time ended
+testers
+use cases covered
+For each use case, state:
+
+equivalence partitions
+boundary conditions
+test cases stemming from each equivalence partition
+name of tester
+For each test case, state:
+
+name of test
+name of tester
+purpose of test
+input data
+prior inputs needed to do this test
+expected output
+For each defect, state:
+
+description
+repair suggestion (or the repair actually made if it's already been done)
+how the repair affects other parts of the program
+underlying logical flaw
+
+Testing Sessions
+5/5/11
+Who: Justin Ermer
+Location: UMBC library
+Start: 7:00 PM
+Use Cases
+Edit Course-Justin Ermer
+Complete Semester-Justin Ermer
+
+Module: EditCourse
+Initial Course: new Course("", "", 0, "", "", "")
+
+  1. Test 1
+
+  * Description: Make no changes
+
+  * Input Data:
+
+  * Expected Output/Results:
+
+  * Actual Output:
+
+  * P/F:
+
+
+  1. Test 2
+
+Description: Grade is blank, change notes to a non-empty String
+
+Input Data:
+
+Expected Output/Results:
+
+Actual Output:
+
+P/F:
+
+
+Test 3
+
+Description: Grade is selected, notes is empty
+
+Input Data:
+
+Expected Output/Results:
+
+Actual Output:
+
+P/F:
+
+
+Test 4
+
+Description: Grade is selected, notes is not empty
+
+Input Data:
+
+Expected Output/Results:
+
+Actual Output:
+
+P/F:
+
+
+Module: CompleteSemester
+
+Initial Course: new Course("", "", 0, "", "", "")
+
+Test 1
+
+Description: CompleteSemester of an empty plan
+
+Input Data:
+
+Expected Output/Results:
+
+Actual Output:
+
+P/F:
+
+
+Test 2
+
+Description: CompleteSemester of a plan with a single semester
+
+Input Data:
+
+Expected Output/Results:
+
+Actual Output:
+
+P/F:
+
+
+Test 3
+
+Description: CompleteSemester of a plan with two semesters
+
+Input Data:
+
+Expected Output/Results:
+
+Actual Output:
+
+P/F:
+
+
+Test 4
+
+Description:
+
+Input Data:
+
+Expected Output/Results:
+
+Actual Output:
+
+P/F:
